@@ -8,14 +8,37 @@ class block:
 		
 	def add_trans_to_block(self,newtrans): #how do we pass an object
 		#verify transaction
-		self.translist[n] = newtrans
-		self.n = self.n + 1
-		if self.n == max_trans_num :
+		for i in range (max_trans_num-1):
+			if (self.translist[i].hash==None) and (self.translist[i+1].hash!=None): #if there is an invalid entry in between
+				newblock = block (self.prev_hash)				#create a newblock with same contents
+				i=0
+				j=0
+				while i < max_trans_num :
+					if self.translist[i].hash != None :
+						newblock.translist[j].hash=self.translist[i].hash
+						newblock.translist[j].incount=self.translist[i].incount
+						newblock.translist[j].outcount=self.translist[i].outcount
+						newblock.n=newblock.n+1
+						j=j+1
+					i=i+1
+					
+						
+		newblock.translist[j] = newtrans						#add the new transaction to this new block
+		newblock.n=newblock.n+1
+		#if self.n == max_trans_num :
 			#create a new block and send its hash to the daemon
 			
 	def remove_trans_from_block(self,trans):
 		for i in range (max_trans_num):
-			if 
+			if trans.hash == self.translist[i].hash:
+				self.translist[i].hash = None
+				break
 		
 	def propose_block(self , myvalidptr):
+		self.prev_hash=myvalidptr							#myvalidptr points to last block 
+		myvalidptr=self									#in this node's consensus chain
+		
+		
+		
+		
 		 
