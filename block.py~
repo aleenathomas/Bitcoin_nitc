@@ -1,3 +1,5 @@
+import python-bitcoinlib
+
 max_trans_num = 5
 
 class block:
@@ -86,7 +88,8 @@ class block:
 	'''
 	
 	'''
-	
+	Propose a block:
+	1.Attach the block to the longest chain
 	'''
 	def propose_block(self , myvalidptr):
 		self.prev_hash=blockhead
