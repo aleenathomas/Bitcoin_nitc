@@ -27,14 +27,48 @@ class transaction:
 	def createoutlist(self):
 		self.outlist = [outputtrans() for i in range (self.outcount)]
 		
-		#to validate the input list of the transaction, ie checking the validity of the transactions in the input list			
-	def validatelist(self, node):	
+		#to validate transaction; ie, checking the input list of the transaction, ie checking the validity of all the transactions in the input list			
+		'''
+		Algorithm to validatetrans: 
+		
+		1. For each transaction (ith) in the input list
+				a. find the blockhash of the block to which it belongs (using the mapping stored in the database)
+				e. find the block in the blockchain
+				b. traverse the block to find the transaction 
+				c. value(i) = value of the nth output of that transaction
+				d. address(i) = address of the nth output of that transaction
+		2. For all i, address(i) must be equal to public key of the ith transaction in the input list and sum of value(i) must be 			   stored in a variable  called inputsum		
+		3. For all outputs, add the value fields to outputsum
+		4. Check whether inputsum = outputsum
+		'''
+	def validatetrans(self, node):	
+		inputsum = 0
 		for i in range(self.incount):
-			findhash = self.inlist[i]
-			# checking from the bl
+			transhash = self.inlist[i].hash
+			# checking from the block
 			
-			# need to make a distributed database				
-			
+			for j in range(node.maxnumtrans):	# iterate through all transactions in the database
+				if node.database[ j,0 ] == transhash:	# if the transaction hash matches, then the block in which 
+					blockhash = node.database[ j,1 ]
+					break
+			blockptr = blockhead
+			while blockptr != blockhash:
+				blockptr = blockptr.prev_hash		
+			for i in range(max_trans_num)	
+				if blockptr.translist[i].hash == transhash
+			    	transptr = translist[i]
+			    	break
+			index =  self.inlist[i].n   
+			address = self.inlist[i].pub		
+			inputsum = inputsum + transptr.outlist[index].value    			
+			if 	transptr.outlist[index].addr != address
+				return false
+		outputsum = 0
+		for i in range(self.outcount)
+			outputsum = outputsum + self.outlist[i].value
+		if inputsum != outputsum
+			return false
+		return true
 			
 			
 
