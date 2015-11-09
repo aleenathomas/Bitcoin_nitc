@@ -6,7 +6,7 @@ from transaction import *
 #TCP_PORT = 5005
 #BUFFER_SIZE = 1024
 
-addr = ('',5005) #added #host,port
+addr = ('',5004) #added #host,port
 
 s = socket.socket ( socket.AF_INET, socket.SOCK_DGRAM ) #SOCK_STREAM
 s.bind(addr) #changed

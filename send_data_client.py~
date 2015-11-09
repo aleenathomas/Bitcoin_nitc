@@ -8,7 +8,7 @@ newtrans.createinlist()
 newtrans.createoutlist()
 
 trans = pickle.dumps ( newtrans )
-
+a="reshma"
 addr=('255.255.255.255','5005') #added
 
 client = socket.socket ( socket.AF_INET, socket.SOCK_DGRAM ) #SOCK_STREAM
@@ -17,6 +17,6 @@ client = socket.socket ( socket.AF_INET, socket.SOCK_DGRAM ) #SOCK_STREAM
 #client.close()
 
 while True:
-	if client.sendto(trans,addr):
+	if client.sendto(a,addr):
 		print('Sending... ')
 client.close()

@@ -15,16 +15,16 @@ class block:
 				j=0
 				while i < max_trans_num :
 					if self.translist[i].hash != None :
-						newblock.translist[j].hash=self.translist[i].hash
-						newblock.translist[j].incount=self.translist[i].incount
-						newblock.translist[j].outcount=self.translist[i].outcount
-						newblock.n=newblock.n+1
-						j=j+1
-					i=i+1
+						newblock.translist[j].hash = self.translist[i].hash
+						newblock.translist[j].incount = self.translist[i].incount
+						newblock.translist[j].outcount = self.translist[i].outcount
+						newblock.n = newblock.n + 1
+						j = j + 1
+					i = i + 1
 					
 						
 		newblock.translist[j] = newtrans						#add the new transaction to this new block
-		newblock.n=newblock.n+1
+		newblock.n = newblock.n + 1
 		#if self.n == max_trans_num :
 			#create a new block and send its hash to the daemon
 			
@@ -35,8 +35,19 @@ class block:
 				break
 		
 	def propose_block(self , myvalidptr):
-		self.prev_hash=myvalidptr							#myvalidptr points to last block 
-		myvalidptr=self									#in this node's consensus chain
+		if myvalidptr != blockhead :
+			#decide whether to change it to blockhead !
+			l1=0
+			l2=0
+			
+			##
+			self.prev_hash=myvalidptr							#myvalidptr points to last block 
+			myvalidptr=self									#in this node's consensus chain
+			
+		else:
+			self.prev_hash=myvalidptr							#myvalidptr points to last block 
+			myvalidptr=self									#in this node's consensus chain
+			blockhead=myvalidptr	
 		
 		
 		
