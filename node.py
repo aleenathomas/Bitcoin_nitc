@@ -15,8 +15,21 @@ class node:
 	def maptransaction(self, block):
 		for i in range(	max_trans_num):
 			database[block.translist[i], top] = block.prevhash		# the block hash of the corresponding trasaction hash
-			top =top + 1	# to denote the that one more entry has been added to the database							
-		
+			top =top + 1	# to denote the that one more entry has been added to the database
+			
+			
+	'''
+	On receiving a block proposed by another node:
+	1. Verify the POW 
+	2. If the block is valid
+		a. block.prev_hash=blockhead
+		   bloackhead=block
+	   else
+	   		do nothing 
+	   		 
+	'''	
+	
+							
 		
 		
 		
