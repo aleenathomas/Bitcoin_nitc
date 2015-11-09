@@ -87,11 +87,13 @@ class block:
 	
 	'''
 	Propose a block:
-	1.Attach the block to the longest chain
+	1.Attach the block to the longest chain	
 	'''
 	def propose_block(self , myvalidptr):
 		self.prev_hash=blockhead
-		block_headself
+		block_head=self
+		
+		
 		
 		
 		
