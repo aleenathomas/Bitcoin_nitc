@@ -37,14 +37,21 @@ class block:
 	def propose_block(self , myvalidptr):
 		if myvalidptr != blockhead :
 			#decide whether to change it to blockhead !
-			l1=0
-			l2=0
+			l1 = 0
+			l2 = 0
+			ptr = blockhead
+			while ptr.prev_hash != None :
+				l1 = l1 + 1
+				ptr = ptr.prev_hash
 			
-			##
-			self.prev_hash=myvalidptr							#myvalidptr points to last block 
-			myvalidptr=self									#in this node's consensus chain
-			
-		else:
+			ptr=myvalidptr
+			while ptr.prev_hash != None :
+				l2 = l2 + 1
+				ptr = ptr.prev_hash
+				
+			if l1 > l2 :
+				myvalidptr = blockhead
+				
 			self.prev_hash=myvalidptr							#myvalidptr points to last block 
 			myvalidptr=self									#in this node's consensus chain
 			blockhead=myvalidptr	
