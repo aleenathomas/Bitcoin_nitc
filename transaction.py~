@@ -1,5 +1,5 @@
 # to import from node.py
-import 
+from node.py import *
 
 class inputtrans:
 	def __init__(self):
