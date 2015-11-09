@@ -1,3 +1,5 @@
+#import python-bitcoinlib
+
 max_trans_num = 5
 
 class block:

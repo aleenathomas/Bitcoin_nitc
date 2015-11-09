@@ -62,13 +62,13 @@ class transaction:
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
 			if 	transptr.outlist[index].addr != address
-				return false
+				return False
 		outputsum = 0
 		for i in range(self.outcount)
 			outputsum = outputsum + self.outlist[i].value
 		if inputsum != outputsum
-			return false
-		return true
+			return False
+		return True
 			
 			
 
