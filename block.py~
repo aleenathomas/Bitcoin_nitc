@@ -6,6 +6,17 @@ class block:
 		self.translist = [transaction(None,0,0) for i in range (max_trans_num)] 	
 		self.n = 0
 		
+	'''
+	Add transaction to a block:
+		1.Verify whether the transaction is valid
+		2.If there is an invalid entry in between the list of transactions in the block
+			a.copy the transaction in the order to a new block
+			b.add the new transaction to the new block
+		  Else
+		  	a.add the new transaction to the current block
+			
+	'''
+		
 	def add_trans_to_block(self,newtrans): 							#how do we pass an object
 		#verify transaction
 		for i in range (max_trans_num-1):
@@ -21,10 +32,15 @@ class block:
 						newblock.n = newblock.n + 1
 						j = j + 1
 					i = i + 1
-					
+				newblock.translist[j] = newtrans				#add the new transaction to this new block
+				newblock.n = newblock.n + 1	
+			else:
+				for i in range (max_trans_num-1):
+					if self.translist[i].hash==None :
+						self.transalist[i]=newtrans
+						self.n=self.n + 1
 						
-		newblock.translist[j] = newtrans						#add the new transaction to this new block
-		newblock.n = newblock.n + 1
+		
 		#if self.n == max_trans_num :
 			#create a new block and send its hash to the daemon
 			
@@ -33,7 +49,18 @@ class block:
 			if trans.hash == self.translist[i].hash:
 				self.translist[i].hash = None
 				break
-		
+				
+				
+	'''
+	Propose block:
+		1.If myvalid pointer is not the same as block head
+			a.Compare the lengths of each branch.i.e.one ending at blockhead and other at myvalidptr
+			b.If blockhead belongs to the longer branch
+				i)change myvalidptr to blockhead
+		2.Attach the new block to myvalidptr and change blockhead to myvalidptr
+	
+	'''
+	'''	
 	def propose_block(self , myvalidptr):
 		if myvalidptr != blockhead :
 			#decide whether to change it to blockhead !
@@ -52,10 +79,18 @@ class block:
 			if l1 > l2 :
 				myvalidptr = blockhead
 				
-			self.prev_hash=myvalidptr							#myvalidptr points to last block 
-			myvalidptr=self									#in the consensus chain
-			blockhead=myvalidptr								#add the new block there
+		self.prev_hash=myvalidptr							#myvalidptr points to last block 
+		myvalidptr=self									#in the consensus chain
+		blockhead=myvalidptr								#add the new block there
 		
+	'''
+	
+	'''
+	
+	'''
+	def propose_block(self , myvalidptr):
+		self.prev_hash=blockhead
+		block_headself
 		
 		
 		
