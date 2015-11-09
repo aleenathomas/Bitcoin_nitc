@@ -18,8 +18,16 @@ class node:
 			top =top + 1							# to denote the that one more entry has been added to the database				
 			
 			
-			
-		
+	'''
+	On receiving a block proposed by another node:
+	1. Verify the POW 
+	2. If the block is valid
+		a. block.prev_hash=blockhead
+		   bloackhead=block
+	   else
+	   		do nothing 
+	   		 
+	'''	
 		
 		
 		
