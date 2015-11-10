@@ -1,6 +1,5 @@
 # to import from node.py
 from node.py import *
-from openssl import *
 from gethash.py import *
 
 
@@ -33,11 +32,13 @@ class transaction:
 		
 		#requires inlist and outlist data!
 		privkey=raw_input('Enter your private key')
+					#sk = SigningKey.generate() # uses NIST192p(private key)
+					#vk = sk.get_verifying_key()(public key)
 		for i in range(self.incount):
 			inlist[i].hash = raw_input('Enter the hash of input transaction %d',i+1)
 			inlist[i].n = raw_input('Enter the n value of input transaction %d',i+1) 
 			inlist[i].pub = raw_input('Enter your public key')
-			#Reshma, create signature and store in inlist[i].sign
+			#inlist[i].sign=sk.sign(inlist[i])(inlist[i] in string format??)
 			
 		for i in range(self.outcount):
 			inlist[i].value = raw_input('Enter the value of output transaction %d',i+1)
@@ -59,20 +60,11 @@ class transaction:
 				d. address(i) = address of the nth output of that transaction
 		2. For all i, 
 				a. verify the digital signature 
-
-					#Create private key
-
-					openssl ecparam -genkey -name secp384r1 -noout -out private.pem
-
-					#Create public key
-
-					openssl ec -in private.pem -pubout -out public.pem
-
-					#Create signature(instead of test.pdf,if we give a variable it might work)
-					openssl dgst -ecdsa-with-SHA1 -sign private.pem test.pdf > signature.bin
-
-					#Verify signature
-					openssl dgst -ecdsa-with-SHA1 -verify public.pem -signature signature.bin test.pdf
+					from ecdsa import *(problem!!!:no module named ecdsa!)
+					sk = SigningKey.generate() # uses NIST192p
+					vk = sk.get_verifying_key()
+					signature = sk.sign("message")
+					assert vk.verify(signature, "message")
 				b. output must not already be spent
 					ptr = blockhead
 					while ptr ! = currentblock
