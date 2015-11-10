@@ -40,6 +40,7 @@ class transaction:
 				d. address(i) = address of the nth output of that transaction
 		2. For all i, 
 				a. verify the digital signature 
+					
 				b. output must not already be spent
 					ptr = blockhead
 					while ptr ! = currentblock

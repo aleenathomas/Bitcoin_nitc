@@ -1,0 +1,44 @@
+
+transaction
+	Members :	hash
+				incount	
+				outcount
+				inlist
+				outlist
+	Methods : createinlist(self)
+			  createoutlist(self)
+			  validatetrans(self, node)
+__________________________________________________________
+
+inputtrans
+	Members :	hash
+			 	n	
+			 	sign
+			 	pub
+__________________________________________________________
+
+outputtrans
+	Members	:	value
+				addr
+__________________________________________________________
+
+node
+	Members	:	publickey
+				privatekey
+				blockhead
+				maxnumtrans
+				database
+				top
+	Methods : maptransaction(self, block)
+__________________________________________________________
+
+block
+	Members :	prevlist
+				translist
+				n
+	Methods : add_trans_to_block(self,newtrans)
+			  remove_trans_from_block(self,trans)
+			  propose_block(self , myvalidptr)
+__________________________________________________________			  				
+	
+	

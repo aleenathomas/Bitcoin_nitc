@@ -4,7 +4,7 @@ max_trans_num = 5
 
 class block:
 	def __init__(self,prev_hash):
-		self.prev_hash=prev_hash
+		self.prev_hash = prev_hash
 		self.translist = [transaction(None,0,0) for i in range (max_trans_num)] 	
 		self.n = 0
 		
