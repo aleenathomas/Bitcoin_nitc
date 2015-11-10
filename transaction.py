@@ -1,22 +1,24 @@
 # to import from node.py
 from node.py import *
+from gethash.py import *
 
 
-class inputtrans:	#input to a transaction
+
+class inputtrans:			#input to a transaction
 	def __init__(self):
 		self.hash = None
 		self.n = 0
 		self.sign = None	#signature of the sender
 		self.pub = 0		#public key of the sender
 		
-class outputtrans:	#output to a transaction
+class outputtrans:			#output to a transaction
 	def __init__(self):
 		self.value = 0
 		self.addr = 0
 
 class transaction:
-	def __init__(self,hashaddr,incount,outcount):
-		self.hash = hashaddr
+	def __init__(self,incount,outcount):
+		
 		self.incount = incount
 		self.outcount = outcount
 		self.inlist = None
@@ -28,7 +30,25 @@ class transaction:
 	def createoutlist(self):
 		self.outlist = [outputtrans() for i in range (self.outcount)]
 		
-		#to validate transaction; ie, checking the input list of the transaction, ie checking the validity of all the transactions in the input list			
+		#requires inlist and outlist data!
+		privkey=raw_input('Enter your private key')
+					#sk = SigningKey.generate() # uses NIST192p(private key)
+					#vk = sk.get_verifying_key()(public key)
+		for i in range(self.incount):
+			inlist[i].hash = raw_input('Enter the hash of input transaction %d',i+1)
+			inlist[i].n = raw_input('Enter the n value of input transaction %d',i+1) 
+			inlist[i].pub = raw_input('Enter your public key')
+			#inlist[i].sign=sk.sign(inlist[i])(inlist[i] in string format??)
+			
+		for i in range(self.outcount):
+			inlist[i].value = raw_input('Enter the value of output transaction %d',i+1)
+			inlist[i].addr = raw_input('Enter the dest addr of output transaction %d',i+1) 
+			
+						
+		
+		self.hash = gethashoftransaction(self)
+		
+	#to validate transaction; ie, checking the input list of the transaction, ie checking the validity of all the transactions in the input list			
 		'''
 		Algorithm to validatetrans: 
 		
@@ -40,7 +60,15 @@ class transaction:
 				d. address(i) = address of the nth output of that transaction
 		2. For all i, 
 				a. verify the digital signature 
+<<<<<<< HEAD
 					
+=======
+					from ecdsa import *(problem!!!:no module named ecdsa!)
+					sk = SigningKey.generate() # uses NIST192p
+					vk = sk.get_verifying_key()
+					signature = sk.sign("message")
+					assert vk.verify(signature, "message")
+>>>>>>> 4c2830ba391f147e92117ea4492d2bd3831f038a
 				b. output must not already be spent
 					ptr = blockhead
 					while ptr ! = currentblock
@@ -50,7 +78,7 @@ class transaction:
 				d. sum of value(i) must be stored in a variable called inputsum						
 		3. For all outputs, add the value fields to outputsum
 		4. Check whether inputsum = outputsum
-
+		
 		'''
 	def validatetrans(self, node):	
 		inputsum = 0
