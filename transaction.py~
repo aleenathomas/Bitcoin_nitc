@@ -1,5 +1,6 @@
 # to import from node.py
 from node.py import *
+from openssl import *
 
 
 class inputtrans:	#input to a transaction
@@ -40,16 +41,18 @@ class transaction:
 				d. address(i) = address of the nth output of that transaction
 		2. For all i, 
 				a. verify the digital signature 
+
+
 				b. output must not already be spent
 					ptr = blockhead
 					while ptr ! = currentblock
 						for each transaction t in the block
 							any output of t !=  nth output of the inputtransaction			
 				c. address(i) must be equal to public key of the ith transaction in the input list 
-				b. sum of value(i) must be stored in a variable called inputsum						
+				d. sum of value(i) must be stored in a variable called inputsum						
 		3. For all outputs, add the value fields to outputsum
 		4. Check whether inputsum = outputsum
-
+		
 		'''
 	def validatetrans(self, node):	
 		inputsum = 0

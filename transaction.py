@@ -1,5 +1,6 @@
 # to import from node.py
 from node.py import *
+from openssl import *
 
 
 class inputtrans:	#input to a transaction
@@ -40,6 +41,20 @@ class transaction:
 				d. address(i) = address of the nth output of that transaction
 		2. For all i, 
 				a. verify the digital signature 
+
+					#Create private key
+
+					openssl ecparam -genkey -name secp384r1 -noout -out private.pem
+
+					#Create public key
+
+					openssl ec -in private.pem -pubout -out public.pem
+
+					#Create signature(instead of test.pdf,if we give a variable it might work)
+					openssl dgst -ecdsa-with-SHA1 -sign private.pem test.pdf > signature.bin
+
+					#Verify signature
+					openssl dgst -ecdsa-with-SHA1 -verify public.pem -signature signature.bin test.pdf
 				b. output must not already be spent
 					ptr = blockhead
 					while ptr ! = currentblock
@@ -49,7 +64,7 @@ class transaction:
 				d. sum of value(i) must be stored in a variable called inputsum						
 		3. For all outputs, add the value fields to outputsum
 		4. Check whether inputsum = outputsum
-
+		
 		'''
 	def validatetrans(self, node):	
 		inputsum = 0
