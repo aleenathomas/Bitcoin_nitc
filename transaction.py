@@ -6,8 +6,8 @@ class inputtrans:	#input to a transaction
 	def __init__(self):
 		self.hash = None
 		self.n = 0
-		self.sign = None
-		self.pub = 0
+		self.sign = None	#signature of the sender
+		self.pub = 0		#public key of the sender
 		
 class outputtrans:	#output to a transaction
 	def __init__(self):
@@ -35,13 +35,18 @@ class transaction:
 		1. For each transaction (ith) in the input list
 				a. find the blockhash of the block to which it belongs (using the mapping stored in the database)
 				e. find the block in the blockchain
-				b. traverse the block to find the transaction 
+				b. traverse the block to find the transaction, say inputtransation
 				c. value(i) = value of the nth output of that transaction
 				d. address(i) = address of the nth output of that transaction
 		2. For all i, 
-				a. address(i) must be equal to public key of the ith transaction in the input list 
-				b. sum of value(i) must be stored in a variable called inputsum		
-				c. value(i) must not be spent in any transaction after that
+				a. verify the digital signature 
+				b. output must not already be spent
+					ptr = blockhead
+					while ptr ! = currentblock
+						for each transaction t in the block
+							any output of t !=  nth output of the inputtransaction			
+				c. address(i) must be equal to public key of the ith transaction in the input list 
+				d. sum of value(i) must be stored in a variable called inputsum						
 		3. For all outputs, add the value fields to outputsum
 		4. Check whether inputsum = outputsum
 
