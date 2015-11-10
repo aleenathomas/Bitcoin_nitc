@@ -11,10 +11,11 @@ class node:
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
 	
-	# function to add the mapping of all transactions in the newly proposed block
+	# function to add the mapping of all transactions in the newly proposed block to the database
 	def maptransaction(self, block):
 		for i in range(	max_trans_num):
-			database[block.translist[i], top] = block.prevhash		# the block hash of the corresponding trasaction hash
+			database [ top, 0 ] = block.translist[i].hash
+			database[ top, 1] = block.prevhash		# the block hash of the corresponding trasaction hash
 			top =top + 1							# to denote the that one more entry has been added to the database				
 			
 			

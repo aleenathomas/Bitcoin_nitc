@@ -1,14 +1,15 @@
 # to import from node.py
 from node.py import *
 
-class inputtrans:
+
+class inputtrans:	#input to a transaction
 	def __init__(self):
 		self.hash = None
 		self.n = 0
 		self.sign = None
 		self.pub = 0
 		
-class outputtrans:
+class outputtrans:	#output to a transaction
 	def __init__(self):
 		self.value = 0
 		self.addr = 0
@@ -37,9 +38,13 @@ class transaction:
 				b. traverse the block to find the transaction 
 				c. value(i) = value of the nth output of that transaction
 				d. address(i) = address of the nth output of that transaction
-		2. For all i, address(i) must be equal to public key of the ith transaction in the input list and sum of value(i) must be 			   stored in a variable  called inputsum		
+		2. For all i, 
+				a. address(i) must be equal to public key of the ith transaction in the input list 
+				b. sum of value(i) must be stored in a variable called inputsum		
+				c. value(i) must not be spent in any transaction after that
 		3. For all outputs, add the value fields to outputsum
 		4. Check whether inputsum = outputsum
+
 		'''
 	def validatetrans(self, node):	
 		inputsum = 0
@@ -51,6 +56,8 @@ class transaction:
 				if node.database[ j,0 ] == transhash:	# if the transaction hash matches, then the block in which 
 					blockhash = node.database[ j,1 ]
 					break
+
+			#finding the block in the blockchain		
 			blockptr = blockhead
 			while blockptr != blockhash:
 				blockptr = blockptr.prev_hash		
