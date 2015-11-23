@@ -119,6 +119,7 @@ Algorithm:
 	
 	Create a new object T of type transaction
 	T.incount = readline()
+	Create an array of type inlist[incount] 
 	for i=0; i<T.incount; i++
 		Create a new object I of type inputtrans
 			I.hash = readline()
@@ -127,6 +128,7 @@ Algorithm:
 			I.pub = readline()
 		Add I to T.inlist[i] 
 	T.outcount = readline()
+	Create an array of type outlist[outcount] 
 	for i=0; i<T.outcount; i++
 		Create a new object O of type inputtrans
 			O.value = readline()
