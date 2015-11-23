@@ -136,4 +136,49 @@ Algorithm:
 		Add O to T.outlist[i] 	
 	
 
-'''			
+'''		
+
+'''
+
+Function to create a text file from a transaction
+
+Algorithm:
+
+	Input: object T of transaction
+	
+	write(T.incount)
+		
+	for i in range 0 to T.incount-1
+		write(T.inlist[i].hash)
+		write(T.inlist[i].n)
+		write(T.inlist[i].sign)
+		write(T.inlist[i].pub)
+		
+	write(T.outcount)
+	
+	for i in range 0 to T.outcount-1
+		write(T.outlist[i].value)
+		write(T.outlist[i].addr)
+	
+	
+'''	
+
+
+def createtext(T):
+	f = open( 'trans.txt', 'w' )
+	f.write( T.incount + '\n')
+	for i in range T.incount
+		f.write( T.inlist[i].hash + '\n')
+		f.write( T.inlist[i].n + '\n')
+		f.write( T.inlist[i].sign + '\n')
+		f.write( T.inlist[i].pub + '\n')
+		
+	f.write( T.outcount + '\n')
+	for i in range T.outcount
+		f.write( T.outlist[i].value + '\n')
+		f.write( T.outlist[i].addr + '\n')
+	
+
+
+
+
