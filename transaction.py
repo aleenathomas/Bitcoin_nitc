@@ -26,6 +26,12 @@ class transaction:
 		
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]
+		for i in range(self.incount):
+			inlist[i].hash = raw_input('Enter the hash of input transaction %d',i+1)
+			inlist[i].n = raw_input('Enter the n value of input transaction %d',i+1) 
+			inlist[i].pub = raw_input('Enter your public key')
+			#inlist[i].sign=sk.sign(inlist[i])(inlist[i] in string format??)
+
 		
 	def createoutlist(self):
 		self.outlist = [outputtrans() for i in range (self.outcount)]
@@ -33,19 +39,11 @@ class transaction:
 		#requires inlist and outlist data!
 		privkey=raw_input('Enter your private key')
 					#sk = SigningKey.generate() # uses NIST192p(private key)
-					#vk = sk.get_verifying_key()(public key)
-		for i in range(self.incount):
-			inlist[i].hash = raw_input('Enter the hash of input transaction %d',i+1)
-			inlist[i].n = raw_input('Enter the n value of input transaction %d',i+1) 
-			inlist[i].pub = raw_input('Enter your public key')
-			#inlist[i].sign=sk.sign(inlist[i])(inlist[i] in string format??)
-			
+					#vk = sk.get_verifying_key()(public key)			
 		for i in range(self.outcount):
-			inlist[i].value = raw_input('Enter the value of output transaction %d',i+1)
-			inlist[i].addr = raw_input('Enter the dest addr of output transaction %d',i+1) 
-			
+			outlist[i].value = raw_input('Enter the value of output transaction %d',i+1)
+			outlist[i].addr = raw_input('Enter the dest addr of output transaction %d',i+1) 			
 						
-		
 		self.hash = gethashoftransaction(self)
 		
 	#to validate transaction; ie, checking the input list of the transaction, ie checking the validity of all the transactions in the input list			
@@ -114,4 +112,26 @@ class transaction:
 			
 
 				
-			
+'''
+Function to create a transaction from the text file received
+
+Algorithm:
+	
+	Create a new object T of type transaction
+	T.incount = readline()
+	for i=0; i<T.incount; i++
+		Create a new object I of type inputtrans
+			I.hash = readline()
+			I.n = readline()
+			I.sign = readline()
+			I.pub = readline()
+		Add I to T.inlist[i] 
+	T.outcount = readline()
+	for i=0; i<T.outcount; i++
+		Create a new object O of type inputtrans
+			O.value = readline()
+			O.addr = readline()
+		Add O to T.outlist[i] 	
+	
+
+'''			
