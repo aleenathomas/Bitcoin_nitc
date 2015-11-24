@@ -135,5 +135,22 @@ Algorithm:
 			O.addr = readline()
 		Add O to T.outlist[i] 	
 	
-
 '''			
+
+	def filetotrans(self, filename):	
+		f = open(filename,  'r')		
+		T = transaction()	# create a new transaction object
+		T.incount = f.readline()	# reading incount from the file			
+		T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
+		for i in range(T.incount):			
+			inlist[i].hash = readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+			inlist[i].n = readline()
+			inlist[i].sign = readline()
+			inlist[i].pub = readline()
+		T.outcount = f.readline()	# reading outcount from the file			
+		T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
+		for i in range(T.outcount):			
+			outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
+			outlist[i].addr = readline()
+		f.close()
+
