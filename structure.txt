@@ -8,6 +8,7 @@ transaction
 	Methods : createinlist(self)
 			  createoutlist(self)
 			  validatetrans(self, node)
+			  filetotrans(self, filename)
 __________________________________________________________
 
 inputtrans
