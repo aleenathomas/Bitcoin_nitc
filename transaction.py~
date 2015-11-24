@@ -135,6 +135,7 @@ Algorithm:
 			O.addr = readline()
 		Add O to T.outlist[i] 	
 	
+<<<<<<< HEAD
 '''			
 
 	def filetotrans(self, filename):	
@@ -153,4 +154,54 @@ Algorithm:
 			outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
 			outlist[i].addr = readline()
 		f.close()
+=======
+
+'''		
+
+'''
+
+Function to create a text file from a transaction
+
+Algorithm:
+
+	Input: object T of transaction
+	
+	write(T.incount)
+		
+	for i in range 0 to T.incount-1
+		write(T.inlist[i].hash)
+		write(T.inlist[i].n)
+		write(T.inlist[i].sign)
+		write(T.inlist[i].pub)
+		
+	write(T.outcount)
+	
+	for i in range 0 to T.outcount-1
+		write(T.outlist[i].value)
+		write(T.outlist[i].addr)
+	
+	
+'''	
+
+
+def createtext(T):
+	f = open( 'trans.txt', 'w' )
+	f.write( T.incount + '\n')
+	for i in range T.incount
+		f.write( T.inlist[i].hash + '\n')
+		f.write( T.inlist[i].n + '\n')
+		f.write( T.inlist[i].sign + '\n')
+		f.write( T.inlist[i].pub + '\n')
+		
+	f.write( T.outcount + '\n')
+	for i in range T.outcount
+		f.write( T.outlist[i].value + '\n')
+		f.write( T.outlist[i].addr + '\n')
+		
+	f.close
+	
+
+
+
+>>>>>>> d4e3586f850b54c549ba0f37c0769363d5c21b83
 
