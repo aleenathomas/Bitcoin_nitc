@@ -44,5 +44,6 @@ block
 			  remove_trans_from_block(self,trans)
 			  propose_block(self , myvalidptr)
 __________________________________________________________			  				
-	
+Library( pow.py ) 
+Method : pow ( block )
 	
