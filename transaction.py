@@ -148,8 +148,6 @@ Algorithm:
 			outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
 			outlist[i].addr = readline()
 		f.close()
-=======
-
 '''		
 Function to create a text file from a transaction
 
