@@ -29,6 +29,31 @@ class node:
 	   		do nothing 
 	   		 
 	'''	
+
+	'''
+	Function to create a block from a received file
+	Create a new object B of type block
+	.incount = readline()
+	B.publickey = readline()
+	B.privatekey = readline()	
+	B.blockhead = readline()
+	B.maxnumtrans = 1000
+	Create an array of type inlist[incount] 
+	for i=0; i<T.incount; i++
+		Create a new object I of type inputtrans
+			I.hash = readline()
+			I.n = readline()
+			I.sign = readline()
+			I.pub = readline()
+		Add I to T.inlist[i] 
+	T.outcount = readline()
+	Create an array of type outlist[outcount] 
+	for i=0; i<T.outcount; i++
+		Create a new object O of type inputtrans
+			O.value = readline()
+			O.addr = readline()
+		Add O to T.outlist[i]
+	'''
 		
 		
 		

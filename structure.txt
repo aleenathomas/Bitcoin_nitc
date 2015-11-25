@@ -8,7 +8,7 @@ transaction
 	Methods : createinlist(self)
 			  createoutlist(self)
 			  validatetrans(self, node)
-			  filetotrans(self, filename)
+			  filetotrans(filename)
 __________________________________________________________
 
 inputtrans
@@ -31,6 +31,7 @@ node
 				database
 				top
 	Methods : maptransaction(self, block)
+		  filetoblock(filename)
 __________________________________________________________
 
 block

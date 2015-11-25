@@ -57,16 +57,11 @@ class transaction:
 				c. value(i) = value of the nth output of that transaction
 				d. address(i) = address of the nth output of that transaction
 		2. For all i, 
-				a. verify the digital signature 
-<<<<<<< HEAD
-					
-=======
-					from ecdsa import *(problem!!!:no module named ecdsa!)
+				a. verify the digital signature 					
 					sk = SigningKey.generate() # uses NIST192p
 					vk = sk.get_verifying_key()
 					signature = sk.sign("message")
 					assert vk.verify(signature, "message")
->>>>>>> 4c2830ba391f147e92117ea4492d2bd3831f038a
 				b. output must not already be spent
 					ptr = blockhead
 					while ptr ! = currentblock
@@ -135,10 +130,9 @@ Algorithm:
 			O.addr = readline()
 		Add O to T.outlist[i] 	
 	
-<<<<<<< HEAD
 '''			
 
-	def filetotrans(self, filename):	
+	def filetotrans(filename):	
 		f = open(filename,  'r')		
 		T = transaction()	# create a new transaction object
 		T.incount = f.readline()	# reading incount from the file			
@@ -157,9 +151,6 @@ Algorithm:
 =======
 
 '''		
-
-'''
-
 Function to create a text file from a transaction
 
 Algorithm:
@@ -179,8 +170,7 @@ Algorithm:
 	for i in range 0 to T.outcount-1
 		write(T.outlist[i].value)
 		write(T.outlist[i].addr)
-	
-	
+		
 '''	
 
 
@@ -198,10 +188,4 @@ def createtext(T):
 		f.write( T.outlist[i].value + '\n')
 		f.write( T.outlist[i].addr + '\n')
 		
-	f.close
-	
-
-
-
->>>>>>> d4e3586f850b54c549ba0f37c0769363d5c21b83
-
+	f.close	
