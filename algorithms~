@@ -11,7 +11,8 @@
 1) create a transacton block (include special coin creation transaction ) and fill in with transaction objects
 2) solve the proof of work
 3) propose a transaction block
-4) receive a proposed transaction block and decide whether to add it to the consensus chain
+4) rcvng node check if the nonce is correct
+5) receive a proposed transaction block and decide whether to add it to the consensus chain
 	
 1) create a wallet ( pvt key, pub key)
 2) find your balance:
@@ -19,4 +20,5 @@
 	move upwards till u find a transaction giving u coin or a transaction created by u
 		if it's a transaction created by u
 			that'll contain ur balance
-			
+		else 
+			add the coins given to u by that transaction 	

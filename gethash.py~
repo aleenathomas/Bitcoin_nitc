@@ -5,6 +5,19 @@ def gethash(string):
 	h.update(string)
 	return h.hexdigest()
 	
+'''	
+def gethashoftransaction(trans):
+	string=""
+	string=string+incount+outcount
+	for i in range(trans.incount):
+		string=string + trans.inlist[i].hash + trans.inlist[i].n + trans.inlist[i].sign +	trans.inlist[i].pub
+		
+	for i in range(trans.outcount):
+		string=string + trans.inlist[i].value + trans.inlist[i].addr
+		
+	return gethash(string)
+'''	
+
 def gethashofblock(block):
 	string=""
 	string =  string + block.nonce + block.prev_hash + block.max_trans_num
