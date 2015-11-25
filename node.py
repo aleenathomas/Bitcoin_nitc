@@ -11,8 +11,6 @@ class node:
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
 	
-					
-			
 			
 	'''
 	On receiving a block proposed by another node:

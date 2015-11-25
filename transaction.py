@@ -172,7 +172,7 @@ Algorithm:
 '''	
 
 
-def transatofile(T,filename):
+def transtofile(T,filename):
 	f = open( filename, 'w' )
 	f.write( T.incount + '\n')
 	for i in range T.incount

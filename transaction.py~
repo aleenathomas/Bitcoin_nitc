@@ -173,7 +173,7 @@ Algorithm:
 
 
 def transatofile(T,filename):
-	f = open( 'trans.txt', 'w' )
+	f = open( filename, 'w' )
 	f.write( T.incount + '\n')
 	for i in range T.incount
 		f.write( T.inlist[i].hash + '\n')
