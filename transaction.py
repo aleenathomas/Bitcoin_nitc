@@ -16,13 +16,15 @@ class outputtrans:			#output to a transaction
 		self.value = 0
 		self.addr = 0
 
+#added sign to transaction class; sign = node.privatekey.sign(transaction); need to initialise this in createtrans function
 class transaction:
-	def __init__(self,incount,outcount):
+	def __init__(self,incount,outcount,node):
 		
 		self.incount = incount
 		self.outcount = outcount
 		self.inlist = None
 		self.outlist = None
+		self.sign = None
 	'''	
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]

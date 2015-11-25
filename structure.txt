@@ -5,6 +5,7 @@ transaction
 				outcount
 				inlist
 				outlist
+				sign
 	Methods : createinlist(self)
 			  createoutlist(self)
 			  validatetrans(self, node)
@@ -45,5 +46,5 @@ block
 			  filetoblock(filename)
 __________________________________________________________			  				
 Library( pow.py ) 
-Methods : pow ( block )
+Methods : proofofwork ( block )
 		  verify_nonce ( block )	

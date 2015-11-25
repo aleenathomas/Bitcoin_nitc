@@ -30,8 +30,7 @@ node
 				maxnumtrans
 				database
 				top
-	Methods : maptransaction(self, block)
-		  filetoblock(filename)
+	Methods : maptransaction(self, block)		  
 __________________________________________________________
 
 block
@@ -43,7 +42,8 @@ block
 	Methods : add_trans_to_block(self,newtrans)
 			  remove_trans_from_block(self,trans)
 			  propose_block(self , myvalidptr)
+			  filetoblock(filename)
 __________________________________________________________			  				
 Library( pow.py ) 
-Method : pow ( block )
-	
+Methods : proofofwork ( block )
+		  verify_nonce ( block )	
