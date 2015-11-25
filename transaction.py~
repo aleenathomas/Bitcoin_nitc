@@ -23,7 +23,7 @@ class transaction:
 		self.outcount = outcount
 		self.inlist = None
 		self.outlist = None
-		
+	'''	
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]
 		for i in range(self.incount):
@@ -45,7 +45,7 @@ class transaction:
 			outlist[i].addr = raw_input('Enter the dest addr of output transaction %d',i+1) 			
 						
 		self.hash = gethashoftransaction(self)
-		
+	'''	
 	#to validate transaction; ie, checking the input list of the transaction, ie checking the validity of all the transactions in the input list			
 		'''
 		Algorithm to validatetrans: 
@@ -177,6 +177,8 @@ def createtext(T):
 	for i in range T.outcount
 		f.write( T.outlist[i].value + '\n')
 		f.write( T.outlist[i].addr + '\n')
+		
+	f.close
 	
 
 
