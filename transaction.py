@@ -103,9 +103,7 @@ class transaction:
 		if inputsum != outputsum
 			return False
 		return True
-			
-			
-
+						
 				
 '''
 Function to create a transaction from the text file received
@@ -129,6 +127,7 @@ Algorithm:
 			O.value = readline()
 			O.addr = readline()
 		Add O to T.outlist[i] 	
+	return T
 	
 '''			
 
@@ -148,6 +147,7 @@ Algorithm:
 			outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
 			outlist[i].addr = readline()
 		f.close()
+		return T
 '''		
 Function to create a text file from a transaction
 

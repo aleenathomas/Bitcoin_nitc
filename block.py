@@ -1,12 +1,12 @@
 #import python-bitcoinlib
-
-max_trans_num = 5
+from transaction.py import *
 
 class block:
 	def __init__(self,prev_hash):
 		self.prev_hash = prev_hash
+		self.max_trans_num = 5
+		self.nonce = None
 		self.translist = [transaction(None,0,0) for i in range (max_trans_num)] 	
-		self.n = 0
 		
 	'''
 	Add transaction to a block:
@@ -24,8 +24,8 @@ class block:
 		for i in range (max_trans_num-1):
 			if (self.translist[i].hash==None) and (self.translist[i+1].hash!=None): #if there is an invalid entry in between
 				newblock = block (self.prev_hash)				#create a newblock with same contents
-				i=0
-				j=0
+				i = 0
+				j = 0
 				while i < max_trans_num :
 					if self.translist[i].hash != None :
 						newblock.translist[j].hash = self.translist[i].hash
@@ -39,8 +39,8 @@ class block:
 			else:
 				for i in range (max_trans_num-1):
 					if self.translist[i].hash==None :
-						self.transalist[i]=newtrans
-						self.n=self.n + 1
+						self.transalist[i] = newtrans
+						self.n = self.n + 1
 						
 		
 		#if self.n == max_trans_num :
@@ -92,11 +92,63 @@ class block:
 	1.Attach the block to the longest chain	
 	'''
 	def propose_block(self , myvalidptr):
-		self.prev_hash=blockhead
-		block_head=self
+		self.prev_hash = blockhead
+		block_head = self
 		
 		
-		
-		
-		
-		 
+	'''
+	Function filetoblock to create a block from a received file
+
+	Algorithm:
+	Create a new object B of type block
+	B.prev_hash = readline()
+	B.max_trans_num = readline()
+	B.nonce = readline()
+	Create an array translist[max_trans_num]
+	for i=0; i<B.max_trans_num; i++
+		translist[i].incount = readline()
+		Create an array of type inlist[incount] 
+		for j=0; j<translist[i].incount; j++
+			Create a new object I of type inputtrans
+				I.hash = readline()
+				I.n = readline()
+				I.sign = readline()
+				I.pub = readline()
+			Add I to translist[i].inlist[j] 
+		translist[i].outcount = readline()
+		Create an array of type outlist[outcount] 
+		for j=0; j<translist[i].outcount; j++
+			Create a new object O of type inputtrans
+				O.value = readline()
+				O.addr = readline()
+			Add O to translist[i].outlist[j] 
+	return B
+	'''	
+	
+	def filetoblock(filename)				
+		f = open(filename, 'r')
+		B = block()
+		B.prev_hash = readline()
+		B.max_trans_num = readline()
+		B.nonce = readline()
+		B.translist = [transaction(None,0,0) for i in range (max_trans_num)] 	
+		for i in range(B.max_trans_num)
+			T = transaction()
+			T.incount = readline()
+			T.inlist = [inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount] 
+			for j in range(T.incount)
+				I = inputtrans()
+				I.hash = readline()
+				I.n = readline()
+				I.sign = readline()
+				I.pub = readline()
+				T.inlist[j] = I
+			T.outcount = readline()
+			T.outlist = [outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
+			for j in range(T.outcount)
+				O = outputtrans()
+				O.value = readline()
+				O.addr = readline()
+				T.outlist[j] = O
+		 	B.translist[i] = T
+		return B

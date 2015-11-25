@@ -33,7 +33,11 @@ class node:
 	'''
 	Function to create a block from a received file
 	Create a new object B of type block
-	T.incount = readline()
+	.incount = readline()
+	B.publickey = readline()
+	B.privatekey = readline()	
+	B.blockhead = readline()
+	B.maxnumtrans = readline()
 	Create an array of type inlist[incount] 
 	for i=0; i<T.incount; i++
 		Create a new object I of type inputtrans
