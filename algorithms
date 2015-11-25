@@ -6,13 +6,13 @@
 3) use gnunet to publish transaction
 4) receive transaction file using gnunet
 5) convert transaction text into an object
-6) validate the transaction object and add to the block of transactions
+6) validate the transaction object and add to the block of transactions !!!
 
 1) create a transacton block (include special coin creation transaction ) and fill in with transaction objects
 2) solve the proof of work
-3) propose a transaction block
+3) propose a transaction block using gnunet
 4) rcvng node check if the nonce is correct. if not, don't add
-5) receive a proposed transaction block and decide whether to add it to the consensus chain
+5) receive a proposed transaction block and decide whether to add it to the consensus chain !!!
 	
 1) create a wallet ( pvt key, pub key)
 2) find your balance:
