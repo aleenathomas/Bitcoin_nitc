@@ -35,9 +35,11 @@ node
 __________________________________________________________
 
 block
-	Members :	prevlist
+	Members :	prev_hash
+				max_trans_num
+				nonce
 				translist
-				n
+
 	Methods : add_trans_to_block(self,newtrans)
 			  remove_trans_from_block(self,trans)
 			  propose_block(self , myvalidptr)
