@@ -84,7 +84,7 @@ class transaction:
 					blockhash = node.database[ j,1 ]
 					break
 
-			#finding the block in the blockchain		
+			# finding the block in the blockchain		
 			blockptr = blockhead
 			while blockptr != blockhash:
 				blockptr = blockptr.prev_hash		
