@@ -172,8 +172,8 @@ Algorithm:
 '''	
 
 
-def createtext(T):
-	f = open( 'trans.txt', 'w' )
+def transatofile(T,filename):
+	f = open( filename, 'w' )
 	f.write( T.incount + '\n')
 	for i in range T.incount
 		f.write( T.inlist[i].hash + '\n')
@@ -187,3 +187,11 @@ def createtext(T):
 		f.write( T.outlist[i].addr + '\n')
 		
 	f.close	
+	
+	
+# function to add the mapping of all transactions in the newly proposed block to the database
+def maptransaction(self, block):
+	for i in range(	max_trans_num):
+		database [ top, 0 ] = block.translist[i].hash
+		database[ top, 1] = block.prevhash		# the block hash of the corresponding trasaction hash
+		top = top + 1					# to denote the that one more entry has been added to the database
