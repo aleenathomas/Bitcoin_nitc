@@ -1,0 +1,22 @@
+1) createtransaction -> create a transaction object with given details
+2) convert transaction object into a file
+		OR
+1&2) make transaction as a file
+
+3) use gnunet to publish transaction
+4) receive transaction file using gnunet
+5) convert transaction text into an object
+6) validate the transaction object and add to the block of transactions
+
+1) create a transacton block (include special coin creation transaction ) and fill in with transaction objects
+2) solve the proof of work
+3) propose a transaction block
+4) receive a proposed transaction block and decide whether to add it to the consensus chain
+	
+1) create a wallet ( pvt key, pub key)
+2) find your balance:
+	start from the block chain head
+	move upwards till u find a transaction giving u coin or a transaction created by u
+		if it's a transaction created by u
+			that'll contain ur balance
+			
