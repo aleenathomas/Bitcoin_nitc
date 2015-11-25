@@ -1,0 +1,5 @@
+mkdir dir
+cd dir/
+git init
+git remote add origin "link"
+git pull origin master
