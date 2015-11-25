@@ -136,7 +136,7 @@ class block:
 			T = transaction()
 			T.incount = readline()
 			T.inlist = [inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount] 
-			for j in range(T.incount)
+			for j in range(T.incount)	# iterating through each input and adding them to the transaction's inlist
 				I = inputtrans()
 				I.hash = readline()
 				I.n = readline()
@@ -145,10 +145,10 @@ class block:
 				T.inlist[j] = I
 			T.outcount = readline()
 			T.outlist = [outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
-			for j in range(T.outcount)
+			for j in range(T.outcount)	# iterating through each output and adding them to the transaction's outlist
 				O = outputtrans()
 				O.value = readline()
 				O.addr = readline()
 				T.outlist[j] = O
-		 	B.translist[i] = T
+		 	B.translist[i] = T	# adding the transaction to the block's translist
 		return B
