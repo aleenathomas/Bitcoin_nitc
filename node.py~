@@ -64,7 +64,7 @@ class node:
 	'''	
 	
 	
-	getbalance(self):
+	def getbalance(self) :
 		blockptr = blockhead
 		balance = 0
 		while blockptr != self.genesis :

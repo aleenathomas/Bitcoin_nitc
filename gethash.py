@@ -1,5 +1,5 @@
 import hashlib
-from block.py import *				#only for verification
+from block import block				#only for verification
 
 def gethash(string):				#verified 
 	h = hashlib.sha1()
@@ -25,5 +25,6 @@ def gethashofblock(block):
 #hashval=gethash("hel")
 #print(hashval)
 
-newblock = block(gethash("hel"))
+hashval = gethash("hel")
+newblock = block (hashval)
 print(gethashofblock(newblock))

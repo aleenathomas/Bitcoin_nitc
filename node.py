@@ -1,7 +1,7 @@
 #\xhh 	Character with hex value hh
 
-from block.py import *
-from pow.py import *
+from block import *
+from pow import *
 
 class node:
 	def __init__(self):
@@ -64,7 +64,7 @@ class node:
 	'''	
 	
 	
-	getbalance(self) :
+	def getbalance(self) :
 		blockptr = blockhead
 		balance = 0
 		while blockptr != self.genesis :
