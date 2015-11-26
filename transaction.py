@@ -144,16 +144,25 @@ class transaction:
 						return False	
 			# end check 3			
 			
-			# for rt
+			#verifying the signature(Not sure if it will work!)
+			transstr = self.incount + self.outcount
+			
+			for i in range (self.incount):
+				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
+				assert node.publickey.verify(self.inlist[i].sign, inliststr)
+
+			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
+			for i in range (self.outcount) :
+				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
+			assert node.publickey.verify(self.sign, transstr)	
+
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
 			if transptr.outlist[index].addr != address :
 				return False
 			
-			#verifying the signature
 			
-			assert node.publickey.verify(T.sign, "message")
 		outputsum = 0
 		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
@@ -268,29 +277,29 @@ def transtofile(T,filename):		# Verified working
 	f.close	
 
 #function to sign a transaction and transfer to a file
-def signtrans(filename):		# Verified working
+def signtrans(node, filename):		# Verified working
 	f = open( filename, 'r' )
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
+	T.incount = int(f.readline())	# reading incount from the file	
+	T.outcount = int(f.readline())	# reading outcount from the file
 	T = transaction(incount,outcount)		# create a new transaction object
-	transstr = str(incount) + str(outcount)
-	T.inlist = [inputtrans() for i in range (incount)]	# creating array inlist[]
-	for i in range (incount) :
+	transstr = str(T.incount) + str(T.outcount)
+	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
+	for i in range (T.incount) :
 		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
 		T.inlist[i].n = f.readline()
 		T.inlist[i].sign = f.readline()
 		T.inlist[i].pub = f.readline()
 		#append each attribute of inlist[i] and sign it
-		inliststr = str(inlist[i].hash) + str(inlist[i].n) + str(inlist[i].pub)
+		inliststr = str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub)
 		T.inlist[i].sign = node.privatekey.sign(inliststr)
 
 		transstr = transstr + str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub) + str(T.inlist[i].sign)
 		
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
-	for i in range (outcount) :
+	for i in range (T.outcount) :
 		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
 		T.outlist[i].addr = f.readline()
-		transstr = transstr + str(outlist[i].value) + str(outlist[i].addr)
+		transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 	T.sign = node.privatekey.sign(transstr)
 	
 	f.close	

@@ -143,6 +143,18 @@ class transaction:
 					if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
 						return False	
 			# end check 3			
+			
+			#verifying the signature(Not sure if it will work!)
+			transstr = self.incount + self.outcount
+			
+			for i in range (self.incount):
+				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
+				assert node.publickey.verify(self.inlist[i].sign, inliststr)
+
+			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
+			for i in range (self.outcount) :
+				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
+			assert node.publickey.verify(self.sign, inliststr)	
 
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
@@ -150,9 +162,7 @@ class transaction:
 			if transptr.outlist[index].addr != address :
 				return False
 			
-			#verifying the signature
 			
-			assert node.publickey.verify(T.sign, "message")
 		outputsum = 0
 		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
@@ -189,10 +199,12 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
+<<<<<<< HEAD
+	
+	incount = int(f.readline())	# reading incount from the file	
+	outcount = int(f.readline())	# reading outcount from the file
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
-<<<<<<< HEAD
-=======
 
 	
 	incount = int(f.readline())	# reading incount from the file	
@@ -207,7 +219,6 @@ def filetotrans(filename):			# Verified working
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
 >>>>>>> c4a0b5afde6f50621b692721244d0db159afe9d9
->>>>>>> 47d308608f50732e41c497e09619805372c1fc21
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
@@ -266,29 +277,29 @@ def transtofile(T,filename):		# Verified working
 	f.close	
 
 #function to sign a transaction and transfer to a file
-def signtrans(filename):		# Verified working
+def signtrans(node, filename):		# Verified working
 	f = open( filename, 'r' )
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
+	T.incount = int(f.readline())	# reading incount from the file	
+	T.outcount = int(f.readline())	# reading outcount from the file
 	T = transaction(incount,outcount)		# create a new transaction object
-	transstr = str(incount) + str(outcount)
-	T.inlist = [inputtrans() for i in range (incount)]	# creating array inlist[]
-	for i in range (incount) :
+	transstr = str(T.incount) + str(T.outcount)
+	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
+	for i in range (T.incount) :
 		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
 		T.inlist[i].n = f.readline()
 		T.inlist[i].sign = f.readline()
 		T.inlist[i].pub = f.readline()
 		#append each attribute of inlist[i] and sign it
-		inliststr = str(inlist[i].hash) + str(inlist[i].n) + str(inlist[i].pub)
+		inliststr = str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub)
 		T.inlist[i].sign = node.privatekey.sign(inliststr)
 
 		transstr = transstr + str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub) + str(T.inlist[i].sign)
 		
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
-	for i in range (outcount) :
+	for i in range (T.outcount) :
 		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
 		T.outlist[i].addr = f.readline()
-		transstr = transstr + str(outlist[i].value) + str(outlist[i].addr)
+		transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 	T.sign = node.privatekey.sign(transstr)
 	
 	f.close	
