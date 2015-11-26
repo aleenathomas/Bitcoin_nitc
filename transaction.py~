@@ -16,13 +16,15 @@ class outputtrans:			#output to a transaction
 		self.value = 0
 		self.addr = 0
 
+#added sign to transaction class; sign = node.privatekey.sign(transaction); initialise this in createtrans function
 class transaction:
-	def __init__(self,incount,outcount):
+	def __init__(self,incount,outcount,node):
 		
 		self.incount = incount
 		self.outcount = outcount
 		self.inlist = None
 		self.outlist = None
+		self.sign = None
 	'''	
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]
@@ -172,7 +174,11 @@ Algorithm:
 '''	
 
 
+<<<<<<< HEAD
+def transatofile(T,filename):
+=======
 def transtofile(T,filename):
+>>>>>>> 2a03eb85237e390fb81038c4557c7f1e0868d111
 	f = open( filename, 'w' )
 	f.write( T.incount + '\n')
 	for i in range T.incount

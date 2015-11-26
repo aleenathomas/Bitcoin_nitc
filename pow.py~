@@ -1,4 +1,4 @@
-def proofofwork ( block ) :
+def pow ( block ) :
 	nonce = 0
 	guess = 99999999999999999999
 	throttle = 10000000

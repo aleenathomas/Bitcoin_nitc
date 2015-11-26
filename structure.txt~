@@ -44,5 +44,6 @@ block
 			  propose_block(self , myvalidptr)
 			  filetoblock(filename)
 __________________________________________________________			  				
-	
-	
+Library( pow.py ) 
+Methods : proofofwork ( block )
+		  verify_nonce ( block )	
