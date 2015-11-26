@@ -19,5 +19,5 @@ def verify_nonce ( block ):
 	guess, = unpack('>Q',hashval[0:8])
 	if guess <= target:
 		return 1;		#verified
-	else :
+	else 
 		return 0;		#incorrect!
