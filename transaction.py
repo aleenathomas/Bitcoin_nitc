@@ -109,7 +109,7 @@ class transaction:
 						
 				
 '''
-Function to create a transaction from the text file received
+Function to create a transaction object from the text file received
 
 Algorithm:
 	
@@ -142,15 +142,15 @@ def filetotrans(filename):
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
-		T.inlist[i].hash = readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
-		T.inlist[i].n = readline()
-		T.inlist[i].sign = readline()
-		T.inlist[i].pub = readline()
+		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		T.inlist[i].n = f.readline()
+		T.inlist[i].sign = f.readline()
+		T.inlist[i].pub = f.readline()
 	
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
 	for i in range(T.outcount):			
-		T.outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
-		T.outlist[i].addr = readline()
+		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = f.readline()
 	f.close()
 	return T
 	

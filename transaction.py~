@@ -109,7 +109,7 @@ class transaction:
 						
 				
 '''
-Function to create a transaction from the text file received
+Function to create a transaction object from the text file received
 
 Algorithm:
 	
