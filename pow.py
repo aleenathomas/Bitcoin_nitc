@@ -5,7 +5,7 @@ def proofofwork ( block ) :
 	target = 2**64 / throttle
 
 	while guess > target:
-		nonce+ = 1
+		nonce = nonce + 1
 		block.nonce = nonce
 		hashval = gethashofblock( block )
 		guess, = unpack('>Q',hashval[0:8])
@@ -19,5 +19,5 @@ def verify_nonce ( block ):
 	guess, = unpack('>Q',hashval[0:8])
 	if guess <= target:
 		return 1;		#verified
-	else 
+	else :
 		return 0;		#incorrect!
