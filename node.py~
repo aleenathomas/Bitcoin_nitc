@@ -1,7 +1,6 @@
 #\xhh 	Character with hex value hh
 
 from block import *
-<<<<<<< HEAD
 from proof_of_work import *
 from blockchain import *
 
@@ -15,7 +14,7 @@ class node:
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
-		self.genesis=NULL
+		self.genesis = None
 		
 
 

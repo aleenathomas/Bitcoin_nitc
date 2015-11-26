@@ -3,7 +3,7 @@
 from block import *
 from proof_of_work import *
 from blockchain import *
-
+#import ecdsa
 
 class node:
 	def __init__(self):
