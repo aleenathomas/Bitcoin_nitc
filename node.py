@@ -15,23 +15,22 @@ class node:
 		self.genesis=NULL
 		
 
-	'''
-	Algorithm:
+<<<<<<< HEAD
+'''
+#Algorithm:
 		
-	1. proofofwork	( new_block )
-	2. ver = verify_nonce ( prop_block )
-	3. maxheight = traverse to the end of a leaf list, check max height.
-	4.	get the block with max height 
-	5. if ver == 1: (i.e, if the nonce is verified by the node)
-	6. 	if node.blockhead.height == maxheight:
-	7.			prop_block should point to node.blockhead
-	8. 		node.blockhead=prop_block
-	9.		else
-	10.			 node.blockhead = blockmaxheight
-	11.			 prop_block should point to node.blockhead
-	12. 			node.blockhead=prop_block
-	
+1. proofofwork	( new_block )
+2. ver = verify_nonce ( prop_block )
+3.	if ver == 1: (i.e, if the nonce is verified by the node)
+4. 		traverse to the end of a leaf list till hash of the block = prop_block.prev_hash.( call it hashequalblock ).
+5.			prop_block.prev_hash = hashequalblock
+6.			Add prop_block in the list of leaves
+7.		 	Also, maxheight = check max height in the leaflist.
+8.			get the block with max height ( blockmaxheight )
+9.		    node.blockhead = blockmaxheight
+=======
 	'''
+
 	'''
 	On receiving a block proposed by another node:
 	1. Verify the POW 
