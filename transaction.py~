@@ -149,12 +149,15 @@ class transaction:
 			
 			for i in range (self.incount):
 				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
-				assert node.publickey.verify(self.inlist[i].sign, inliststr)
-
+				truthval = assert node.publickey.verify(self.inlist[i].sign, inliststr)
+				if truthval != True:
+					break
+			if truthval != True:
+					break
 			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
 			for i in range (self.outcount) :
 				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
-			assert node.publickey.verify(self.sign, inliststr)	
+			truthval = assert node.publickey.verify(self.sign, transstr)	
 
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
