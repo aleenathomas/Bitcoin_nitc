@@ -50,7 +50,7 @@ class node:
 
 	getbalance()
 	1.Traverse the consesus chain
-	2.balance = 0
+	2.inbalance = outbalance = 0
 	3.For each block in the chain
 		a.For each transaction from bottom to top
 			i.If it's a transaction created by self
@@ -60,7 +60,7 @@ class node:
 				ii1.If it contains transaction destined to self.publickey
 					inbalance = inbalance + value of its output transaction
 				
-	4. Return balance
+	4. Return inbalance - outbalance
 
 	'''	
 	
