@@ -3,17 +3,19 @@
 from block import *
 from proof_of_work import *
 from blockchain import *
-
+from treestruct import *
 
 class node:
 	def __init__(self):
 		
 		self.privatekey = SigningKey.generate()	
 		self.publickey = self.privatekey.get_verifying_key()
+		#required??
 		self.blockhead = None
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
+		#required??
 		self.genesis=NULL
 		
 '''
@@ -99,9 +101,6 @@ class node:
 '''
 Function addblock to add the proposed block to the blockchain maintained by the node
 
-
-
 '''
 		balance = inbalance - outbalance
 		return balance
-
