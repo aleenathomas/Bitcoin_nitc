@@ -109,7 +109,7 @@ class transaction:
 						
 				
 '''
-Function to create a transaction from the text file received
+Function to create a transaction object from the text file received
 
 Algorithm:
 	
@@ -153,6 +153,7 @@ def filetotrans(filename, node):
 		T.outlist[i].addr = readline()
 	f.close()
 	return T
+	
 '''		
 Function to create a text file from a transaction
 

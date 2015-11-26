@@ -3,17 +3,26 @@
 from block import *
 from proof_of_work import *
 from blockchain import *
+<<<<<<< HEAD
 #import ecdsa
+=======
+from treestruct import *
+
+>>>>>>> 5367f342ed557fdbb53da8b8ad9f73f50736fc22
 
 class node:
 	def __init__(self):
 		
 		self.privatekey = SigningKey.generate()	
 		self.publickey = self.privatekey.get_verifying_key()
+		#required??
 		self.blockhead = None
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
+
+		#required??
+		self.genesis=NULL
 		self.genesis = None
 		
 	'''
@@ -100,8 +109,11 @@ class node:
 '''
 Function addblock to add the proposed block to the blockchain maintained by the node
 
-
-
 '''
+<<<<<<< HEAD
+		balance = inbalance - outbalance
+		return balance
+=======
 		
 
+>>>>>>> 9394d790a2ec3ba46e318f6a310634d2ed0790a5

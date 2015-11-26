@@ -14,7 +14,7 @@ Attach (child, parent)
 	4. listofleaves.add(child)
 	5. child.height = parent.height + 1
 	
-global variable listofleaves = list of the leaves in th tree	
+global variable listofleaves = list of the leaves in the tree	
 class blockinablockchain
 	listofchildren		   				
 	parent
