@@ -71,4 +71,9 @@ if ver == 1:
 		balance = inbalance - outbalance
 		return balance
 
+<<<<<<< HEAD
 		
+=======
+'''
+
+>>>>>>> d21e50a00204902c33182de47cfb11f18ad63a62

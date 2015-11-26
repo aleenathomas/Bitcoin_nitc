@@ -1,15 +1,15 @@
 from transaction import *
 
-trans = filetotrans('transaction.txt')
-print( T.incount + '\n')
+T = filetotrans('transaction.txt')
+print( str(T.incount) )
 for i in range( T.incount ):
-	print(T.inlist[i].hash + '\n')
-	print(T.inlist[i].n + '\n')
-	print(T.inlist[i].sign + '\n')
-	print(T.inlist[i].pub + '\n')
+	print(str(T.inlist[i].hash) )
+	print(str(T.inlist[i].n) )
+	print(str(T.inlist[i].sign) )
+	print(str(T.inlist[i].pub) )
 	
-print( T.outcount + '\n' )
+print( str(T.outcount)  )
 
 for i in range( T.outcount ) :
-	print( T.outlist[i].value + '\n' )
-	print( T.outlist[i].addr + '\n' ) 
+	print( str(T.outlist[i].value)  )
+	print( str(T.outlist[i].addr)  ) 

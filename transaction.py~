@@ -19,10 +19,10 @@ class outputtrans:			#output to a transaction
 
 #added sign to transaction class; sign = node.privatekey.sign(transaction); need to initialise this in createtrans function
 class transaction:
-	def __init__(self,incount,outcount,node):
+	def __init__(self,incount,outcount):
 		
-		self.incount = 0
-		self.outcount = 0
+		self.incount = incount
+		self.outcount = outcount
 		self.inlist = None
 		self.outlist = None
 		self.sign = None
@@ -134,23 +134,23 @@ Algorithm:
 	
 '''			
 
-def filetotrans(filename, node):	
+def filetotrans(filename):	
 	f = open(filename,  'r')		
-	T = transaction()	# create a new transaction object
-	T.incount = f.readline()	# reading incount from the file	
-	T.outcount = f.readline()	# reading outcount from the file
-						
+	
+	incount = f.readline()	# reading incount from the file	
+	outcount = f.readline()	# reading outcount from the file
+	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
-		T.inlist[i].hash = readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
-		T.inlist[i].n = readline()
-		T.inlist[i].sign = readline()
-		T.inlist[i].pub = readline()
+		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		T.inlist[i].n = f.readline()
+		T.inlist[i].sign = f.readline()
+		T.inlist[i].pub = f.readline()
 	
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
 	for i in range(T.outcount):			
-		T.outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
-		T.outlist[i].addr = readline()
+		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = f.readline()
 	f.close()
 	return T
 	

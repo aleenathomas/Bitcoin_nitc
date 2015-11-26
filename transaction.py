@@ -19,10 +19,10 @@ class outputtrans:			#output to a transaction
 
 #added sign to transaction class; sign = node.privatekey.sign(transaction); need to initialise this in createtrans function
 class transaction:
-	def __init__(self,incount,outcount,node):
+	def __init__(self,incount,outcount):
 		
-		self.incount = 0
-		self.outcount = 0
+		self.incount = incount
+		self.outcount = outcount
 		self.inlist = None
 		self.outlist = None
 		self.sign = None
@@ -134,12 +134,12 @@ Algorithm:
 	
 '''			
 
-def filetotrans(filename, node):	
+def filetotrans(filename):	
 	f = open(filename,  'r')		
-	T = transaction()	# create a new transaction object
-	T.incount = f.readline()	# reading incount from the file	
-	T.outcount = f.readline()	# reading outcount from the file
-						
+	
+	incount = f.readline()	# reading incount from the file	
+	outcount = f.readline()	# reading outcount from the file
+	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
 		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
