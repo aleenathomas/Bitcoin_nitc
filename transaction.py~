@@ -16,7 +16,7 @@ class outputtrans:			#output to a transaction
 		self.value = 0
 		self.addr = 0
 
-#added sign to transaction class; sign = node.privatekey.sign(transaction); initialise this in createtrans function
+#added sign to transaction class; sign = node.privatekey.sign(transaction); need to initialise this in createtrans function
 class transaction:
 	def __init__(self,incount,outcount,node):
 		
@@ -49,7 +49,7 @@ class transaction:
 		self.hash = gethashoftransaction(self)
 	'''	
 	#to validate transaction; ie, checking the input list of the transaction, ie checking the validity of all the transactions in the input list			
-		'''
+	'''
 		Algorithm to validatetrans: 
 		
 		1. For each transaction (ith) in the input list
@@ -90,19 +90,19 @@ class transaction:
 			blockptr = blockhead
 			while blockptr != blockhash:
 				blockptr = blockptr.prev_hash		
-			for i in range(max_trans_num)	
-				if blockptr.translist[i].hash == transhash
-			    	transptr = translist[i]
-			    	break
+			for i in range(max_trans_num) :	
+				if (blockptr.translist[i].hash == transhash) :
+				    	transptr = translist[i]
+				    	break
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
-			if 	transptr.outlist[index].addr != address
+			if transptr.outlist[index].addr != address :
 				return False
 		outputsum = 0
-		for i in range(self.outcount)
+		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
-		if inputsum != outputsum
+		if inputsum != outputsum :
 			return False
 		return True
 						
@@ -133,23 +133,23 @@ Algorithm:
 	
 '''			
 
-	def filetotrans(filename):	
-		f = open(filename,  'r')		
-		T = transaction()	# create a new transaction object
-		T.incount = f.readline()	# reading incount from the file			
-		T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
-		for i in range(T.incount):			
-			inlist[i].hash = readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
-			inlist[i].n = readline()
-			inlist[i].sign = readline()
-			inlist[i].pub = readline()
-		T.outcount = f.readline()	# reading outcount from the file			
-		T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
-		for i in range(T.outcount):			
-			outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
-			outlist[i].addr = readline()
-		f.close()
-		return T
+def filetotrans(filename):	
+	f = open(filename,  'r')		
+	T = transaction()	# create a new transaction object
+	T.incount = f.readline()	# reading incount from the file			
+	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
+	for i in range(T.incount):			
+		inlist[i].hash = readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		inlist[i].n = readline()
+		inlist[i].sign = readline()
+		inlist[i].pub = readline()
+	T.outcount = f.readline()	# reading outcount from the file			
+	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
+	for i in range(T.outcount):			
+		outlist[i].value = readline()	# reading value and addr values from file ans storing it in outlist[i]
+		outlist[i].addr = readline()
+	f.close()
+	return T
 '''		
 Function to create a text file from a transaction
 
@@ -174,21 +174,17 @@ Algorithm:
 '''	
 
 
-<<<<<<< HEAD
-def transatofile(T,filename):
-=======
 def transtofile(T,filename):
->>>>>>> 2a03eb85237e390fb81038c4557c7f1e0868d111
 	f = open( filename, 'w' )
 	f.write( T.incount + '\n')
-	for i in range T.incount
+	for i in range (T.incount) :
 		f.write( T.inlist[i].hash + '\n')
 		f.write( T.inlist[i].n + '\n')
 		f.write( T.inlist[i].sign + '\n')
 		f.write( T.inlist[i].pub + '\n')
 		
 	f.write( T.outcount + '\n')
-	for i in range T.outcount
+	for i in range T.outcount :
 		f.write( T.outlist[i].value + '\n')
 		f.write( T.outlist[i].addr + '\n')
 		
