@@ -22,8 +22,6 @@ class node:
 
 
 	'''
-<<<<<<< HEAD
-=======
 	#Algorithm:
 		
 	1. proofofwork	( new_block )
@@ -37,7 +35,6 @@ class node:
 	9.		    node.blockhead = blockmaxheight
 
 	'''
->>>>>>> b15a3407dcf4c5e8741ecdf0596b8d4729a865f4
 
 	'''
 	On receiving a block proposed by another node:
@@ -64,7 +61,7 @@ class node:
 				
 			ii.Else
 				ii1.If it contains transaction destined to self.publickey
-					balance = balance + value of its output transaction
+					inbalance = inbalance + value of its output transaction
 				
 	4. Return balance
 
