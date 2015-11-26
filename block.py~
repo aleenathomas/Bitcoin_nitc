@@ -145,7 +145,7 @@ class block:
 				T.inlist[j] = I
 			T.outcount = readline()
 			T.outlist = [outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
-			for j in range(T.outcount)	# iterating through each output and adding them to the transaction's outlist
+			for j in range(T.outcount) :	# iterating through each output and adding them to the transaction's outlist
 				O = outputtrans()
 				O.value = readline()
 				O.addr = readline()

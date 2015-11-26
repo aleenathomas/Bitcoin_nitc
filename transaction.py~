@@ -184,7 +184,7 @@ def transtofile(T,filename):
 		f.write( T.inlist[i].pub + '\n')
 		
 	f.write( T.outcount + '\n')
-	for i in range T.outcount :
+	for i in range (T.outcount) :
 		f.write( T.outlist[i].value + '\n')
 		f.write( T.outlist[i].addr + '\n')
 		

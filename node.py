@@ -1,7 +1,8 @@
 #\xhh 	Character with hex value hh
 
-from block.py import *
-from pow.py import *
+from block import *
+from proof_of_work import *
+from blockchain import *
 
 class node:
 	def __init__(self):
