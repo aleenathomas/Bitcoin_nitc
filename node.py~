@@ -15,26 +15,23 @@ class node:
 		self.genesis=NULL
 		
 
-#Algorithm:
+'''
+Algorithm:
 		
-#1. proofofwork	( new_block )
-#2. ver = verify_nonce ( prop_block )
-#3. maxheight = traverse to the end of a leaf list, check max height.
-#4.	get the block with max height 
-#5. if ver == 1: (i.e, if the nonce is verified by the node)
-#6. 	if node.blockhead.height == maxheight:
-#7.			prop_block should point to node.blockhead
-#8. 		node.blockhead=prop_block
-#9.		else
-#10.			 node.blockhead = blockmaxheight
-#11.			 prop_block should point to node.blockhead
-#12. 			node.blockhead=prop_block
+1. proofofwork	( new_block )
+2. ver = verify_nonce ( prop_block )
+3. maxheight = traverse to the end of a leaf list, check max height.
+4.	get the block with max height 
+5. if ver == 1: (i.e, if the nonce is verified by the node)
+6. 	if node.blockhead.height == maxheight:
+7.			prop_block should point to node.blockhead
+8. 		node.blockhead=prop_block
+9.		else
+10.			 node.blockhead = blockmaxheight
+11.			 prop_block should point to node.blockhead
+12. 			node.blockhead=prop_block
 	
-<<<<<<< HEAD
-				
-=======
-			
->>>>>>> 2a03eb85237e390fb81038c4557c7f1e0868d111
+'''
 	'''
 	On receiving a block proposed by another node:
 	1. Verify the POW 
@@ -64,4 +61,25 @@ class node:
 					
 	4. Return balance
 	
-	'''		
+	'''	
+	
+	
+getbalance(self):
+	blockptr = blockhead
+	balance = 0
+	while blockptr != self.genesis :
+		for i in range(blockptr.max_trans_num,0,-1) :
+			if ( blockptr.translist[i].sign == node.sign ) :
+				for j in range(blockptr.translist[i].outcount) :
+					 if ( blockptr.translist[i].outlist[j].addr == self.publickey ) :
+					 	balance = balance + blockptr.translist[i].outlist[j].value
+					 	break
+			else : 
+				for j in range(blockptr.translist[i].outcount) :
+					if ( blockptr.translist[i].outlist[j].addr == self.publickey ) :
+						balance = balance + blockptr.translist[i].outlist[j].value
+						
+						
+	return balance
+	
+	
