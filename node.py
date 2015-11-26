@@ -52,11 +52,11 @@ class node:
 	3.For each block in the chain
 		a.For each transaction from bottom to top
 			i.If it's a transaction created by self
-				i1.balance = balance + value of output transaction destined to self.publickey
-				i2.break loop
+				i1.outbalance = outbalance + value of output transaction destined to someone else
+				
 			ii.Else
 				ii1.If it contains transaction destined to self.publickey
-					balance = balance + value of its output transaction
+					inbalance = inbalance + value of its output transaction
 				
 	4. Return balance
 
@@ -65,20 +65,22 @@ class node:
 	
 	def getbalance(self) :
 		blockptr = blockhead
-		balance = 0
+		inbalance = 0
+		outbalance
 		while blockptr != self.genesis :
 			for i in range(blockptr.max_trans_num,0,-1) :
 				if ( blockptr.translist[i].sign == node.sign ) :
 					for j in range(blockptr.translist[i].outcount) :
-						 if ( blockptr.translist[i].outlist[j].addr == self.publickey ) :
-						 	balance = balance + blockptr.translist[i].outlist[j].value
-						 	break
+						 if ( blockptr.translist[i].outlist[j].addr != self.publickey ) :
+						 	outbalance = outbalance + blockptr.translist[i].outlist[j].value
+						 	
 				else : 
 					for j in range(blockptr.translist[i].outcount) :
 						if ( blockptr.translist[i].outlist[j].addr == self.publickey ) :
-							balance = balance + blockptr.translist[i].outlist[j].value
+							inbalance = inbalance + blockptr.translist[i].outlist[j].value
 						
 						
+		balance = inbalance - outbalance
 		return balance
 	
 	

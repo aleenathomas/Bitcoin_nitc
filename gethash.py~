@@ -6,7 +6,7 @@ def gethash(string):				#verified
 	h.update(string)
 	return h.hexdigest()
 	
-def gethashofblock(block):
+def gethashofblock(block):			#veriried
 	string = ""
 	string =  string + str(block.nonce) + str(block.prev_hash) + str(block.max_trans_num)
 	#for each transaction in the block, concatenate the content to the string
@@ -16,7 +16,7 @@ def gethashofblock(block):
 			string = string + str(block.translist[j].inlist[i].hash) + str(block.translist[j].inlist[i].n) + str(block.translist[j].inlist[i].sign) + str(block.translist[j].inlist[i].pub)
 		
 		for i in range(block.translist[j].outcount):
-			string = string + str(block.translist[j].inlist[i].value) + block.translist[j].inlist[i].addr
+			string = string + str(block.translist[j].inlist[i].value) + str(block.translist[j].inlist[i].addr)
 	return gethash(string)
 	
 	
@@ -25,6 +25,6 @@ def gethashofblock(block):
 #hashval=gethash("hel")
 #print(hashval)
 
-hashval = gethash("hel")
-newblock = block (hashval)
-print(gethashofblock(newblock))
+#hashval = gethash("hel")
+#newblock = block (hashval)
+#print(gethashofblock(newblock))

@@ -1,12 +1,12 @@
 import hashlib
-from block import block				#only for verification
+#from block import block				#only for verification
 
 def gethash(string):				#verified 
 	h = hashlib.sha1()
 	h.update(string)
 	return h.hexdigest()
 	
-def gethashofblock(block):
+def gethashofblock(block):			#veriried
 	string = ""
 	string =  string + str(block.nonce) + str(block.prev_hash) + str(block.max_trans_num)
 	#for each transaction in the block, concatenate the content to the string
@@ -25,6 +25,6 @@ def gethashofblock(block):
 #hashval=gethash("hel")
 #print(hashval)
 
-hashval = gethash("hel")
-newblock = block (hashval)
-print(gethashofblock(newblock))
+#hashval = gethash("hel")
+#newblock = block (hashval)
+#print(gethashofblock(newblock))
