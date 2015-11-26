@@ -30,7 +30,11 @@ class node:
 #11.			 prop_block should point to node.blockhead
 #12. 			node.blockhead=prop_block
 	
+<<<<<<< HEAD
 				
+=======
+			
+>>>>>>> 2a03eb85237e390fb81038c4557c7f1e0868d111
 	'''
 	On receiving a block proposed by another node:
 	1. Verify the POW 
@@ -40,4 +44,24 @@ class node:
 	   else
 	   		do nothing 
 	   		 
+	'''
+	
+	
+	'''
+	To find the balance in our wallet
+	
+	getbalance()
+	1.Traverse the consesus chain
+	2.balance = 0
+	3.For each block in the chain
+		a.For each transaction from bottom to top
+			i.If it's a transaction created by self
+				i1.balance = balance + value of output transaction destined to self.publickey
+				i2.break loop
+			ii.Else
+				ii1.If it contains transaction destined to self.publickey
+					balance = balance + value of its output transaction
+					
+	4. Return balance
+	
 	'''		

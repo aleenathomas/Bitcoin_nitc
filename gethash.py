@@ -15,5 +15,4 @@ def gethashofblock(block):
 		
 		for i in range(block.translist[j].outcount):
 			string = string + block.translist[j].inlist[i].value + block.translist[j].inlist[i].addr
-		
 	return gethash(string)

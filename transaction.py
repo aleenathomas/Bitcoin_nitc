@@ -174,7 +174,7 @@ Algorithm:
 '''	
 
 
-def transatofile(T,filename):
+def transtofile(T,filename):
 	f = open( filename, 'w' )
 	f.write( T.incount + '\n')
 	for i in range T.incount
@@ -197,3 +197,5 @@ def maptransaction(self, block):
 		database [ top, 0 ] = block.translist[i].hash
 		database[ top, 1] = block.prevhash		# the block hash of the corresponding trasaction hash
 		top = top + 1					# to denote the that one more entry has been added to the database
+		
+
