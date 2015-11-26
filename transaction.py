@@ -138,13 +138,10 @@ Algorithm:
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
 	
-<<<<<<< HEAD
 	incount = int(f.readline())	# reading incount from the file	
 	outcount = int(f.readline())	# reading outcount from the file
-=======
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
->>>>>>> 7db890f917ecea233de99bb3c4039206a48c44ca
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
