@@ -39,6 +39,6 @@ class node:
 				ii1.If it contains transaction destined to self.publickey
 					balance = balance + value of its output transaction
 					
-	4. Return transaction
+	4. Return balance
 	
 	'''		
