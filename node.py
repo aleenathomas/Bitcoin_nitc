@@ -106,5 +106,4 @@ class node:
 Function addblock to add the proposed block to the blockchain maintained by the node
 
 '''
-		balance = inbalance - outbalance
-		return balance
+
