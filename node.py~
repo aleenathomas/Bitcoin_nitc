@@ -28,7 +28,7 @@ class node:
 #9.		else
 #10.			 node.blockhead = blockmaxheight
 #11.			 prop_block should point to node.blockhead
-#12. 		node.blockhead=prop_block
+#12. 			node.blockhead=prop_block
 	
 <<<<<<< HEAD
 				

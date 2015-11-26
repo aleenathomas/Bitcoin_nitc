@@ -30,11 +30,7 @@ class node:
 #11.			 prop_block should point to node.blockhead
 #12. 			node.blockhead=prop_block
 	
-<<<<<<< HEAD
-				
-=======
-			
->>>>>>> 2a03eb85237e390fb81038c4557c7f1e0868d111
+
 	'''
 	On receiving a block proposed by another node:
 	1. Verify the POW 
