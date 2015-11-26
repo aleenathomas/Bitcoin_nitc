@@ -1,8 +1,10 @@
 # to import from node.py
+
 from node import *
 #from gethash import *
+>>>>>>> b15a3407dcf4c5e8741ecdf0596b8d4729a865f4
 
-dummy_none = "456"			#used and changed to test run gethashofblock
+dummy_none = "456"			#used to test run gethashofblock
 
 class inputtrans:			#input to a transaction
 	def __init__(self):
