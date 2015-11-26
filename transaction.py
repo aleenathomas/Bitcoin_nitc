@@ -2,13 +2,13 @@
 from node import *
 #from gethash import *
 
-
+dummy_none = "456"			#used and changed to test run gethashofblock
 
 class inputtrans:			#input to a transaction
 	def __init__(self):
-		self.hash = None
+		self.hash = dummy_none
 		self.n = 0
-		self.sign = None	#signature of the sender
+		self.sign = dummy_none	#signature of the sender
 		self.pub = 0		#public key of the sender
 		
 class outputtrans:			#output to a transaction
@@ -20,11 +20,11 @@ class outputtrans:			#output to a transaction
 class transaction:
 	def __init__(self,incount,outcount,node):
 		
-		self.incount = incount
-		self.outcount = outcount
-		self.inlist = None
-		self.outlist = None
-		self.sign = None
+		self.incount = 0
+		self.outcount = 0
+		self.inlist = dummy_none
+		self.outlist = dummy_none
+		self.sign = dummy_none
 	'''	
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]
