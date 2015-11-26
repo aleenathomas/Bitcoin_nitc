@@ -1,6 +1,7 @@
 # to import from node.py
 
 from node import *
+from treestruct import *
 #from gethash import *
 
 dummy_none = "456"			#used to test run gethashofblock
@@ -79,21 +80,21 @@ class transaction:
 	def validatetrans(self, node):	
 		inputsum = 0
 		for i in range(self.incount):
-			transhash = self.inlist[i].hash
-			# checking from the block
+			transhash = self.inlist[i].hash		#
 			
-			for j in range(node.maxnumtrans):	# iterate through all transactions in the database
+			for j in range(top):	# iterate through all transactions in the database ie till 'top' transactions
 				if node.database[ j,0 ] == transhash:	# if the transaction hash matches, then the block in which 
 					blockhash = node.database[ j,1 ]
 					break
 
-			# finding the block in the blockchain		
+			# finding the block in the blockchain using the blockhash		
 			blockptr = blockhead
-			while blockptr != blockhash:
-				blockptr = blockptr.prev_hash		
+			while blockptr.parent != None and blockptr.propblock.hash != blockhash:	# ie, search till the genesis block
+				blockptr = blockptr.parent		
+			# searching for the transaction in the block using transaction hash
 			for i in range(max_trans_num) :	
-				if (blockptr.translist[i].hash == transhash) :
-				    	transptr = translist[i]
+				if (blockptr.propblock.translist[i].hash == transhash) :
+				    	transptr = translist[i]		# transptr points to the input transaction
 				    	break
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
@@ -103,7 +104,7 @@ class transaction:
 		outputsum = 0
 		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
-		if inputsum != outputsum :
+		if inputsum < outputsum :
 			return False
 		return True
 						
@@ -137,8 +138,8 @@ Algorithm:
 def filetotrans(filename):	
 	f = open(filename,  'r')		
 	
-	incount = f.readline()	# reading incount from the file	
-	outcount = f.readline()	# reading outcount from the file
+	incount = int(f.readline())	# reading incount from the file	
+	outcount = int(f.readline())	# reading outcount from the file
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
@@ -199,7 +200,7 @@ def transtofile(T,filename):
 def maptransaction(self, block):
 	for i in range(	max_trans_num):
 		database [ top, 0 ] = block.translist[i].hash
-		database[ top, 1] = block.prevhash		# the block hash of the corresponding trasaction hash
+		database[ top, 1] = gethashofblock(block)		# the block hash of the corresponding trasaction hash
 		top = top + 1					# to denote the that one more entry has been added to the database
 		
 
