@@ -129,8 +129,9 @@ class transaction:
 			if transptr.outlist[index].addr != address :
 				return False
 			
-			signature = sk.sign("message")
-			assert vk.verify(signature, "message")
+			#verifying the signature
+			
+			assert node.publickey.verify(T.sign, "message")
 		outputsum = 0
 		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
