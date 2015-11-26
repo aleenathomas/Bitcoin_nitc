@@ -184,7 +184,7 @@ Algorithm:
 '''	
 
 
-def transtofile(T,filename):
+def transtofile(T,filename):		# Verified working
 	f = open( filename, 'w' )
 	f.write( str(T.incount) + '\n' )
 	f.write( str(T.outcount) + '\n' )
