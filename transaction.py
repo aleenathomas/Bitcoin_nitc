@@ -134,7 +134,7 @@ Algorithm:
 	
 '''			
 
-def filetotrans(filename):	
+def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
 	
 	incount = int( f.readline() ) 	# reading incount from the file	
@@ -178,19 +178,21 @@ Algorithm:
 '''	
 
 
-def transtofile(T,filename):
+def transtofile(T,filename):		# Verified working
 	f = open( filename, 'w' )
-	f.write( T.incount + '\n')
+	f.write( str(T.incount) + '\n' )
+	f.write( str(T.outcount) + '\n' )
+	
 	for i in range (T.incount) :
-		f.write( T.inlist[i].hash + '\n')
-		f.write( T.inlist[i].n + '\n')
-		f.write( T.inlist[i].sign + '\n')
-		f.write( T.inlist[i].pub + '\n')
+		f.write( T.inlist[i].hash )
+		f.write( T.inlist[i].n )
+		f.write( T.inlist[i].sign )
+		f.write( T.inlist[i].pub )
 		
-	f.write( T.outcount + '\n')
+	
 	for i in range (T.outcount) :
-		f.write( T.outlist[i].value + '\n')
-		f.write( T.outlist[i].addr + '\n')
+		f.write( T.outlist[i].value )
+		f.write( T.outlist[i].addr )
 		
 	f.close	
 	
