@@ -1,24 +1,17 @@
-1) createtransaction -> create a transaction object with given details
-2) convert transaction object into a file
-		OR
-1&2) make transaction as a file
+1) make transaction as a file
+2) convert filetotrans 
+*3) call function to sign contents of transaction and its input transactions and store sign
+4) replace the previous transaction file with the new contents (including sign) - call transtofile
+5) use gnunet to publish transaction file
+6) receive transaction file using gnunet
+7) convert transaction text into an object
+*8) validate the transaction object and add to the block of transactions !!!
 
-3) use gnunet to publish transaction
-4) receive transaction file using gnunet
-5) convert transaction text into an object
-6) validate the transaction object and add to the block of transactions !!!
-
-1) create a transacton block (include special coin creation transaction ) and fill in with transaction objects
+1) create a transaction block (include special coin creation transaction ) and fill in with transaction objects
 2) solve the proof of work
 3) propose a transaction block using gnunet
 4) rcvng node check if the nonce is correct. if not, don't add
 5) receive a proposed transaction block and decide whether to add it to the consensus chain !!!
 	
 1) create a wallet ( pvt key, pub key)
-2) find your balance:
-	start from the block chain head
-	move upwards till u find a transaction giving u coin or a transaction created by u
-		if it's a transaction created by u
-			that'll contain ur balance
-		else 
-			add the coins given to u by that transaction 	
+2) find your balance before making any transaction	

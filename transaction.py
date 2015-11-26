@@ -75,12 +75,35 @@ class transaction:
 				d. sum of value(i) must be stored in a variable called inputsum						
 		3. For all outputs, add the value fields to outputsum
 		4. Check whether inputsum = outputsum
+
+		points to check		    
+
+    Reject if we already have matching tx in the pool, or in a block in the main branch
+    For each input, if the referenced output exists in any other tx in the pool, reject this transaction.[5]
+    For each input, look in the main branch and the transaction pool to find the referenced output transaction. If the output transaction is missing for any input, this will be an orphan transaction. Add to the orphan transactions, if a matching transaction is not in there already.
+    For each input, if the referenced output transaction is coinbase (i.e. only 1 input, with hash=0, n=-1), it must have at least COINBASE_MATURITY (100) confirmations; else reject this transaction
+    For each input, if the referenced output does not exist (e.g. never existed or has already been spent), reject this transaction[6]
+    Using the referenced output transactions to get input values, check that each input value, as well as the sum, are in legal money range
+    Reject if the sum of input values < sum of output values
+    Reject if transaction fee (defined as sum of input values minus sum of output values) would be too low to get into an empty block
+    Verify the scriptPubKey accepts for each input; reject if any are bad
+    Add to transaction pool[7]
+    "Add to wallet if mine"
+    Relay transaction to peers
+    For each orphan transaction that uses this one as one of its inputs, run all these steps (including this one) recursively on that orphan
 		
 		'''
-	def validatetrans(self, node):	
+	def validatetrans(self, node):
+		# check whether the transaction is already present in the outstanding block of the node or in the blockchain	
+		# part 1 : checking in the blockchain, it is enough to check whether the transaction hash has been added to the database or not
+		for i in range(top):	# iterate through all transactions in the database ie till 'top' transactions
+				if node.database[ i,0 ] == self.hash:	# if the transaction hash is already present in the database
+					return False
+
+
 		inputsum = 0
-		for i in range(self.incount):
-			transhash = self.inlist[i].hash		#
+		for i in range(self.incount):	# after each pass, one input transaction from the input list is verified
+			transhash = self.inlist[i].hash		
 			
 			for j in range(top):	# iterate through all transactions in the database ie till 'top' transactions
 				if node.database[ j,0 ] == transhash:	# if the transaction hash matches, then the block in which 
@@ -96,11 +119,18 @@ class transaction:
 				if (blockptr.propblock.translist[i].hash == transhash) :
 				    	transptr = translist[i]		# transptr points to the input transaction
 				    	break
+			# checking whether the inlist or outlist is empty
+			if transptr.incount == 0 or transptr.outcount == 0:
+				return False
+
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
 			if transptr.outlist[index].addr != address :
 				return False
+			
+			signature = sk.sign("message")
+			assert vk.verify(signature, "message")
 		outputsum = 0
 		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
@@ -137,14 +167,8 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
-	
-<<<<<<< HEAD
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
-=======
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
->>>>>>> 7db890f917ecea233de99bb3c4039206a48c44ca
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			

@@ -17,7 +17,7 @@ class node:
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
 
-		#required?
+		#required??
 		self.genesis = None
 	
 		
@@ -75,6 +75,5 @@ if ver == 1:
 		
 =======
 '''
-		balance = inbalance - outbalance
-		return balance
+
 >>>>>>> d21e50a00204902c33182de47cfb11f18ad63a62
