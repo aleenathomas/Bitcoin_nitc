@@ -3,11 +3,8 @@
 from block import *
 from proof_of_work import *
 from blockchain import *
-<<<<<<< HEAD
 from treestruct import *
-=======
-#import ecdsa
->>>>>>> 9394d790a2ec3ba46e318f6a310634d2ed0790a5
+
 
 class node:
 	def __init__(self):
@@ -19,12 +16,10 @@ class node:
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
-<<<<<<< HEAD
+
 		#required??
 		self.genesis=NULL
-=======
 		self.genesis = None
->>>>>>> 9394d790a2ec3ba46e318f6a310634d2ed0790a5
 		
 	'''
 	#Algorithm:
@@ -111,10 +106,5 @@ class node:
 Function addblock to add the proposed block to the blockchain maintained by the node
 
 '''
-<<<<<<< HEAD
 		balance = inbalance - outbalance
 		return balance
-=======
-		
-
->>>>>>> 9394d790a2ec3ba46e318f6a310634d2ed0790a5
