@@ -3,7 +3,7 @@
 from block import *
 from proof_of_work import *
 from blockchain import *
-
+#import ecdsa
 
 class node:
 	def __init__(self):
@@ -95,8 +95,8 @@ class node:
 							inbalance = inbalance + blockptr.translist[i].outlist[j].value
 						
 						
-		return balance		
-
+		balance = inbalance - outbalance
+		return balance
 '''
 Function addblock to add the proposed block to the blockchain maintained by the node
 
