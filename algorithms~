@@ -1,11 +1,11 @@
 1) make transaction as a file
 2) convert filetotrans 
-*3) call function to sign contents of transaction and its input transactions and store sign
+3) call function to sign contents of transaction and its input transactions and store sign
 4) replace the previous transaction file with the new contents (including sign) - call transtofile
 5) use gnunet to publish transaction file
 6) receive transaction file using gnunet
 7) convert transaction text into an object
-8) validate the transaction object and add to the block of transactions !!!
+*8) validate the transaction object and add to the block of transactions !!!
 
 1) create a transaction block (include special coin creation transaction ) and fill in with transaction objects
 2) solve the proof of work
