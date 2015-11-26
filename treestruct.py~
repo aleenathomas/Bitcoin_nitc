@@ -51,6 +51,6 @@ def addleaf( leaf ):
 	
 def removeleaf(leaf):
 	ptr = leafhead
-	while(ptr != None and ptr.next != leaf):
+	while(ptr != None and ptr.next ! =leaf):
 		ptr = ptr.next		
 	ptr.next = leaf.next

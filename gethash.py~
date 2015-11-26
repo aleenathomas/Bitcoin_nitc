@@ -1,5 +1,5 @@
 import hashlib
-from block import block				#only for verification
+#from block import block				#only for verification
 
 def gethash(string):				#verified 
 	h = hashlib.sha1()
