@@ -1,6 +1,6 @@
 # to import from node.py
-from node.py import *
-from gethash.py import *
+from node import *
+from gethash import *
 
 
 
