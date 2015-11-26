@@ -93,13 +93,23 @@ class transaction:
     For each orphan transaction that uses this one as one of its inputs, run all these steps (including this one) recursively on that orphan
 		
 		'''
-	def validatetrans(self, node):
-		# check whether the transaction is already present in the outstanding block of the node or in the blockchain	
-		# part 1 : checking in the blockchain, it is enough to check whether the transaction hash has been added to the database or not
-		for i in range(top):	# iterate through all transactions in the database ie till 'top' transactions
-				if node.database[ i,0 ] == self.hash:	# if the transaction hash is already present in the database
-					return False
+	def validatetrans(self, node, block):
+		# check 1 : check whether the transaction is already present in the outstanding block of the node or in the blockchain	
+		# part 1 : checking in the blockchain
+		blockptr = blockhead
+		while blockptr.parent != None and blockptr.propblock.hash != blockhash:	# ie, search till the genesis block
+				blockptr = blockptr.parent
 
+		# part 2 : checking in the block currently filled by the node
+		for i in range(block.max_trans_num):
+			if node.currentblock.translist[i].hash == self.hash:
+				return False
+		# end check 1
+
+		#check 2 : checking whether the inlist or outlist is empty
+		if self.incount == 0 or self.outcount == 0:
+			return False 
+		# end check 2
 
 		inputsum = 0
 		for i in range(self.incount):	# after each pass, one input transaction from the input list is verified
@@ -115,14 +125,26 @@ class transaction:
 			while blockptr.parent != None and blockptr.propblock.hash != blockhash:	# ie, search till the genesis block
 				blockptr = blockptr.parent		
 			# searching for the transaction in the block using transaction hash
-			for i in range(max_trans_num) :	
+			for i in range(block.max_trans_num) :	
 				if (blockptr.propblock.translist[i].hash == transhash) :
 				    	transptr = translist[i]		# transptr points to the input transaction
-				    	break
-			# checking whether the inlist or outlist is empty
-			if transptr.incount == 0 or transptr.outcount == 0:
-				return False
-
+				    	break			
+			# check 3 : checking whether the inputs are already spent or not
+			# checking whether the current transaction's (pointed by transptr) hash is given as the hash of any input to any transaction that comes after that
+			ptr = blockhead 
+			while ptr != blockptr:
+				for j in range(block.max_trans_num):	# every transaction in the block
+					for k in range(ptr.propblock.incount):		# every input to the transaction
+						if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
+							return False
+			
+			for j in range(i, block.max_trans_num):	# for those transactions that come after the input transaction
+				for k in range(ptr.propblock.incount):		# every input to the transaction
+					if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
+						return False	
+			# end check 3			
+			
+			# for rt
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
@@ -168,8 +190,26 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
+<<<<<<< HEAD
+	
+	incount = int(f.readline())	# reading incount from the file	
+	outcount = int(f.readline())	# reading outcount from the file
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
+
+	
+	incount = int(f.readline())	# reading incount from the file	
+	outcount = int(f.readline())	# reading outcount from the file
+	incount = int( f.readline() ) 	# reading incount from the file	
+	outcount = int( f.readline() )	# reading outcount from the file
+
+	incount = int( f.readline() ) 	# reading incount from the file	
+	outcount = int( f.readline() )	# reading outcount from the file
+
+=======
+	incount = int( f.readline() ) 	# reading incount from the file	
+	outcount = int( f.readline() )	# reading outcount from the file
+>>>>>>> c4a0b5afde6f50621b692721244d0db159afe9d9
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
