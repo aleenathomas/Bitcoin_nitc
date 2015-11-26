@@ -1,12 +1,9 @@
 #\xhh 	Character with hex value hh
 
 from block import *
-<<<<<<< HEAD
 from proof_of_work import *
 from blockchain import *
-=======
-from pow import *
->>>>>>> b15a3407dcf4c5e8741ecdf0596b8d4729a865f4
+
 
 class node:
 	def __init__(self):
