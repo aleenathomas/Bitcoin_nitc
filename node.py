@@ -16,10 +16,23 @@ class node:
 		self.top = 0
 		self.genesis = None
 		
+	'''
+	#Algorithm:
+		
+	1. proofofwork	( new_block )
+	2. ver = verify_nonce ( prop_block )
+	3.	if ver == 1: (i.e, if the nonce is verified by the node)
+	4. 		traverse to the end of a leaf list till hash of the block = prop_block.prev_hash.( call it hashequalblock ).
+	5.			prop_block.prev_hash = hashequalblock
+	6.			Add prop_block in the list of leaves
+	7.		 	Also, maxheight = check max height in the leaflist.
+	8.			get the block with max height ( blockmaxheight )
+	9.		    node.blockhead = blockmaxheight
 
 
 	'''
-	#Algorithm:
+	'''
+	Algorithm:
 		
 	1. proofofwork	( new_block )
 	2. ver = verify_nonce ( prop_block )
@@ -84,5 +97,11 @@ class node:
 						
 		balance = inbalance - outbalance
 		return balance
-	
-	
+'''
+Function addblock to add the proposed block to the blockchain maintained by the node
+
+
+
+'''
+		
+
