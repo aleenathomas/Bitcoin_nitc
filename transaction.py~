@@ -184,7 +184,7 @@ Algorithm:
 '''	
 
 
-def transtofile(T,filename):
+def transtofile(T,filename):		# Verified working
 	f = open( filename, 'w' )
 	f.write( str(T.incount) + '\n' )
 	f.write( str(T.outcount) + '\n' )
@@ -201,7 +201,34 @@ def transtofile(T,filename):
 		f.write( T.outlist[i].addr )
 		
 	f.close	
+#function to sign a transaction and transfer to a file
+def signtrans(filename):		# Verified working
+	f = open( filename, 'r' )
+	incount = int(f.readline())	# reading incount from the file	
+	outcount = int(f.readline())	# reading outcount from the file
+	T = transaction(incount,outcount)		# create a new transaction object
+	transstr = str(incount) + str(outcount)
+	T.inlist = [inputtrans() for i in range (incount)]	# creating array inlist[]
+	for i in range (incount) :
+		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		T.inlist[i].n = f.readline()
+		T.inlist[i].sign = f.readline()
+		T.inlist[i].pub = f.readline()
+		#append each attribute of inlist[i] and sign it
+		inliststr = str(inlist[i].hash) + str(inlist[i].n) + str(inlist[i].pub)
+		T.inlist[i].sign = node.privatekey.sign(inliststr)
+
+		transstr = transstr + str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub) + str(T.inlist[i].sign)
+		
+	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
+	for i in range (outcount) :
+		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = f.readline()
+		transstr = transstr + str(outlist[i].value) + str(outlist[i].addr)
+	T.sign = node.privatekey.sign(transstr)
 	
+	f.close	
+	transtofile(T,filename)	
 	
 # function to add the mapping of all transactions in the newly proposed block to the database
 def maptransaction(self, block):
