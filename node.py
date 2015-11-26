@@ -16,6 +16,7 @@ class node:
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
+		self.currrentblock = None
 
 		#required??
 		self.genesis = None

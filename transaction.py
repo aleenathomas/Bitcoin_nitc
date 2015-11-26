@@ -93,14 +93,17 @@ class transaction:
     For each orphan transaction that uses this one as one of its inputs, run all these steps (including this one) recursively on that orphan
 		
 		'''
-	def validatetrans(self, node):
+	def validatetrans(self, node, block):
 		# check whether the transaction is already present in the outstanding block of the node or in the blockchain	
-		# part 1 : checking in the blockchain, it is enough to check whether the transaction hash has been added to the database or not
-		for i in range(top):	# iterate through all transactions in the database ie till 'top' transactions
-				if node.database[ i,0 ] == self.hash:	# if the transaction hash is already present in the database
-					return False
+		# part 1 : checking in the blockchain
+		blockptr = blockhead
+		while blockptr.parent != None and blockptr.propblock.hash != blockhash:	# ie, search till the genesis block
+				blockptr = blockptr.parent
 
-
+		# part 2 : checking in the block currently filled by the node
+		for i in range(block.max_trans_num):
+			if node.currentblock.translist[i].hash == self.hash:
+				return False
 		inputsum = 0
 		for i in range(self.incount):	# after each pass, one input transaction from the input list is verified
 			transhash = self.inlist[i].hash		
@@ -167,25 +170,21 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
-<<<<<<< HEAD
 	
 	incount = int(f.readline())	# reading incount from the file	
 	outcount = int(f.readline())	# reading outcount from the file
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
-=======
-<<<<<<< HEAD
-	
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
-=======
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
 
->>>>>>> f5a391b6a5defebad105fc53386f2d418c964ff2
->>>>>>> e37579e1773e58ad142c1fa3aba7fa373a5264be
+	
+	incount = int(f.readline())	# reading incount from the file	
+	outcount = int(f.readline())	# reading outcount from the file
+	incount = int( f.readline() ) 	# reading incount from the file	
+	outcount = int( f.readline() )	# reading outcount from the file
+
+	incount = int( f.readline() ) 	# reading incount from the file	
+	outcount = int( f.readline() )	# reading outcount from the file
+
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range(T.incount):			
