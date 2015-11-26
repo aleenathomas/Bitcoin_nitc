@@ -27,6 +27,7 @@ class transaction:
 		self.inlist = None
 		self.outlist = None
 		self.sign = None
+		self.hash = None
 	'''	
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]
@@ -206,6 +207,8 @@ def filetotrans(filename):			# Verified working
 	outcount = int( f.readline() )	# reading outcount from the file
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
+	T.sign = f.readline()
+	T.hash = f.readline()
 	for i in range(T.incount):			
 		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
 		T.inlist[i].n = f.readline()
@@ -247,7 +250,8 @@ def transtofile(T,filename):		# Verified working
 	f = open( filename, 'w' )
 	f.write( str(T.incount) + '\n' )
 	f.write( str(T.outcount) + '\n' )
-	
+	f.write( T.sign )
+	f.write( T.hash )
 	for i in range (T.incount) :
 		f.write( T.inlist[i].hash )
 		f.write( T.inlist[i].n )

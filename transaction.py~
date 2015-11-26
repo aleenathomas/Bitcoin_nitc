@@ -27,6 +27,7 @@ class transaction:
 		self.inlist = None
 		self.outlist = None
 		self.sign = None
+		self.hash = None
 	'''	
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]
@@ -144,9 +145,6 @@ class transaction:
 						return False	
 			# end check 3			
 			
-<<<<<<< HEAD
-			# for rt
-=======
 			#verifying the signature(Not sure if it will work!)
 			transstr = self.incount + self.outcount
 			
@@ -154,15 +152,14 @@ class transaction:
 				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
 				truthval = assert node.publickey.verify(self.inlist[i].sign, inliststr)
 				if truthval != True:
-					break
-			if truthval != True:
-					break
+					return False
+			
 			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
 			for i in range (self.outcount) :
 				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
 			truthval = assert node.publickey.verify(self.sign, transstr)	
-
->>>>>>> bba372cb9558e60f4caf52a860e40a83da58ded8
+			if truthval != True
+				return False
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
@@ -206,28 +203,12 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
-<<<<<<< HEAD
-	
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
-
-	
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
-
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
-
-=======
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
->>>>>>> c4a0b5afde6f50621b692721244d0db159afe9d9
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
+	T.sign = f.readline()
+	T.hash = f.readline()
 	for i in range(T.incount):			
 		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
 		T.inlist[i].n = f.readline()
@@ -269,7 +250,8 @@ def transtofile(T,filename):		# Verified working
 	f = open( filename, 'w' )
 	f.write( str(T.incount) + '\n' )
 	f.write( str(T.outcount) + '\n' )
-	
+	f.write( T.sign )
+	f.write( T.hash )
 	for i in range (T.incount) :
 		f.write( T.inlist[i].hash )
 		f.write( T.inlist[i].n )
