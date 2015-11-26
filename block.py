@@ -1,12 +1,16 @@
 #import python-bitcoinlib
-from transaction.py import *
+from transaction import *
+
+#dummy values to verify working of gethash as None cannot be used
+dummy_nonce = 123
+dummy_hash = 567
 
 class block:
 	def __init__(self,prev_hash):
 		self.prev_hash = prev_hash
 		self.max_trans_num = 5
-		self.nonce = None
-		self.translist = [transaction(None,0,0) for i in range (max_trans_num)] 	
+		self.nonce = dummy_nonce
+		self.translist = [transaction(None,0,0) for i in range (self.max_trans_num)] 	
 		
 	'''
 	Add transaction to a block:

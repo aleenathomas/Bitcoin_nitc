@@ -1,8 +1,9 @@
 # to import from node.py
-from node.py import *
-from gethash.py import *
 
+from node import *
+#from gethash import *
 
+dummy_none = "456"			#used to test run gethashofblock
 
 class inputtrans:			#input to a transaction
 	def __init__(self):
@@ -20,8 +21,8 @@ class outputtrans:			#output to a transaction
 class transaction:
 	def __init__(self,incount,outcount,node):
 		
-		self.incount = incount
-		self.outcount = outcount
+		self.incount = 0
+		self.outcount = 0
 		self.inlist = None
 		self.outlist = None
 		self.sign = None
