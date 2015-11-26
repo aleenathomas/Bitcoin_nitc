@@ -139,7 +139,7 @@ class block:
 		B.prev_hash = readline()
 		B.max_trans_num = readline()
 		B.nonce = readline()
-		B.translist = [transaction(None,0,0) for i in range (max_trans_num)] 	
+		B.translist = [transaction(None,0,0) for i in range (B.max_trans_num)] 	
 		for i in range(B.max_trans_num) :
 			T = transaction()
 			T.incount = readline()
@@ -160,3 +160,26 @@ class block:
 				T.outlist[j] = O
 		 	B.translist[i] = T	# adding the transaction to the block's translist
 		return B
+		
+		
+		
+	def blocktofile(B,filename):
+		f = open( filename, 'w' )
+		f.write(B.prev_hash)
+		f.write(str(B.max_trans_num) + '\n')
+		f.write(str(B.nonce) + '\n')
+		for i in range( B.max_trans_num) :
+			f.write(str(B.translist[i].incount) + '\n')
+			for j in range(B.translist[i].incount) :
+				write(B.translist[i].inlist[j].hash)
+				write(str(B.translist[i].inlist[j].n) + '\n')
+				write(B.translist[i].inlist[j].sign)
+				write(B.translist[i].inlist[j].pub)
+			f.write(str(B.translist[i].outcount) + '\n')
+			for j in range(B.translist[i].outcount) :
+				write(B.translist[i].outlist[j].value)
+				write(B.translist[i].outlist[j].addr)
+		
+		
+		
+		

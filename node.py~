@@ -16,21 +16,12 @@ class node:
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
 		self.top = 0
+		self.currrentblock = None
 
 		#required??
 		self.genesis = None
 	
 		
-proofofwork	( new_block )
-ver = verify_nonce ( prop_block )
-#ver=1 => verified nonce
-if ver == 1: 
-	addblock( propblock )
-
-	
-	
-
-
 	'''
 	To find the balance in our wallet
 
@@ -70,5 +61,15 @@ if ver == 1:
 						
 		balance = inbalance - outbalance
 		return balance
+		
+proofofwork	( new_block )
+ver = verify_nonce ( prop_block )
+#ver=1 => verified nonce
+if ver == 1: 
+	addblock( propblock )
+
+	
+	
+
 
 

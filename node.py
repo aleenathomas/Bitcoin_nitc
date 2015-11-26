@@ -22,16 +22,6 @@ class node:
 		self.genesis = None
 	
 		
-proofofwork	( new_block )
-ver = verify_nonce ( prop_block )
-#ver=1 => verified nonce
-if ver == 1: 
-	addblock( propblock )
-
-	
-	
-
-
 	'''
 	To find the balance in our wallet
 
@@ -71,5 +61,15 @@ if ver == 1:
 						
 		balance = inbalance - outbalance
 		return balance
+		
+proofofwork( new_block )
+ver = verify_nonce ( prop_block )
+#ver=1 => verified nonce
+if ver == 1: 
+	addblock( propblock )
+
+	
+	
+
 
 
