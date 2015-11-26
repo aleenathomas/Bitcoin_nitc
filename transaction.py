@@ -1,6 +1,12 @@
 # to import from node.py
+<<<<<<< HEAD
+from node.py import *
+
+
+=======
 from node import *
 #from gethash import *
+>>>>>>> b15a3407dcf4c5e8741ecdf0596b8d4729a865f4
 
 dummy_none = "456"			#used to test run gethashofblock
 
