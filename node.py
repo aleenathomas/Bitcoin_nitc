@@ -16,7 +16,6 @@ class node:
 		self.top = 0
 		self.genesis=NULL
 		
-<<<<<<< HEAD
 '''
 #Algorithm:
 		
@@ -29,7 +28,6 @@ class node:
 7.		 	Also, maxheight = check max height in the leaflist.
 8.			get the block with max height ( blockmaxheight )
 9.		    node.blockhead = blockmaxheight
-=======
 
 
 	'''
@@ -45,7 +43,6 @@ class node:
 	8.			get the block with max height ( blockmaxheight )
 	9.		    node.blockhead = blockmaxheight
 
->>>>>>> 7ab09232be5b1b473abdde1773e33c88cbf217a6
 	'''
 
 	'''
@@ -97,7 +94,6 @@ class node:
 							inbalance = inbalance + blockptr.translist[i].outlist[j].value
 						
 						
-<<<<<<< HEAD
 		return balance		
 
 '''
@@ -106,9 +102,6 @@ Function addblock to add the proposed block to the blockchain maintained by the 
 
 
 '''
-=======
 		balance = inbalance - outbalance
 		return balance
-	
-	
->>>>>>> 7ab09232be5b1b473abdde1773e33c88cbf217a6
+
