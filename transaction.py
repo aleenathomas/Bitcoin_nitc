@@ -145,7 +145,7 @@ class transaction:
 					if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
 						return False	
 			# end check 3			
-			
+			'''
 			#verifying the signature(Not sure if it will work!)
 			transstr = self.incount + self.outcount + self.hash
 			
@@ -160,7 +160,7 @@ class transaction:
 			for i in range (self.outcount) :
 				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
 			assert node.publickey.verify(self.sign, transstr)	
-			
+			'''
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
