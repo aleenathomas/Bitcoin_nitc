@@ -107,32 +107,7 @@ t1.outlist[1].addr = 1001
 block1.translist[4] = t1
 
 
-block.blocktofile(block1, "testblocktofile.txt")
-B = block.filetoblock("testblocktofile.txt")
-'''Printing:
-'''
-print('printing block2')
-print(str(B.prev_hash) + '\n')
-print(str(B.max_trans_num) + '\n')
-print(str(B.nonce) + '\n')
-
-for i in range( B.max_trans_num) :
-	print(str(B.translist[i].incount) + '\n')
-	print(str(B.translist[i].outcount) + '\n')
-	print( str(B.translist[i].sign ) + '\n')
-	print( str(B.translist[i].hash ) + '\n')
-	for j in range(B.translist[i].incount) :
-		print(str(B.translist[i].inlist[j].hash) + '\n')
-		print(str(B.translist[i].inlist[j].n) + '\n')
-		print(str(B.translist[i].inlist[j].sign) + '\n')
-		print(str(B.translist[i].inlist[j].pub) + '\n')
-		
-	for j in range(B.translist[i].outcount) :
-		print ("value = %d",B.translist[i].outlist[j].value)
-		print(str(B.translist[i].outlist[j].value) + '\n')
-		print(str(B.translist[i].outlist[j].addr) + '\n')	
-
-
-
-
-#block.blocktofile(block2, "testblocktofilecompare.txt")
+block.blocktofile(block1, "file1.txt")
+block2 = block.filetoblock("file1.txt")
+block.blocktofile(block2, "file2.txt")
+block.rmnewline("file2.txt")

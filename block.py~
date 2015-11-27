@@ -1,5 +1,6 @@
 #import python-bitcoinlib
 import transaction
+import fileinput
 
 #dummy values to verify working of gethash as None cannot be used
 dummy_nonce = 123
@@ -135,16 +136,16 @@ class block:
 	
 def filetoblock(filename) :				
 	f = open(filename, 'r')
-	prev_hash = f.readline()
-	B = block(prev_hash)
+	prevhash = f.readline()
+	B = block(prevhash)
 	B.max_trans_num = int(f.readline())
 	B.nonce = f.readline()
-	B.translist = [transaction.transaction(0,0) for i in range (B.max_trans_num)] 	
+	#B.translist = [transaction.transaction(0,0) for i in range (B.max_trans_num)] 	
 	for i in range(B.max_trans_num) :
 		incount = int(f.readline())
 		outcount = int(f.readline())
 		T = transaction.transaction(incount,outcount)
-		T.inlist = [transaction.inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount]
+		T.inlist = [transaction.inputtrans() for i1 in range (T.incount)]	#Create an array of type inlist[incount]
 		T.sign = f.readline()
 		T.hash = f.readline() 
 		for j in range(T.incount) :	# iterating through each input and adding them to the transaction's inlist
@@ -155,7 +156,7 @@ def filetoblock(filename) :
 			I.pub = f.readline()
 			T.inlist[j] = I
 	
-		T.outlist = [transaction.outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
+		T.outlist = [transaction.outputtrans() for i2 in range (T.outcount)]	   #Create an array of type outlist[outcount] 
 		for j in range(T.outcount) :	# iterating through each output and adding them to the transaction's outlist
 			O = transaction.outputtrans()
 			O.value = f.readline()
@@ -164,6 +165,15 @@ def filetoblock(filename) :
 	 	B.translist[i] = T	# adding the transaction to the block's translist
 	return B
 		
+def rmnewline(filename):
+	'''
+		for lines in fileinput.FileInput(filename, inplace = 1):
+			lines = lines.rstrip()
+			if lines:
+				print lines
+	'''	
+	for lines in fileinput.FileInput(filename, inplace = 1):
+		"".join([s for s in lines.strip().splitlines(True) if s.strip()])	
 		
 		
 def blocktofile(B,filename):
@@ -187,3 +197,4 @@ def blocktofile(B,filename):
 			print ("value = %d",B.translist[i].outlist[j].value)
 			f.write(str(B.translist[i].outlist[j].value) + '\n')
 			f.write(str(B.translist[i].outlist[j].addr) + '\n')	
+	#rmnewline(filename)

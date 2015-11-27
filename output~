@@ -31,14 +31,14 @@ sign1
 1
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e14aef0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c8e368>
 
 
 ('value = %d', '19\n')
 19
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c6e560>
 
 
 1
@@ -60,21 +60,21 @@ sign2
 signofnode0
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c6e560>
 
 
 ('value = %d', '2\n')
 2
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e15bdd0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816ca0248>
 
 
 ('value = %d', '17\n')
 17
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c6e560>
 
 
 1
@@ -96,21 +96,21 @@ sign3
 signofnode0
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c6e560>
 
 
 ('value = %d', '5\n')
 5
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e0edcb0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c33128>
 
 
 ('value = %d', '12\n')
 12
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c6e560>
 
 
 1
@@ -132,21 +132,21 @@ sign3
 signofnode0
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c6e560>
 
 
 ('value = %d', '3\n')
 3
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e101b90>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c44fc8>
 
 
 ('value = %d', '9\n')
 9
 
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
+<ecdsa.keys.VerifyingKey instance at 0x7f1816c6e560>
 
 
 0
