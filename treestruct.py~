@@ -16,8 +16,7 @@ blockhead = Treenode()
 genesis = Treenode()	#height will be zero for genesis block
  
 #function to add a block to blockchain
-def addblock( propblock ):
-	
+def addblock( propblock ):	
 	newnode = Treenode()
 	newnode.propblock = propblock
 	newnode.propblockhash = gethashofblock(propblock)
