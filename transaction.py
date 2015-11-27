@@ -1,5 +1,6 @@
 # to import from node.py
 
+from ecdsa import SigningKey
 from node import *
 from treestruct import *
 #from gethash import *
@@ -27,6 +28,7 @@ class transaction:
 		self.inlist = None
 		self.outlist = None
 		self.sign = None
+		self.hash = None
 	'''	
 	def createinlist(self):
 		self.inlist = [inputtrans() for i in range (self.incount)]
@@ -149,16 +151,14 @@ class transaction:
 			
 			for i in range (self.incount):
 				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
-				truthval = assert node.publickey.verify(self.inlist[i].sign, inliststr)
-				if truthval != True:
-					return False
+				assert node.publickey.verify(self.inlist[i].sign, inliststr)
+			
 			
 			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
 			for i in range (self.outcount) :
 				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
-			truthval = assert node.publickey.verify(self.sign, transstr)	
-			if truthval != True
-				return False
+			assert node.publickey.verify(self.sign, transstr)	
+			
 			index =  self.inlist[i].n   
 			address = self.inlist[i].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
@@ -202,28 +202,15 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
-<<<<<<< HEAD
-	
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
 
 	
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
 
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
-
-=======
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
->>>>>>> c4a0b5afde6f50621b692721244d0db159afe9d9
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
+	T.sign = f.readline()
+	T.hash = f.readline()
 	for i in range(T.incount):			
 		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
 		T.inlist[i].n = f.readline()
@@ -234,6 +221,7 @@ def filetotrans(filename):			# Verified working
 	for i in range(T.outcount):			
 		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
 		T.outlist[i].addr = f.readline()
+	
 	f.close()
 	return T
 	
@@ -263,28 +251,33 @@ Algorithm:
 
 def transtofile(T,filename):		# Verified working
 	f = open( filename, 'w' )
-	f.write( str(T.incount) + '\n' )
-	f.write( str(T.outcount) + '\n' )
-	
+	f.write( str(T.incount) + '\n')
+	f.write( str(T.outcount) + '\n')
+	f.write(T.sign)
+	f.write('\n' + str(T.hash))
 	for i in range (T.incount) :
-		f.write( T.inlist[i].hash )
-		f.write( T.inlist[i].n )
-		f.write( T.inlist[i].sign )
-		f.write( T.inlist[i].pub )
+		f.write( '\n' + str(T.inlist[i].hash) )
+		f.write(str(T.inlist[i].n) )
+		f.write( T.inlist[i].sign)
+		f.write( '\n' + T.inlist[i].pub )
 		
 	
 	for i in range (T.outcount) :
 		f.write( T.outlist[i].value )
 		f.write( T.outlist[i].addr )
-		
+	
 	f.close	
 
 #function to sign a transaction and transfer to a file
 def signtrans(node, filename):		# Verified working
 	f = open( filename, 'r' )
-	T.incount = int(f.readline())	# reading incount from the file	
-	T.outcount = int(f.readline())	# reading outcount from the file
+
+	incount = int(f.readline())	# reading incount from the file	
+	outcount = int(f.readline())	# reading outcount from the file
+	sign = f.readline()
+	
 	T = transaction(incount,outcount)		# create a new transaction object
+	T.hash = f.readline()
 	transstr = str(T.incount) + str(T.outcount)
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range (T.incount) :
@@ -295,6 +288,8 @@ def signtrans(node, filename):		# Verified working
 		#append each attribute of inlist[i] and sign it
 		inliststr = str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub)
 		T.inlist[i].sign = node.privatekey.sign(inliststr)
+		print T.inlist[i].sign
+		
 
 		transstr = transstr + str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub) + str(T.inlist[i].sign)
 		
@@ -303,10 +298,14 @@ def signtrans(node, filename):		# Verified working
 		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
 		T.outlist[i].addr = f.readline()
 		transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
-	T.sign = node.privatekey.sign(transstr)
 	
+
+	
+	T.sign = node.privatekey.sign(transstr)
+	print T.sign
 	f.close	
-	transtofile(T,filename)	
+	transtofile(T,"signedtrans.txt")	
+	return T
 	
 # function to add the mapping of all transactions in the newly proposed block to the database
 def maptransaction(self, block):

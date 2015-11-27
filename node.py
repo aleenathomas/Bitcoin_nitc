@@ -14,15 +14,15 @@ class node:
 		#required??
 		self.blockhead = None
 		self.maxnumtrans = 1000
-		self.database = [[0] * 2 for i in xrange(maxnumtrans)]
+		self.database = [[0] * 2 for i in xrange(self.maxnumtrans)]
 		self.top = 0
 		self.currrentblock = None
 
 		#required??
 		self.genesis = None
 	
-		
-proofofwork	( new_block )
+'''		
+#proofofwork	( new_block )
 ver = verify_nonce ( prop_block )
 #ver=1 => verified nonce
 if ver == 1: 
@@ -32,7 +32,8 @@ if ver == 1:
 	
 
 
-	'''
+	
+	
 	To find the balance in our wallet
 
 	getbalance()
@@ -49,7 +50,7 @@ if ver == 1:
 				
 	4. Return inbalance - outbalance
 
-	'''	
+		
 	
 	
 	def getbalance(self) :
@@ -72,4 +73,4 @@ if ver == 1:
 		balance = inbalance - outbalance
 		return balance
 
-
+'''
