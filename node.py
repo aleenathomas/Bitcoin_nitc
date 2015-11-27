@@ -4,6 +4,7 @@ from block import *
 from proof_of_work import *
 from blockchain import *
 from treestruct import *
+from ecdsa import SigningKey
 
 
 class node:
@@ -21,14 +22,6 @@ class node:
 		#required??
 		self.genesis = None
 	
-
-		
-
-
-	
-	
-
-
 	
 	'''	
 	To find the balance in our wallet
@@ -75,9 +68,4 @@ class node:
 #ver=1 => verified nonce
 #if ver == 1: 
 #	addblock( propblock )
-
-	
-	
-
-
 

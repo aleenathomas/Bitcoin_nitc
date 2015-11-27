@@ -21,14 +21,6 @@ class node:
 		#required??
 		self.genesis = None
 	
-
-		
-
-
-	
-	
-
-
 	
 	'''	
 	To find the balance in our wallet
@@ -71,13 +63,8 @@ class node:
 		return balance
 		
 #proofofwork( new_block )
-ver = verify_nonce ( prop_block )
+#ver = verify_nonce ( prop_block )
 #ver=1 => verified nonce
-if ver == 1: 
-	addblock( propblock )
-
-	
-	
-
-
+#if ver == 1: 
+#	addblock( propblock )
 

@@ -1,5 +1,5 @@
 #import python-bitcoinlib
-from transaction import *
+import transaction
 
 #dummy values to verify working of gethash as None cannot be used
 dummy_nonce = 123
@@ -10,7 +10,7 @@ class block:
 		self.prev_hash = prev_hash
 		self.max_trans_num = 5
 		self.nonce = dummy_nonce
-		self.translist = [transaction(0,0) for i in range (self.max_trans_num)] 	
+		self.translist = [transaction.transaction(0,0) for i in range (self.max_trans_num)] 	
 		
 	'''
 	Add transaction to a block:
@@ -139,25 +139,25 @@ def filetoblock(filename) :
 	B = block(prev_hash)
 	B.max_trans_num = int(f.readline())
 	B.nonce = f.readline()
-	B.translist = [transaction(0,0) for i in range (B.max_trans_num)] 	
+	B.translist = [transaction.transaction(0,0) for i in range (B.max_trans_num)] 	
 	for i in range(B.max_trans_num) :
-		incount = f.readline()
-		outcount = f.readline()
-		T = transaction(incount,outcount)
-		T.inlist = [inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount]
+		incount = int(f.readline())
+		outcount = int(f.readline())
+		T = transaction.transaction(incount,outcount)
+		T.inlist = [transaction.inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount]
 		T.sign = f.readline()
 		T.hash = f.readline() 
 		for j in range(T.incount) :	# iterating through each input and adding them to the transaction's inlist
-			I = inputtrans()
+			I = transaction.inputtrans()
 			I.hash = f.readline()
 			I.n = f.readline()
 			I.sign = f.readline()
 			I.pub = f.readline()
 			T.inlist[j] = I
 	
-		T.outlist = [outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
+		T.outlist = [transaction.outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
 		for j in range(T.outcount) :	# iterating through each output and adding them to the transaction's outlist
-			O = outputtrans()
+			O = transaction.outputtrans()
 			O.value = f.readline()
 			O.addr = f.readline()
 			T.outlist[j] = O
@@ -168,25 +168,22 @@ def filetoblock(filename) :
 		
 def blocktofile(B,filename):
 	f = open( filename, 'w' )
-	f.write(B.prev_hash)
+	f.write(str(B.prev_hash) + '\n')
 	f.write(str(B.max_trans_num) + '\n')
 	f.write(str(B.nonce) + '\n')
 	
 	for i in range( B.max_trans_num) :
 		f.write(str(B.translist[i].incount) + '\n')
 		f.write(str(B.translist[i].outcount) + '\n')
-		f.write( T.sign )
-		f.write( T.hash )
+		f.write( str(B.translist[i].sign ) + '\n')
+		f.write( str(B.translist[i].hash ) + '\n')
 		for j in range(B.translist[i].incount) :
-			f.write(B.translist[i].inlist[j].hash)
+			f.write(str(B.translist[i].inlist[j].hash) + '\n')
 			f.write(str(B.translist[i].inlist[j].n) + '\n')
-			f.write(B.translist[i].inlist[j].sign)
-			f.write(B.translist[i].inlist[j].pub)
+			f.write(str(B.translist[i].inlist[j].sign) + '\n')
+			f.write(str(B.translist[i].inlist[j].pub) + '\n')
 			
 		for j in range(B.translist[i].outcount) :
-			f.write(B.translist[i].outlist[j].value)
-			f.write(B.translist[i].outlist[j].addr)
-		
-		
-		
-		
+			print ("value = %d",B.translist[i].outlist[j].value)
+			f.write(str(B.translist[i].outlist[j].value) + '\n')
+			f.write(str(B.translist[i].outlist[j].addr) + '\n')	

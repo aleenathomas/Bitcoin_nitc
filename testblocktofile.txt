@@ -1,0 +1,55 @@
+9999
+5
+123
+0
+2
+sign1
+12341
+1
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e9855368>
+19
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e98355a8>
+1
+2
+sign2
+12342
+12345
+1
+signofnode0
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e98355a8>
+2
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e9867248>
+17
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e98355a8>
+1
+2
+sign3
+12343
+12346
+1
+signofnode0
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e98355a8>
+5
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e97fa128>
+12
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e98355a8>
+1
+2
+sign3
+12344
+12346
+1
+signofnode0
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e98355a8>
+3
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e980bfc8>
+9
+<ecdsa.keys.VerifyingKey instance at 0x7fa8e98355a8>
+0
+2
+sign5
+12345
+5
+1002
+15
+1001
