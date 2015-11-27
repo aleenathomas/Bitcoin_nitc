@@ -1,6 +1,9 @@
 import transaction
-
-B = transaction.filetotrans('newtrans.txt')
+import node
+newnode = node.node()
+transaction.signtrans(newnode, 'newtrans.txt')
+B = transaction.filetotrans('signedtrans.txt')
+'''
 print(B.incount)
 print(B.outcount )
 print(B.sign )
@@ -14,5 +17,7 @@ for i in range( B.incount ) :
 for i in range ( B.outcount ) :
 			print(B.outlist[i].value)
 			print( B.outlist[i].addr )
-		
+'''
 transaction.transtofile(B,'newtrans1.txt')
+T = transaction.filetotrans('newtrans1.txt')
+transaction.transtofile(T,'newtrans2.txt')

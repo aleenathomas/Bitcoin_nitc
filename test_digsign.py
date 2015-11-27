@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from ecdsa import SigningKey
-from transnew import *
+from transaction	 import *
 from node import *
 '''
 privatekey = SigningKey.generate()	
@@ -14,12 +14,12 @@ assert publickey.verify(signature, message)
 #checked signing,verification problem
 filename = "newtrans.txt"
 newnode = node()
-newtrans = filetotrans(filename)
-transtofile(newtrans, "new.txt")
-T = signtrans(newnode, filename)
+#newtrans = filetotrans(filename)
+#transtofile(newtrans, "new.txt")
+signtrans(newnode, filename)
 
 
-#T = filetotrans("signedtrans.txt")
+T = filetotrans("signedtrans.txt")
 
 #verifying the signature(Not sure if it will work!)
 transstr = str(T.incount) + str(T.outcount) +str(T.hash)
