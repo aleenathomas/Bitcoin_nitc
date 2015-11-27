@@ -70,11 +70,11 @@ class node:
 		balance = inbalance - outbalance
 		return balance
 		
-proofofwork( new_block )
-ver = verify_nonce ( prop_block )
+#proofofwork( new_block )
+#ver = verify_nonce ( prop_block )
 #ver=1 => verified nonce
-if ver == 1: 
-	addblock( propblock )
+#if ver == 1: 
+#	addblock( propblock )
 
 	
 	

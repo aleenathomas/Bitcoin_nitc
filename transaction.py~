@@ -156,10 +156,6 @@ class transaction:
 				assert node.publickey.verify(self.inlist[i].sign, inliststr)
 			
 
-				truthval = assert node.publickey.verify(self.inlist[i].sign, inliststr) 
-				if truthval != True:
-					return False
-
 			
 			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
 			for i in range (self.outcount) :

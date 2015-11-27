@@ -2,13 +2,13 @@ from block import *
 
 B = filetoblock('newblock.txt')
 print(B.prev_hash)
-print(str(B.max_trans_num) + '\n')
-print(str(B.nonce) + '\n')
+print(B.max_trans_num )
+print(B.nonce )
 for i in range( B.max_trans_num) :
 			print(str(B.translist[i].incount) + '\n')
 			print(str(B.translist[i].outcount) + '\n')
-			print( T.sign )
-			print( T.hash )
+			print( B.translist[i].sign )
+			print( B.translist[i].hash )
 			for j in range(B.translist[i].incount) :
 				print(B.translist[i].inlist[j].hash)
 				print(str(B.translist[i].inlist[j].n) + '\n')

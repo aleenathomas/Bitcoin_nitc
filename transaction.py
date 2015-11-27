@@ -3,7 +3,6 @@
 from ecdsa import SigningKey
 from node import *
 from treestruct import *
-from ecdsa import *
 #from gethash import *
 
 dummy_none = "456"			#used to test run gethashofblock

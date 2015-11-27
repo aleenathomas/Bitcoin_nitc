@@ -10,7 +10,7 @@ class block:
 		self.prev_hash = prev_hash
 		self.max_trans_num = 5
 		self.nonce = dummy_nonce
-		self.translist = [transaction(None,0,0) for i in range (self.max_trans_num)] 	
+		self.translist = [transaction(0,0) for i in range (self.max_trans_num)] 	
 		
 	'''
 	Add transaction to a block:
@@ -133,59 +133,59 @@ class block:
 	return B
 	'''	
 	
-	def filetoblock(filename) :				
-		f = open(filename, 'r')
-		B = block()
-		B.prev_hash = readline()
-		B.max_trans_num = readline()
-		B.nonce = readline()
-		B.translist = [transaction(None,0,0) for i in range (B.max_trans_num)] 	
-		for i in range(B.max_trans_num) :
-			incount = f.readline()
-			outcount = f.readline()
-			T = transaction(incount,outcount)
-			T.inlist = [inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount]
-			T.sign = f.readline()
-			T.hash = f.readline() 
-			for j in range(T.incount) :	# iterating through each input and adding them to the transaction's inlist
-				I = inputtrans()
-				I.hash = readline()
-				I.n = readline()
-				I.sign = readline()
-				I.pub = readline()
-				T.inlist[j] = I
+def filetoblock(filename) :				
+	f = open(filename, 'r')
+	prev_hash = f.readline()
+	B = block(prev_hash)
+	B.max_trans_num = int(f.readline())
+	B.nonce = f.readline()
+	B.translist = [transaction(0,0) for i in range (B.max_trans_num)] 	
+	for i in range(B.max_trans_num) :
+		incount = f.readline()
+		outcount = f.readline()
+		T = transaction(incount,outcount)
+		T.inlist = [inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount]
+		T.sign = f.readline()
+		T.hash = f.readline() 
+		for j in range(T.incount) :	# iterating through each input and adding them to the transaction's inlist
+			I = inputtrans()
+			I.hash = f.readline()
+			I.n = f.readline()
+			I.sign = f.readline()
+			I.pub = f.readline()
+			T.inlist[j] = I
+	
+		T.outlist = [outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
+		for j in range(T.outcount) :	# iterating through each output and adding them to the transaction's outlist
+			O = outputtrans()
+			O.value = f.readline()
+			O.addr = f.readline()
+			T.outlist[j] = O
+	 	B.translist[i] = T	# adding the transaction to the block's translist
+	return B
+		
+		
+		
+def blocktofile(B,filename):
+	f = open( filename, 'w' )
+	f.write(B.prev_hash)
+	f.write(str(B.max_trans_num) + '\n')
+	f.write(str(B.nonce) + '\n')
+	
+	for i in range( B.max_trans_num) :
+		f.write(str(B.translist[i].incount) + '\n')
+		f.write(str(B.translist[i].outcount) + '\n')
+		f.write( T.sign )
+		f.write( T.hash )
+		for j in range(B.translist[i].incount) :
+			f.write(B.translist[i].inlist[j].hash)
+			f.write(str(B.translist[i].inlist[j].n) + '\n')
+			f.write(B.translist[i].inlist[j].sign)
+			f.write(B.translist[i].inlist[j].pub)
 			
-			T.outlist = [outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
-			for j in range(T.outcount) :	# iterating through each output and adding them to the transaction's outlist
-				O = outputtrans()
-				O.value = f.readline()
-				O.addr = f.readline()
-				T.outlist[j] = O
-		 	B.translist[i] = T	# adding the transaction to the block's translist
-		return B
-		
-		
-		
-	def blocktofile(B,filename):
-		f = open( filename, 'w' )
-		f.write(B.prev_hash)
-		f.write(str(B.max_trans_num) + '\n')
-		f.write(str(B.nonce) + '\n')
-		
-		for i in range( B.max_trans_num) :
-			f.write(str(B.translist[i].incount) + '\n')
-			f.write(str(B.translist[i].outcount) + '\n')
-			f.write( T.sign )
-			f.write( T.hash )
-			for j in range(B.translist[i].incount) :
-				write(B.translist[i].inlist[j].hash)
-				write(str(B.translist[i].inlist[j].n) + '\n')
-				write(B.translist[i].inlist[j].sign)
-				write(B.translist[i].inlist[j].pub)
-				
-			for j in range(B.translist[i].outcount) :
-				write(B.translist[i].outlist[j].value)
-				write(B.translist[i].outlist[j].addr)
+		for j in range(B.translist[i].outcount) :
+			f.write(B.translist[i].outlist[j].value)
+			f.write(B.translist[i].outlist[j].addr)
 		
 		
 		
