@@ -178,14 +178,14 @@ class block:
 			f.write( T.sign )
 			f.write( T.hash )
 			for j in range(B.translist[i].incount) :
-				write(B.translist[i].inlist[j].hash)
-				write(str(B.translist[i].inlist[j].n) + '\n')
-				write(B.translist[i].inlist[j].sign)
-				write(B.translist[i].inlist[j].pub)
+				f.write(B.translist[i].inlist[j].hash)
+				f.write(str(B.translist[i].inlist[j].n) + '\n')
+				f.write(B.translist[i].inlist[j].sign)
+				f.write(B.translist[i].inlist[j].pub)
 				
 			for j in range(B.translist[i].outcount) :
-				write(B.translist[i].outlist[j].value)
-				write(B.translist[i].outlist[j].addr)
+				f.write(B.translist[i].outlist[j].value)
+				f.write(B.translist[i].outlist[j].addr)
 		
 		
 		

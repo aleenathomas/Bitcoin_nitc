@@ -2,6 +2,7 @@
 
 from node import *
 from treestruct import *
+from ecdsa import *
 #from gethash import *
 
 dummy_none = "456"			#used to test run gethashofblock
@@ -150,7 +151,7 @@ class transaction:
 			
 			for i in range (self.incount):
 				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
-				truthval = assert node.publickey.verify(self.inlist[i].sign, inliststr)
+				truthval = assert node.publickey.verify(self.inlist[i].sign, inliststr) 
 				if truthval != True:
 					return False
 			

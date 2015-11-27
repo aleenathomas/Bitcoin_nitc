@@ -182,6 +182,7 @@ class block:
 				write(str(B.translist[i].inlist[j].n) + '\n')
 				write(B.translist[i].inlist[j].sign)
 				write(B.translist[i].inlist[j].pub)
+				
 			for j in range(B.translist[i].outcount) :
 				write(B.translist[i].outlist[j].value)
 				write(B.translist[i].outlist[j].addr)
