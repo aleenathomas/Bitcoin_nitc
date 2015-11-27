@@ -21,24 +21,16 @@ class node:
 		#required??
 		self.genesis = None
 	
-<<<<<<< HEAD
-'''		
-#proofofwork	( new_block )
-ver = verify_nonce ( prop_block )
-#ver=1 => verified nonce
-if ver == 1: 
-	addblock( propblock )
 
-	
-	
-
-
-	
-	
-=======
 		
-	'''
->>>>>>> a9fd6c8bbe16036ec0bfb2f7cc3ed24dc950c333
+
+
+	
+	
+
+
+	
+	'''	
 	To find the balance in our wallet
 
 	getbalance()
@@ -54,7 +46,7 @@ if ver == 1:
 					inbalance = inbalance + value of its output transaction
 				
 	4. Return inbalance - outbalance
-
+	'''
 		
 	
 	
@@ -88,4 +80,4 @@ if ver == 1:
 	
 
 
-'''
+
