@@ -3,7 +3,7 @@
 from ecdsa import SigningKey
 from node import *
 from treestruct import *
-#from gethash import *
+from block import readword
 
 dummy_none = "456"			#used to test run gethashofblock
 
@@ -204,23 +204,23 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
-	incount = int( f.readline() ) 	# reading incount from the file	
-	outcount = int( f.readline() )	# reading outcount from the file
+	incount = int( readword(f.readline()) ) 	# reading incount from the file	
+	outcount = int( readword(f.readline()) )	# reading outcount from the file
 
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
-	T.sign = f.readline()
-	T.hash = f.readline()
+	T.sign = readword(f.readline())
+	T.hash = readword(f.readline())
 	for i in range(T.incount):			
-		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
-		T.inlist[i].n = f.readline()
-		T.inlist[i].sign = f.readline()
-		T.inlist[i].pub = f.readline()
+		T.inlist[i].hash = readword(f.readline())# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		T.inlist[i].n = int(readword(f.readline()))
+		T.inlist[i].sign = readword(f.readline())
+		T.inlist[i].pub = readword(f.readline())
 	
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
 	for i in range(T.outcount):			
-		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
-		T.outlist[i].addr = f.readline()
+		T.outlist[i].value = int(readword(f.readline()))# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = readword(f.readline())
 	
 	f.close()
 	return T
@@ -254,20 +254,19 @@ def transtofile(T,filename):		# Verified working
 
 	f.write( str(T.incount) + '\n' )
 	f.write( str(T.outcount) + '\n' )
-	f.write( T.sign )
-	f.write( T.hash )
+	f.write( str(T.sign ) + '\n')
+	f.write( str(T.hash ) + '\n')
 
 	for i in range (T.incount) :
-		f.write( '\n' + str(T.inlist[i].hash) )
-		f.write(str(T.inlist[i].n) )
-		f.write( T.inlist[i].sign)
-		f.write( '\n' + T.inlist[i].pub )
+		f.write( str(T.inlist[i].hash) + '\n')
+		f.write( str(T.inlist[i].n) + '\n')
+		f.write( str(T.inlist[i].sign) + '\n')
+		f.write( str(T.inlist[i].pub ) + '\n')
 		
 	
 	for i in range (T.outcount) :
-		f.write( T.outlist[i].value )
-		f.write( T.outlist[i].addr )
-	
+		f.write( str(T.outlist[i].value ) + '\n')
+		f.write( str(T.outlist[i].addr ) + '\n')	
 	f.close	
 
 #function to sign a transaction and transfer to a file

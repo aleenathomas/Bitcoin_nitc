@@ -1,22 +1,18 @@
-from block import *
+import transaction
 
-B = filetoblock('newblock.txt')
-print(B.prev_hash)
-print(B.max_trans_num )
-print(B.nonce )
-for i in range( B.max_trans_num) :
-			print(str(B.translist[i].incount) + '\n')
-			print(str(B.translist[i].outcount) + '\n')
-			print( B.translist[i].sign )
-			print( B.translist[i].hash )
-			for j in range(B.translist[i].incount) :
-				print(B.translist[i].inlist[j].hash)
-				print(str(B.translist[i].inlist[j].n) + '\n')
-				print(B.translist[i].inlist[j].sign)
-				print(B.translist[i].inlist[j].pub)
-				
-			for j in range(B.translist[i].outcount) :
-				print(B.translist[i].outlist[j].value)
-				print(B.translist[i].outlist[j].addr)
+B = transaction.filetotrans('newtrans.txt')
+print(B.incount)
+print(B.outcount )
+print(B.sign )
+print(B.hash )
+for i in range( B.incount ) :
+			print(B.inlist[i].hash)
+			print(B.inlist[i].n)
+			print( B.inlist[i].sign )
+			print( B.inlist[i].pub )
+			
+for i in range ( B.outcount ) :
+			print(B.outlist[i].value)
+			print( B.outlist[i].addr )
 		
-#transtofile(T,'newtrans.txt')
+transaction.transtofile(B,'newtrans1.txt')
