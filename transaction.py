@@ -273,19 +273,19 @@ def transtofile(T,filename):		# Verified working
 def signtrans(node, filename):		# Verified working
 	f = open( filename, 'r' )
 
-	incount = int(f.readline())	# reading incount from the file	
-	outcount = int(f.readline())	# reading outcount from the file
-	sign = f.readline()
+	incount = int(readword(f.readline()))	# reading incount from the file	
+	outcount = int(readword(f.readline()))	# reading outcount from the file
+	sign = readword(f.readline())
 	
 	T = transaction(incount,outcount)		# create a new transaction object
-	T.hash = f.readline()
+	T.hash = readword(f.readline())
 	transstr = str(T.incount) + str(T.outcount) + str(T.hash)
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range (T.incount) :
-		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
-		T.inlist[i].n = f.readline()
-		T.inlist[i].sign = f.readline()
-		T.inlist[i].pub = f.readline()
+		T.inlist[i].hash = readword(f.readline())	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		T.inlist[i].n = int(readword(f.readline()))
+		T.inlist[i].sign = readword(f.readline())
+		T.inlist[i].pub = readword(f.readline())
 		#append each attribute of inlist[i] and sign it
 		inliststr = str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub)
 		T.inlist[i].sign = node.privatekey.sign(inliststr)
@@ -296,8 +296,8 @@ def signtrans(node, filename):		# Verified working
 		
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
 	for i in range (T.outcount) :
-		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
-		T.outlist[i].addr = f.readline()
+		T.outlist[i].value = int(readword(f.readline()))	# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = readword(f.readline())
 		transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 	
 
@@ -306,7 +306,7 @@ def signtrans(node, filename):		# Verified working
 	print T.sign
 	f.close	
 	transtofile(T,"signedtrans.txt")	
-	return T
+
 	
 # function to add the mapping of all transactions in the newly proposed block to the database
 def maptransaction(self, block):
