@@ -106,7 +106,8 @@ t1.outlist[1].addr = 1001
 # adding trans1 to the block
 block1.translist[4] = t1
 
+# adding block1 to the blockchain maintained by node1
 
-
+addblock(block1)
 
 

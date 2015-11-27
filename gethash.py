@@ -16,7 +16,7 @@ def gethashofblock(block):			#veriried
 			string = string + str(block.translist[j].inlist[i].hash) + str(block.translist[j].inlist[i].n) + str(block.translist[j].inlist[i].sign) + str(block.translist[j].inlist[i].pub)
 		
 		for i in range(block.translist[j].outcount):
-			string = string + str(block.translist[j].inlist[i].value) + str(block.translist[j].inlist[i].addr)
+			string = string + str(block.translist[j].outlist[i].value) + str(block.translist[j].outlist[i].addr)
 	return gethash(string)
 	
 	
