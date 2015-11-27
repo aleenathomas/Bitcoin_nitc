@@ -10,10 +10,9 @@ class Treenode:
 		#self.next to be used only for leaf list
 		self.next = None
 
-#head of the list of leaves, points to an empty node initially
-leafhead = Treenode()
+leafhead = Treenode()	# head of the list of leaves, points to an empty node initially
 blockhead = Treenode()
-genesis = Treenode()	#height will be zero for genesis block
+genesis = Treenode()	# height will be zero for genesis block
  
 #function to add a block to blockchain
 def addblock( propblock ):	
@@ -49,11 +48,16 @@ def addblock( propblock ):
 	blockhead = maxheightnode
 				
 def addleaf( leaf ):
+	global leafhead
 	leaf.next = leafhead
 	leafhead = leaf	
 	
 def removeleaf(leaf):
+	global leafhead
 	ptr = leafhead
-	while(ptr != None and ptr.next != leaf):
+	while ptr != None and ptr.next != leaf:
 		ptr = ptr.next		
-	ptr.next = leaf.next
+	if ptr != None and leaf != None:	
+		ptr.next = leaf.next
+	else:
+		leafhead = None
