@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 from ecdsa import SigningKey
-from transaction import *
+from transnew import *
 from node import *
 '''
 privatekey = SigningKey.generate()	
@@ -27,7 +27,7 @@ transstr = str(T.incount) + str(T.outcount) +str(T.hash)
 for i in range (T.incount):
 	
 	inliststr = str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub)
-	assert newnode.publickey.verify(T.inlist[i].sign, "reshma")
+	assert newnode.publickey.verify(T.inlist[i].sign, inliststr)
 	
 	
 			
