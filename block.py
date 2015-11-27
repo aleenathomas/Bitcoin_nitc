@@ -132,48 +132,44 @@ class block:
 				O.addr = readline()
 			Add O to translist[i].outlist[j] 
 	return B
-	'''	
+	'''
+def readword(word):
+	word2 = ""
+	for c in word:
+		if c != '\n':			
+			word2 = word2 + c
+	return word2
 	
 def filetoblock(filename) :				
 	f = open(filename, 'r')
-	prevhash = f.readline()
+	prevhash = readword(f.readline())
 	B = block(prevhash)
-	B.max_trans_num = int(f.readline())
-	B.nonce = f.readline()
+	B.max_trans_num = int(readword(f.readline()))
+	B.nonce = int(readword(f.readline()))
 	#B.translist = [transaction.transaction(0,0) for i in range (B.max_trans_num)] 	
-	for i in range(B.max_trans_num) :
-		incount = int(f.readline())
-		outcount = int(f.readline())
+	for i in range(B.max_trans_num) :		
+		incount = int(readword(f.readline()))
+		outcount = int(readword(f.readline()))
 		T = transaction.transaction(incount,outcount)
 		T.inlist = [transaction.inputtrans() for i1 in range (T.incount)]	#Create an array of type inlist[incount]
-		T.sign = f.readline()
-		T.hash = f.readline() 
+		T.sign = readword(f.readline())
+		T.hash = readword(f.readline())
 		for j in range(T.incount) :	# iterating through each input and adding them to the transaction's inlist
 			I = transaction.inputtrans()
-			I.hash = f.readline()
-			I.n = f.readline()
-			I.sign = f.readline()
-			I.pub = f.readline()
+			I.hash = readword(f.readline())
+			I.n = readword(f.readline())
+			I.sign = readword(f.readline())
+			I.pub = readword(f.readline())
 			T.inlist[j] = I
 	
 		T.outlist = [transaction.outputtrans() for i2 in range (T.outcount)]	   #Create an array of type outlist[outcount] 
 		for j in range(T.outcount) :	# iterating through each output and adding them to the transaction's outlist
 			O = transaction.outputtrans()
-			O.value = f.readline()
-			O.addr = f.readline()
+			O.value = int(readword(f.readline()))
+			O.addr = readword(f.readline())
 			T.outlist[j] = O
 	 	B.translist[i] = T	# adding the transaction to the block's translist
 	return B
-		
-def rmnewline(filename):
-	'''
-		for lines in fileinput.FileInput(filename, inplace = 1):
-			lines = lines.rstrip()
-			if lines:
-				print lines
-	'''	
-	for lines in fileinput.FileInput(filename, inplace = 1):
-		"".join([s for s in lines.strip().splitlines(True) if s.strip()])	
 		
 		
 def blocktofile(B,filename):
@@ -185,8 +181,8 @@ def blocktofile(B,filename):
 	for i in range( B.max_trans_num) :
 		f.write(str(B.translist[i].incount) + '\n')
 		f.write(str(B.translist[i].outcount) + '\n')
-		f.write( str(B.translist[i].sign ) + '\n')
-		f.write( str(B.translist[i].hash ) + '\n')
+		f.write(str(B.translist[i].sign) + '\n')
+		f.write(str(B.translist[i].hash) + '\n')
 		for j in range(B.translist[i].incount) :
 			f.write(str(B.translist[i].inlist[j].hash) + '\n')
 			f.write(str(B.translist[i].inlist[j].n) + '\n')
@@ -194,7 +190,6 @@ def blocktofile(B,filename):
 			f.write(str(B.translist[i].inlist[j].pub) + '\n')
 			
 		for j in range(B.translist[i].outcount) :
-			print ("value = %d",B.translist[i].outlist[j].value)
 			f.write(str(B.translist[i].outlist[j].value) + '\n')
 			f.write(str(B.translist[i].outlist[j].addr) + '\n')	
-	# rmnewline(filename)
+	#rmnewline(filename, "test.txt")
