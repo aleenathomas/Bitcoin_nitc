@@ -1,4 +1,5 @@
 from gethash import *
+
 class Treenode:
 	def __init__( self ):
 		#parent points to the block whose hash=proposed block's prev_hash

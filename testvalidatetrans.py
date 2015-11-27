@@ -106,13 +106,8 @@ t1.outlist[1].addr = 1001
 # adding trans1 to the block
 block1.translist[4] = t1
 
+# adding block1 to the blockchain maintained by node1
 
-block.blocktofile(block1, "file1.txt")
-block2 = block.filetoblock("file1.txt")
+addblock(block1)
 
-
-block.blocktofile(block2, "file4.txt")
-
-block3 = block.filetoblock("file4.txt")
-block.blocktofile(block3, "file3.txt")
 
