@@ -25,8 +25,8 @@ class transaction:
 		
 		self.incount = incount
 		self.outcount = outcount
-		self.inlist = None
-		self.outlist = None
+		self.inlist = [inputtrans() for i in range (self.incount)]
+		self.outlist = [outputtrans() for i in range (self.outcount)]
 		self.sign = None
 		self.hash = None
 	'''	
@@ -99,8 +99,11 @@ class transaction:
 		# check 1 : check whether the transaction is already present in the outstanding block of the node or in the blockchain	
 		# part 1 : checking in the blockchain
 		blockptr = blockhead
-		while blockptr.parent != None and blockptr.propblock.hash != blockhash:	# ie, search till the genesis block
-				blockptr = blockptr.parent
+		while blockptr.parent != None and blockptr.propblockhash != 9999:	# ie, search till the genesis block
+			for i in range(block.max_trans_num) :	
+				if (blockptr.propblock.translist[i].hash == self.hash) :
+					return False
+			blockptr = blockptr.parent
 
 		# part 2 : checking in the block currently filled by the node
 		for i in range(block.max_trans_num):
@@ -114,12 +117,13 @@ class transaction:
 		# end check 2
 
 		inputsum = 0
-		for i in range(self.incount):	# after each pass, one input transaction from the input list is verified
-			transhash = self.inlist[i].hash		
+		transptr = None
+		for l in range(self.incount):	# after each pass, one input transaction from the input list is verified
+			transhash = self.inlist[l].hash		
 			
-			for j in range(top):	# iterate through all transactions in the database ie till 'top' transactions
-				if node.database[ j,0 ] == transhash:	# if the transaction hash matches, then the block in which 
-					blockhash = node.database[ j,1 ]
+			for j in range(node.top):	# iterate through all transactions in the database ie till 'top' transactions
+				if node.database[ j] [ 0 ] == transhash:	# if the transaction hash matches, then the block in which 
+					blockhash = node.database[ j ] [1 ]
 					break
 
 			# finding the block in the blockchain using the blockhash		
@@ -128,7 +132,7 @@ class transaction:
 				blockptr = blockptr.parent		
 			# searching for the transaction in the block using transaction hash
 			for i in range(block.max_trans_num) :	
-				if (blockptr.propblock.translist[i].hash == transhash) :
+				if (blockptr.propblock != None and blockptr.propblock.translist[i].hash == transhash) :
 				    	transptr = translist[i]		# transptr points to the input transaction
 				    	break			
 			# check 3 : checking whether the inputs are already spent or not
@@ -141,11 +145,13 @@ class transaction:
 							return False
 			
 			for j in range(i, block.max_trans_num):	# for those transactions that come after the input transaction
-				for k in range(ptr.propblock.incount):		# every input to the transaction
-					if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
-						return False	
+				if ptr.propblock != None:
+					for k in range(ptr.propblock.incount):		# every input to the transaction
+						if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
+							return False	
+				else:continue
 			# end check 3			
-			
+			'''
 			#verifying the signature(Not sure if it will work!)
 			transstr = self.incount + self.outcount + self.hash
 			
@@ -160,9 +166,9 @@ class transaction:
 			for i in range (self.outcount) :
 				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
 			assert node.publickey.verify(self.sign, transstr)	
-			
-			index =  self.inlist[i].n   
-			address = self.inlist[i].pub		
+			'''
+			index =  self.inlist[l].n   
+			address = self.inlist[l].pub		
 			inputsum = inputsum + transptr.outlist[index].value    			
 			if transptr.outlist[index].addr != address :
 				return False
@@ -284,8 +290,8 @@ def signtrans(node, filename):		# Verified working
 	for i in range (T.incount) :
 		T.inlist[i].hash = readword(f.readline())	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
 		T.inlist[i].n = int(readword(f.readline()))
-		T.inlist[i].sign = f.readline()
-		T.inlist[i].pub = f.readline()
+		T.inlist[i].sign = readword(f.readline())
+		T.inlist[i].pub = readword(f.readline())
 		#append each attribute of inlist[i] and sign it
 		inliststr = str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub)
 		T.inlist[i].sign = node.privatekey.sign(inliststr)
@@ -296,8 +302,8 @@ def signtrans(node, filename):		# Verified working
 		
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
 	for i in range (T.outcount) :
-		T.outlist[i].value = f.readline()	# reading value and addr values from file ans storing it in outlist[i]
-		T.outlist[i].addr = f.readline()
+		T.outlist[i].value = int(readword(f.readline()))	# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = readword(f.readline())
 		transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 	
 
@@ -309,10 +315,10 @@ def signtrans(node, filename):		# Verified working
 
 	
 # function to add the mapping of all transactions in the newly proposed block to the database
-def maptransaction(self, block):
-	for i in range(	max_trans_num):
-		database [ top, 0 ] = block.translist[i].hash
-		database[ top, 1] = gethashofblock(block)		# the block hash of the corresponding trasaction hash
-		top = top + 1					# to denote the that one more entry has been added to the database
+def maptransaction(block, node):
+	for i in range(block.max_trans_num):
+		node.database [ node.top] [ 0 ] = block.translist[i].hash
+		node.database[ node.top] [1] = gethashofblock(block)		# the block hash of the corresponding trasaction hash
+		node.top = node.top + 1					# to denote the that one more entry has been added to the database
 		
 

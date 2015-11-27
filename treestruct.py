@@ -1,4 +1,5 @@
 from gethash import *
+import transaction
 
 class Treenode:
 	def __init__( self ):
@@ -10,12 +11,12 @@ class Treenode:
 		#self.next to be used only for leaf list
 		self.next = None
 
-leafhead = Treenode()	# head of the list of leaves, points to an empty node initially
 blockhead = Treenode()
 genesis = Treenode()	# height will be zero for genesis block
+leafhead = genesis	# head of the list of leaves, points to an empty node initially
  
 #function to add a block to blockchain
-def addblock( propblock ):	
+def addblock(propblock, node):	
 	newnode = Treenode()
 	newnode.propblock = propblock
 	newnode.propblockhash = gethashofblock(propblock)
@@ -34,11 +35,12 @@ def addblock( propblock ):
 	#update leaflist
 	removeleaf(newnode.parent)
 	addleaf(newnode)
+		
 
 	#find the node with the maximum height in the leaflist (after adding the newnode to the blockchain)
 	maxheight = 0
-	maxheightnode = tempnode
 	tempnode = leafhead
+	maxheightnode = tempnode
 	while tempnode != None:
 		if( maxheight < tempnode.height ):
 			maxheight = tempnode.height
@@ -47,6 +49,9 @@ def addblock( propblock ):
 	#updating blockhead, pointing it to the node with the maximum height
 	blockhead = maxheightnode
 				
+	# updating the database
+	transaction.maptransaction(propblock, node)
+	
 def addleaf( leaf ):
 	global leafhead
 	leaf.next = leafhead

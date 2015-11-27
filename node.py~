@@ -4,21 +4,18 @@ from block import *
 from proof_of_work import *
 from blockchain import *
 from treestruct import *
+from ecdsa import SigningKey
 
 
 class node:
-	def __init__(self):
-		
+	def __init__(self):		
 		self.privatekey = SigningKey.generate()	
 		self.publickey = self.privatekey.get_verifying_key()
-		#required??
 		self.blockhead = None
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in xrange(self.maxnumtrans)]
 		self.top = 0
-		self.currrentblock = None
-
-		#required??
+		self.currentblock = block(None)
 		self.genesis = None
 	
 	

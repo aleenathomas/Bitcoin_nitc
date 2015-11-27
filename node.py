@@ -8,18 +8,14 @@ from ecdsa import SigningKey
 
 
 class node:
-	def __init__(self):
-		
+	def __init__(self):		
 		self.privatekey = SigningKey.generate()	
 		self.publickey = self.privatekey.get_verifying_key()
-		#required??
 		self.blockhead = None
 		self.maxnumtrans = 1000
-		self.database = [[0] * 2 for i in xrange(self.maxnumtrans)]
+		self.database = [[0] * 2 for i in range(self.maxnumtrans)]
 		self.top = 0
-		self.currrentblock = None
-
-		#required??
+		self.currentblock = block(None)
 		self.genesis = None
 	
 	
