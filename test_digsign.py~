@@ -14,12 +14,12 @@ assert publickey.verify(signature, message)
 #checked signing,verification problem
 filename = "newtrans.txt"
 newnode = node()
-newtrans = filetotrans(filename)
-transtofile(newtrans, "new.txt")
-T = signtrans(newnode, filename)
+#newtrans = filetotrans(filename)
+#transtofile(newtrans, "new.txt")
+signtrans(newnode, filename)
 
 
-#T = filetotrans("signedtrans.txt")
+T = filetotrans("signedtrans.txt")
 
 #verifying the signature(Not sure if it will work!)
 transstr = str(T.incount) + str(T.outcount) +str(T.hash)

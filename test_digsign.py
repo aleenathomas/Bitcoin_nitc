@@ -22,7 +22,7 @@ signtrans(newnode, filename)
 T = filetotrans("signedtrans.txt")
 
 #verifying the signature(Not sure if it will work!)
-transstr = str(T.incount) + str(T.outcount) +str(T.hash)
+transstr = str(T.incount) + str(T.outcount) 
 		
 for i in range (T.incount):
 	
@@ -35,5 +35,6 @@ for i in range (T.incount):
 for i in range (T.outcount) :
 	
 	transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
+transstr = transstr + T.hash
 assert newnode.publickey.verify(T.sign, transstr)	
 

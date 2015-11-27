@@ -15,3 +15,8 @@
 	
 1) create a wallet ( pvt key, pub key)
 2) find your balance before making any transaction	
+
+
+
+
+*verification works only if signature is on the same line
