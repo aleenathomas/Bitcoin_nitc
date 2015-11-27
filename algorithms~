@@ -5,7 +5,7 @@
 5) use gnunet to publish transaction file
 6) receive transaction file using gnunet
 7) convert transaction text into an object
-*8) validate the transaction object and add to the block of transactions !!!
+8) validate the transaction object and add to the block of transactions !!!
 
 1) create a transaction block (include special coin creation transaction ) and fill in with transaction objects
 2) solve the proof of work
@@ -15,3 +15,8 @@
 	
 1) create a wallet ( pvt key, pub key)
 2) find your balance before making any transaction	
+
+
+
+
+*verification works only if signature is on the same line
