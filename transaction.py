@@ -3,6 +3,7 @@
 from ecdsa import SigningKey
 from node import *
 from treestruct import *
+from ecdsa import *
 #from gethash import *
 
 dummy_none = "456"			#used to test run gethashofblock
@@ -151,8 +152,14 @@ class transaction:
 			
 			for i in range (self.incount):
 				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
+<<<<<<< HEAD
 				assert node.publickey.verify(self.inlist[i].sign, inliststr)
 			
+=======
+				truthval = assert node.publickey.verify(self.inlist[i].sign, inliststr) 
+				if truthval != True:
+					return False
+>>>>>>> a9fd6c8bbe16036ec0bfb2f7cc3ed24dc950c333
 			
 			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
 			for i in range (self.outcount) :
@@ -202,11 +209,16 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
+<<<<<<< HEAD
 
 	
 	incount = int( f.readline() ) 	# reading incount from the file	
 	outcount = int( f.readline() )	# reading outcount from the file
 
+=======
+	incount = int( f.readline() ) 	# reading incount from the file	
+	outcount = int( f.readline() )	# reading outcount from the file
+>>>>>>> a9fd6c8bbe16036ec0bfb2f7cc3ed24dc950c333
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	T.sign = f.readline()
@@ -251,10 +263,17 @@ Algorithm:
 
 def transtofile(T,filename):		# Verified working
 	f = open( filename, 'w' )
+<<<<<<< HEAD
 	f.write( str(T.incount) + '\n')
 	f.write( str(T.outcount) + '\n')
 	f.write(T.sign)
 	f.write('\n' + str(T.hash))
+=======
+	f.write( str(T.incount) + '\n' )
+	f.write( str(T.outcount) + '\n' )
+	f.write( T.sign )
+	f.write( T.hash )
+>>>>>>> a9fd6c8bbe16036ec0bfb2f7cc3ed24dc950c333
 	for i in range (T.incount) :
 		f.write( '\n' + str(T.inlist[i].hash) )
 		f.write(str(T.inlist[i].n) )

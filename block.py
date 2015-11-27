@@ -139,11 +139,14 @@ class block:
 		B.prev_hash = readline()
 		B.max_trans_num = readline()
 		B.nonce = readline()
-		B.translist = [transaction(None,0,0) for i in range (max_trans_num)] 	
+		B.translist = [transaction(None,0,0) for i in range (B.max_trans_num)] 	
 		for i in range(B.max_trans_num) :
-			T = transaction()
-			T.incount = readline()
-			T.inlist = [inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount] 
+			incount = f.readline()
+			outcount = f.readline()
+			T = transaction(incount,outcount)
+			T.inlist = [inputtrans() for i in range (T.incount)]	#Create an array of type inlist[incount]
+			T.sign = f.readline()
+			T.hash = f.readline() 
 			for j in range(T.incount) :	# iterating through each input and adding them to the transaction's inlist
 				I = inputtrans()
 				I.hash = readline()
@@ -151,12 +154,39 @@ class block:
 				I.sign = readline()
 				I.pub = readline()
 				T.inlist[j] = I
-			T.outcount = readline()
+			
 			T.outlist = [outputtrans() for i in range (T.outcount)]	   #Create an array of type outlist[outcount] 
 			for j in range(T.outcount) :	# iterating through each output and adding them to the transaction's outlist
 				O = outputtrans()
-				O.value = readline()
-				O.addr = readline()
+				O.value = f.readline()
+				O.addr = f.readline()
 				T.outlist[j] = O
 		 	B.translist[i] = T	# adding the transaction to the block's translist
 		return B
+		
+		
+		
+	def blocktofile(B,filename):
+		f = open( filename, 'w' )
+		f.write(B.prev_hash)
+		f.write(str(B.max_trans_num) + '\n')
+		f.write(str(B.nonce) + '\n')
+		
+		for i in range( B.max_trans_num) :
+			f.write(str(B.translist[i].incount) + '\n')
+			f.write(str(B.translist[i].outcount) + '\n')
+			f.write( T.sign )
+			f.write( T.hash )
+			for j in range(B.translist[i].incount) :
+				f.write(B.translist[i].inlist[j].hash)
+				f.write(str(B.translist[i].inlist[j].n) + '\n')
+				f.write(B.translist[i].inlist[j].sign)
+				f.write(B.translist[i].inlist[j].pub)
+				
+			for j in range(B.translist[i].outcount) :
+				f.write(B.translist[i].outlist[j].value)
+				f.write(B.translist[i].outlist[j].addr)
+		
+		
+		
+		
