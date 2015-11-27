@@ -147,7 +147,7 @@ class transaction:
 			# end check 3			
 			
 			#verifying the signature(Not sure if it will work!)
-			transstr = self.incount + self.outcount
+			transstr = self.incount + self.outcount + self.hash
 			
 			for i in range (self.incount):
 				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
@@ -156,7 +156,7 @@ class transaction:
 			
 
 			
-			transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
+				transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
 			for i in range (self.outcount) :
 				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
 			assert node.publickey.verify(self.sign, transstr)	
@@ -280,7 +280,7 @@ def signtrans(node, filename):		# Verified working
 	
 	T = transaction(incount,outcount)		# create a new transaction object
 	T.hash = f.readline()
-	transstr = str(T.incount) + str(T.outcount)
+	transstr = str(T.incount) + str(T.outcount) + str(T.hash)
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range (T.incount) :
 		T.inlist[i].hash = f.readline()	# reading hash, n, sign and pub values from file ans storing it in inlist[i]

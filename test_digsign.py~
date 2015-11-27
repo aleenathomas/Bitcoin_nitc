@@ -22,7 +22,7 @@ T = signtrans(newnode, filename)
 #T = filetotrans("signedtrans.txt")
 
 #verifying the signature(Not sure if it will work!)
-transstr = str(T.incount) + str(T.outcount)
+transstr = str(T.incount) + str(T.outcount) +str(T.hash)
 		
 for i in range (T.incount):
 	
