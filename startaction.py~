@@ -1,0 +1,27 @@
+import node
+import transaction
+
+i_am = node.node()	#creating a node instance for the peer
+
+choice = 1
+while choice != -1
+	print "Press 1 to create a new transaction"
+	raw_input(choice)
+	if choice == 1:
+		t = transaction.transaction(1,2)
+		t.sign = "sign6"
+		t.hash = 12346
+		t.inlist[0].hash = 12343
+		t.inlist[0].n = 0
+		t.inlist[0].sign = "mysign"
+		t.inlist[0].pub = i_am.publickey
+		t.outlist[0].value = 2
+		t.outlist[0].addr = 1234567
+		t.outlist[1].value = 3
+		t.outlist[1].addr = 56789 
+		
+		# write the transaction to a file
+		transaction.transtofile(t, "trans1.txt")
+		
+		
+ 
