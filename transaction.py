@@ -171,6 +171,7 @@ class transaction:
 				return False
 		else:
 			if inputsum < outputsum :
+				print 'error is here'
 				return False
 		return True
 						
