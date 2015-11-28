@@ -107,7 +107,7 @@ t1.outlist[1].addr = 1001
 block1.translist[4] = t1
 
 # adding block1 to the blockchain maintained by node1
-addblock(block1)
+addblock(block1, node1)
 
 ########################################################_____________________________________________________________
 
