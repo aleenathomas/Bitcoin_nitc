@@ -3,16 +3,16 @@ import transaction
 import block
 
 t = transaction.transaction(1,2)
-t.sign = "sign6"
+t.sign = "teacher1sign"
 t.hash = 12346
-t.inlist[0].hash = 12343
+t.inlist[0].hash = 100
 t.inlist[0].n = 0
-t.inlist[0].sign = "mysign"
-t.inlist[0].pub = createnode.i_am.publickey
-t.outlist[0].value = 2
+t.inlist[0].sign = "teacher1sign"
+t.inlist[0].pub = createnode.teacher1publickey
+t.outlist[0].value = 20
 t.outlist[0].addr = 1234567
-t.outlist[1].value = 3
-t.outlist[1].addr = 56789 
+t.outlist[0].value = 80
+t.outlist[0].addr = createnode.teacher1publickey
 
 # write the transaction to a file
 transaction.transtofile(t, "trans1.txt")

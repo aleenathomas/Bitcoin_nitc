@@ -18,7 +18,7 @@ select opt in "${options[@]}"
 do
     case $opt in
         "1")
-            python createtransaction.py
+            python2 createtransaction.py
             ./publish.sh "signedtrans.txt"	
             ;;
         "2")

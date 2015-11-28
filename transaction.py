@@ -22,7 +22,7 @@ class outputtrans:			#output to a transaction
 #added sign to transaction class; sign = node.privatekey.sign(transaction); need to initialise this in createtrans function
 class transaction:
 	def __init__(self,incount,outcount):
-		self.STAR = 20	#the total number of bitcoins given by the faculty
+		self.STAR = 100	#the total number of bitcoins given by the faculty
 		self.incount = incount
 		self.outcount = outcount
 		self.inlist = [inputtrans() for i in range (self.incount)]
@@ -90,9 +90,10 @@ class transaction:
 			blockptr = blockptr.parent
 		# end check 1
 		# part 2 : checking in the block currently filled by the node
-		for i in range(block.block(None).max_trans_num):
-			if node.currentblock.translist[i].hash == self.hash:
-				return False		
+		if node.currentblock != None:
+			for i in range(block.block(None).max_trans_num):
+				if node.currentblock.translist[i].hash == self.hash:
+					return False		
 
 		#check 2 : checking whether the inlist is empty, ie whether it is a special transaction in whcih the faculty gives STAR bitcoins to a student
 		flag = 0
