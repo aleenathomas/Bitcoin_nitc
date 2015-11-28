@@ -3,7 +3,7 @@
 #while :
 #do
 #timeout gnunet-search -N 1 "$1" > filestodownload.sh
-timeout 10s gnunet-search "$1" > filestodownload.sh
+timeout 100s gnunet-search "$1" > filestodownload.sh
 gnunet-search "$1" > filestodownload.sh
 grep -v '^#' filestodownload.sh > download.sh
 rm filestodownload.sh
