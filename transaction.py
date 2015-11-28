@@ -289,7 +289,7 @@ def signtrans(node, filename):		# Verified working
 		#append each attribute of inlist[i] and sign it
 		hashinstr = str(T.inlist[i].n) + str(T.inlist[i].pub)
 		hashstr = hashstr + hashinstr
-		T.inlist[i].hash = gethash(hashinstr)
+		#T.inlist[i].hash = gethash(hashinstr) #Commented out bcos validation was failing
 
 		inliststr = str(T.inlist[i].hash) + str(T.inlist[i].n) + str(T.inlist[i].pub)
 		T.inlist[i].sign = node.privatekey.sign(inliststr)

@@ -55,7 +55,6 @@ t1.outlist[0].value = transaction.transaction(0,0).STAR
 t1.outlist[0].addr = teacher5publickey
 i_am.blockhead.propblock.add_trans_to_block(t1)
 
-
 t = transaction.transaction(1,2)
 t.sign = "teacher1sign"
 t.hash = 12346
@@ -68,7 +67,6 @@ t.outlist[0].addr = student1publickey
 t.outlist[1].value = 95
 t.outlist[1].addr = teacher1publickey
 
-
-#validate trans
 result = t.validatetrans(i_am)
-print result 
+print "result"
+print result
