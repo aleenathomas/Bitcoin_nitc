@@ -1,4 +1,4 @@
-from proof_of_work import *
+from pow_new import *
 
 import transaction 
 from treestruct import *
@@ -100,9 +100,5 @@ t1.outlist[1].addr = 1001
 block1.translist[4] = t1
 
 proofofwork(block1)
-print "Nonce value is: %d", block1.nonce
+print "Nonce value is:" , block1.nonce
 truthval = verify_nonce(block1)
-if truthval == 1:
-	print "verified!"
-else:
-	print "Fraud!"
