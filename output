@@ -1,153 +1,50 @@
-('value = %d', 1)
-('value = %d', 19)
-('value = %d', 2)
-('value = %d', 17)
-('value = %d', 5)
-('value = %d', 12)
-('value = %d', 3)
-('value = %d', 9)
-('value = %d', 5)
-('value = %d', 15)
-printing block2
-9999
-
-
-5
-
-123
-
-
-0
-
-2
-
-sign1
-
-
-12341
-
-
-('value = %d', '1\n')
-1
-
-
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e14aef0>
-
-
-('value = %d', '19\n')
-19
-
-
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
-
-
 1
 
 2
 
 sign2
 
-
 12342
 
-
-12345
-
+12341
 
 1
 
-
 signofnode0
 
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
-
-
-('value = %d', '2\n')
 2
 
+<ecdsa.keys.VerifyingKey instance at 0x7f69501c33f8>
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e15bdd0>
-
-
-('value = %d', '17\n')
 17
 
-
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
-
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
 
 1
 
 2
 
 sign3
-
 
 12343
 
-
-12346
-
+12342
 
 1
 
-
 signofnode0
 
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
-
-
-('value = %d', '5\n')
 5
 
+<ecdsa.keys.VerifyingKey instance at 0x7f69501d67a0>
 
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e0edcb0>
-
-
-('value = %d', '12\n')
 12
 
-
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
-
-
-1
-
-2
-
-sign3
-
-
-12344
-
-
-12346
-
-
-1
-
-
-signofnode0
-
-
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
-
-
-('value = %d', '3\n')
-3
-
-
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e101b90>
-
-
-('value = %d', '9\n')
-9
-
-
-<ecdsa.keys.VerifyingKey instance at 0x7fe56e12e5f0>
-
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
 
 0
 
@@ -155,21 +52,191 @@ signofnode0
 
 sign5
 
-
 12345
 
-
-('value = %d', '5\n')
 5
-
 
 1002
 
-
-('value = %d', '15\n')
 15
-
 
 1001
 
+0
+
+0
+
+None
+
+None
+
+0
+
+0
+
+None
+
+None
+
+After deleting: 
+1
+
+2
+
+sign2
+
+12342
+
+12341
+
+1
+
+signofnode0
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+2
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501c33f8>
+
+17
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+1
+
+2
+
+sign3
+
+None
+
+12342
+
+1
+
+signofnode0
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+5
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501d67a0>
+
+12
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+0
+
+2
+
+sign5
+
+12345
+
+5
+
+1002
+
+15
+
+1001
+
+0
+
+0
+
+None
+
+None
+
+0
+
+0
+
+None
+
+None
+
+After adding new trans:
+1
+
+2
+
+sign2
+
+12342
+
+12341
+
+1
+
+signofnode0
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+2
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501c33f8>
+
+17
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+0
+
+2
+
+sign5
+
+12345
+
+5
+
+1002
+
+15
+
+1001
+
+1
+
+2
+
+sign3
+
+12344
+
+12343
+
+1
+
+signofnode0
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+3
+
+<ecdsa.keys.VerifyingKey instance at 0x7f694e512b48>
+
+9
+
+<ecdsa.keys.VerifyingKey instance at 0x7f69501a9050>
+
+0
+
+0
+
+None
+
+None
+
+0
+
+0
+
+None
+
+None
 
