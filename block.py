@@ -45,14 +45,14 @@ class block:
 						j = j + 1
 					i = i + 1
 				newblock.translist[j] = newtrans				#add the new transaction to this new block
-				break
+				return newblock
 				#newblock.n = newblock.n + 1	
 		if invalidtrans == 0 :
 			for i in range (self.max_trans_num-1):
 				if self.translist[i].hash==None :
 					self.translist[i] = newtrans
 					#self.n = self.n + 1
-					break
+					return self
 
 			
 	def remove_trans_from_block(self,trans):
