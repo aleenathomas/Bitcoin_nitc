@@ -22,7 +22,7 @@ class outputtrans:			#output to a transaction
 #added sign to transaction class; sign = node.privatekey.sign(transaction); need to initialise this in createtrans function
 class transaction:
 	def __init__(self,incount,outcount):
-		
+		self.STAR = 20	#the total number of bitcoins given by the faculty
 		self.incount = incount
 		self.outcount = outcount
 		self.inlist = [inputtrans() for i in range (self.incount)]
@@ -77,43 +77,27 @@ class transaction:
 				d. sum of value(i) must be stored in a variable called inputsum						
 		3. For all outputs, add the value fields to outputsum
 		4. Check whether inputsum = outputsum
-
-		points to check		    
-
-    Reject if we already have matching tx in the pool, or in a block in the main branch
-    For each input, if the referenced output exists in any other tx in the pool, reject this transaction.[5]
-    For each input, look in the main branch and the transaction pool to find the referenced output transaction. If the output transaction is missing for any input, this will be an orphan transaction. Add to the orphan transactions, if a matching transaction is not in there already.
-    For each input, if the referenced output transaction is coinbase (i.e. only 1 input, with hash=0, n=-1), it must have at least COINBASE_MATURITY (100) confirmations; else reject this transaction
-    For each input, if the referenced output does not exist (e.g. never existed or has already been spent), reject this transaction[6]
-    Using the referenced output transactions to get input values, check that each input value, as well as the sum, are in legal money range
-    Reject if the sum of input values < sum of output values
-    Reject if transaction fee (defined as sum of input values minus sum of output values) would be too low to get into an empty block
-    Verify the scriptPubKey accepts for each input; reject if any are bad
-    Add to transaction pool[7]
-    "Add to wallet if mine"
-    Relay transaction to peers
-    For each orphan transaction that uses this one as one of its inputs, run all these steps (including this one) recursively on that orphan
 		
 		'''
 	def validatetrans(self, node, block):
 		# check 1 : check whether the transaction is already present in the outstanding block of the node or in the blockchain	
 		# part 1 : checking in the blockchain
-		blockptr = blockhead
+		blockptr = node.blockhead
 		while blockptr.parent != None and blockptr.propblockhash != 9999:	# ie, search till the genesis block
 			for i in range(block.max_trans_num) :	
 				if (blockptr.propblock.translist[i].hash == self.hash) :
 					return False
 			blockptr = blockptr.parent
-
+		# end check 1
 		# part 2 : checking in the block currently filled by the node
 		for i in range(block.max_trans_num):
 			if node.currentblock.translist[i].hash == self.hash:
-				return False
-		# end check 1
+				return False		
 
-		#check 2 : checking whether the inlist or outlist is empty
-		if self.incount == 0 or self.outcount == 0:
-			return False 
+		#check 2 : checking whether the inlist is empty, ie whether it is a special transaction in whcih the faculty gives STAR bitcoins to a student
+		flag = 0
+		if self.incount == 0:
+			flag = 1 
 		# end check 2
 
 		inputsum = 0
@@ -124,32 +108,34 @@ class transaction:
 			for j in range(node.top):	# iterate through all transactions in the database ie till 'top' transactions
 				if node.database[ j] [ 0 ] == transhash:   # if the transaction hash matches, then the block in which 
 					blockhash = node.database[ j ] [1 ]
+					print "blockhash"
+					print blockhash
 					break
 
-			# finding the block in the blockchain using the blockhash		
-			blockptr = blockhead
-			while blockptr.parent != None and blockptr.propblock.hash != blockhash:	# ie, search till the genesis block
-				blockptr = blockptr.parent		
+			# finding the block in the blockchain using the blockhash
+			blockptr = node.blockhead
+			while blockptr.parent != None and blockptr.propblockhash != blockhash:	# ie, search till the genesis block
+				blockptr = blockptr.parent					
 			# searching for the transaction in the block using transaction hash
 			for i in range(block.max_trans_num) :	
 				if (blockptr.propblock != None and blockptr.propblock.translist[i].hash == transhash) :
-				    	transptr = translist[i]		# transptr points to the input transaction
-				    	break			
+				    	transptr = blockptr.propblock.translist[i]		# transptr points to the input transaction
+				    	break					
 			# check 3 : checking whether the inputs are already spent or not
 			# checking whether the current transaction's (pointed by transptr) hash is given as the hash of any input to any transaction that comes after that
-			ptr = blockhead 
+			ptr = node.blockhead 
 			while ptr != blockptr:
 				for j in range(block.max_trans_num):	# every transaction in the block
 					for k in range(ptr.propblock.incount):		# every input to the transaction
 						if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
 							return False
-			
-			for j in range(i, block.max_trans_num):	# for those transactions that come after the input transaction
-				if ptr.propblock != None:
-					for k in range(ptr.propblock.incount):		# every input to the transaction
-						if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
-							return False	
-				else:continue
+			'''
+			for j in range(i+1, block.max_trans_num):	# for those transactions that come after the input transaction
+				for k in range(ptr.propblock.translist[j].incount):		# every input to the transaction
+					if ptr.propblock.translist[j].inlist[k].hash == transptr.hash:	# if input was spent, return false
+						print "problem is here and j is %d", j
+						return False	
+			'''
 			# end check 3			
 			'''
 			#verifying the signature(Not sure if it will work!)
@@ -168,18 +154,29 @@ class transaction:
 			transstr = transstr + self.hash
 			assert node.publickey.verify(self.sign, transstr)	
 			'''
-			index =  self.inlist[l].n   
-			address = self.inlist[l].pub		
-			inputsum = inputsum + transptr.outlist[index].value    			
-			if transptr.outlist[index].addr != address :
-				return False
+			if flag != 1 and transptr != None:	# ie checking whether its a transcation with empty inlist
+				index =  self.inlist[l].n   
+				address = self.inlist[l].pub		
+				inputsum = inputsum + transptr.outlist[index].value  
+#				print "actual inputsum"  			
+#				print inputsum			
+				if transptr.outlist[index].addr != address :
+					return False
 			
 			
 		outputsum = 0
 		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
-		if inputsum < outputsum :
-			return False
+		if flag == 1:
+			if self.outcount == 1 and outputsum != self.STAR:
+				return False
+		else:
+			print "outputsum"
+			print outputsum
+			print "inputsum"
+			print inputsum
+			if inputsum < outputsum :
+				return False
 		return True
 						
 				

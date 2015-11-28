@@ -114,18 +114,9 @@ addblock(block1, node1)
 
 # validating a transaction t, from node3 to node1 2 bitcoins
 
-t = transaction.transaction(1,2)
-t.sign = "sign6"
-t.hash = 12346
-t.inlist[0].hash = 12343
-t.inlist[0].n = 0
-t.inlist[0].sign = "signofnode3"
-t.inlist[0].pub = node3.publickey
-t.outlist[0].value = 2
-t.outlist[0].addr = node1.publickey
-t.outlist[1].value = 3
-t.outlist[1].addr = node3.publickey
+
+
 
 #validate trans
-print node1.currentblock
 result = t.validatetrans(node1, block1)
+print result 

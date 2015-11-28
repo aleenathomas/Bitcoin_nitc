@@ -16,7 +16,9 @@ class node:
 		self.database = [[0] * 2 for i in range(self.maxnumtrans)]
 		self.top = 0
 		self.currentblock = block.block(None)
-		self.genesis = None
+		self.blockhead = Treenode()
+		self.genesis = Treenode()	# height will be zero for genesis block
+		self.leafhead = self.genesis	# head of the list of leaves, points to an empty node initially
 	
 	
 	'''	
@@ -40,20 +42,20 @@ class node:
 	
 	
 	def getbalance(self) :
-		blockptr = blockhead
+		blockptr = self.blockhead
 		inbalance = 0
-		outbalance
+		outbalance = 0
 		while blockptr != self.genesis :
-			for i in range(blockptr.max_trans_num,0,-1) :
-				if ( blockptr.translist[i].sign == node.sign ) :
-					for j in range(blockptr.translist[i].outcount) :
-						 if ( blockptr.translist[i].outlist[j].addr != self.publickey ) :
-						 	outbalance = outbalance + blockptr.translist[i].outlist[j].value
+			for i in range(blockptr.propblock.max_trans_num) :
+				if ( blockptr.propblock.translist[i].sign == node.sign ) :
+					for j in range(blockptr.propblock.translist[i].outcount) :
+						 if ( blockptr.propblock.translist[i].outlist[j].addr != self.publickey ) :
+						 	outbalance = outbalance + blockptr.propblock.translist[i].outlist[j].value
 						 	
 				else : 
-					for j in range(blockptr.translist[i].outcount) :
-						if ( blockptr.translist[i].outlist[j].addr == self.publickey ) :
-							inbalance = inbalance + blockptr.translist[i].outlist[j].value
+					for j in range(blockptr.propblock.translist[i].outcount) :
+						if ( blockptr.propblock.translist[i].outlist[j].addr == self.publickey ) :
+							inbalance = inbalance + blockptr.propblock.translist[i].outlist[j].value
 						
 						
 		balance = inbalance - outbalance
