@@ -19,7 +19,7 @@ do
     case $opt in
         "1")
             python createtransaction.py
-            ./publish "signedtrans.txt"	
+            ./publish.sh "signedtrans.txt"	
             ;;
         "2")
             echo "you chose choice 2"

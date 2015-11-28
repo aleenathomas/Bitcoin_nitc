@@ -3,13 +3,13 @@
 #start gnunet
 ./start.sh
 
+#create node
+python createnode.py
+
 #listening for transactions in background
 ./search.sh "signedtrans.txt" &
 #listening for proposed block in background
 ./search.sh "block.txt"	&
-
-#create node
-python createnode.py
 
 #ask the user for his choice
 PS3='Please enter your choice: '
