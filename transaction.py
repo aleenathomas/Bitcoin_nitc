@@ -79,18 +79,18 @@ class transaction:
 		4. Check whether inputsum = outputsum
 		
 		'''
-	def validatetrans(self, node, block):
+	def validatetrans(self, node):
 		# check 1 : check whether the transaction is already present in the outstanding block of the node or in the blockchain	
 		# part 1 : checking in the blockchain
 		blockptr = node.blockhead
 		while blockptr.parent != None and blockptr.propblockhash != 9999:	# ie, search till the genesis block
-			for i in range(block.max_trans_num) :	
+			for i in range(blockptr.propblock.max_trans_num) :	
 				if (blockptr.propblock.translist[i].hash == self.hash) :
 					return False
 			blockptr = blockptr.parent
 		# end check 1
 		# part 2 : checking in the block currently filled by the node
-		for i in range(block.max_trans_num):
+		for i in range(block.block(None).max_trans_num):
 			if node.currentblock.translist[i].hash == self.hash:
 				return False		
 
@@ -108,8 +108,6 @@ class transaction:
 			for j in range(node.top):	# iterate through all transactions in the database ie till 'top' transactions
 				if node.database[ j] [ 0 ] == transhash:   # if the transaction hash matches, then the block in which 
 					blockhash = node.database[ j ] [1 ]
-					print "blockhash"
-					print blockhash
 					break
 
 			# finding the block in the blockchain using the blockhash
@@ -117,7 +115,7 @@ class transaction:
 			while blockptr.parent != None and blockptr.propblockhash != blockhash:	# ie, search till the genesis block
 				blockptr = blockptr.parent					
 			# searching for the transaction in the block using transaction hash
-			for i in range(block.max_trans_num) :	
+			for i in range(block.block(None).max_trans_num) :	
 				if (blockptr.propblock != None and blockptr.propblock.translist[i].hash == transhash) :
 				    	transptr = blockptr.propblock.translist[i]		# transptr points to the input transaction
 				    	break					
@@ -125,7 +123,7 @@ class transaction:
 			# checking whether the current transaction's (pointed by transptr) hash is given as the hash of any input to any transaction that comes after that
 			ptr = node.blockhead 
 			while ptr != blockptr:
-				for j in range(block.max_trans_num):	# every transaction in the block
+				for j in range(blockptr.propblock.max_trans_num):	# every transaction in the block
 					for k in range(ptr.propblock.incount):		# every input to the transaction
 						if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
 							return False
@@ -171,10 +169,6 @@ class transaction:
 			if self.outcount == 1 and outputsum != self.STAR:
 				return False
 		else:
-			print "outputsum"
-			print outputsum
-			print "inputsum"
-			print inputsum
 			if inputsum < outputsum :
 				return False
 		return True
