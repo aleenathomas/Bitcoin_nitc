@@ -3,7 +3,7 @@
 from ecdsa import SigningKey
 from node import *
 from treestruct import *
-from block import readword
+import block
 
 dummy_none = "456"			#used to test run gethashofblock
 
@@ -122,7 +122,7 @@ class transaction:
 			transhash = self.inlist[l].hash		
 			
 			for j in range(node.top):	# iterate through all transactions in the database ie till 'top' transactions
-				if node.database[ j] [ 0 ] == transhash:	# if the transaction hash matches, then the block in which 
+				if node.database[ j] [ 0 ] == transhash:   # if the transaction hash matches, then the block in which 
 					blockhash = node.database[ j ] [1 ]
 					break
 
@@ -153,7 +153,7 @@ class transaction:
 			# end check 3			
 			'''
 			#verifying the signature(Not sure if it will work!)
-			transstr = self.incount + self.outcount + self.hash
+			transstr = self.incount + self.outcount
 			
 			for i in range (self.incount):
 				inliststr = str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub)
@@ -165,15 +165,11 @@ class transaction:
 				transstr = transstr + str(self.inlist[i].hash) + str(self.inlist[i].n) + str(self.inlist[i].pub) + str(self.inlist[i].sign)
 			for i in range (self.outcount) :
 				transstr = transstr + str(self.outlist[i].value) + str(self.outlist[i].addr)
+			transstr = transstr + self.hash
 			assert node.publickey.verify(self.sign, transstr)	
 			'''
-<<<<<<< HEAD
 			index =  self.inlist[l].n   
 			address = self.inlist[l].pub		
-=======
-			index =  self.inlist[i].n   
-			address = self.inlist[i].pub		
->>>>>>> 6f2225174dc83f36ae4c5f510f2f362f53905891
 			inputsum = inputsum + transptr.outlist[index].value    			
 			if transptr.outlist[index].addr != address :
 				return False

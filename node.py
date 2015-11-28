@@ -1,6 +1,6 @@
 #\xhh 	Character with hex value hh
 
-from block import *
+import block
 from proof_of_work import *
 from blockchain import *
 from treestruct import *
@@ -15,7 +15,7 @@ class node:
 		self.maxnumtrans = 1000
 		self.database = [[0] * 2 for i in range(self.maxnumtrans)]
 		self.top = 0
-		self.currentblock = block(None)
+		self.currentblock = block.block(None)
 		self.genesis = None
 	
 	

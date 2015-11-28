@@ -3,7 +3,7 @@
 from ecdsa import SigningKey
 from node import *
 from treestruct import *
-from block import readword
+import block
 
 dummy_none = "456"			#used to test run gethashofblock
 
@@ -211,23 +211,23 @@ Algorithm:
 
 def filetotrans(filename):			# Verified working
 	f = open(filename,  'r')		
-	incount = int( readword(f.readline()) ) 	# reading incount from the file	
-	outcount = int( readword(f.readline()) )	# reading outcount from the file
+	incount = int( block.readword(f.readline()) ) 	# reading incount from the file	
+	outcount = int( block.readword(f.readline()) )	# reading outcount from the file
 
 	T = transaction(incount,outcount)		# create a new transaction object					
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
-	T.sign = readword(f.readline())
-	T.hash = readword(f.readline())
+	T.sign = block.readword(f.readline())
+	T.hash = block.readword(f.readline())
 	for i in range(T.incount):			
-		T.inlist[i].hash = readword(f.readline())# reading hash, n, sign and pub values from file ans storing it in inlist[i]
-		T.inlist[i].n = int(readword(f.readline()))
-		T.inlist[i].sign = readword(f.readline())
-		T.inlist[i].pub = readword(f.readline())
+		T.inlist[i].hash = block.readword(f.readline())# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		T.inlist[i].n = int(block.readword(f.readline()))
+		T.inlist[i].sign = block.readword(f.readline())
+		T.inlist[i].pub = block.readword(f.readline())
 	
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
 	for i in range(T.outcount):			
-		T.outlist[i].value = int(readword(f.readline()))# reading value and addr values from file ans storing it in outlist[i]
-		T.outlist[i].addr = readword(f.readline())
+		T.outlist[i].value = int(block.readword(f.readline()))# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = block.readword(f.readline())
 	
 	f.close()
 	return T
@@ -280,20 +280,20 @@ def transtofile(T,filename):		# Verified working
 def signtrans(node, filename):		# Verified working
 	f = open( filename, 'r' )
 
-	incount = int(readword(f.readline()))	# reading incount from the file	
-	outcount = int(readword(f.readline()))	# reading outcount from the file
-	sign = readword(f.readline())
+	incount = int(block.readword(f.readline()))	# reading incount from the file	
+	outcount = int(block.readword(f.readline()))	# reading outcount from the file
+	sign = block.readword(f.readline())
 	
 	T = transaction(incount,outcount)		# create a new transaction object
-	T.hash = readword(f.readline())
+	T.hash = block.readword(f.readline())
 	hashstr = str(T.incount) + str(T.outcount) 
 	transstr = str(T.incount) + str(T.outcount)
 	T.inlist = [inputtrans() for i in range (T.incount)]	# creating array inlist[]
 	for i in range (T.incount) :
-		T.inlist[i].hash = readword(f.readline())	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
-		T.inlist[i].n = int(readword(f.readline()))
-		T.inlist[i].sign = readword(f.readline())
-		T.inlist[i].pub = readword(f.readline())
+		T.inlist[i].hash = block.readword(f.readline())	# reading hash, n, sign and pub values from file ans storing it in inlist[i]
+		T.inlist[i].n = int(block.readword(f.readline()))
+		T.inlist[i].sign = block.readword(f.readline())
+		T.inlist[i].pub = block.readword(f.readline())
 		#append each attribute of inlist[i] and sign it
 		hashinstr = str(T.inlist[i].n) + str(T.inlist[i].pub)
 		hashstr = hashstr + hashinstr
@@ -308,8 +308,8 @@ def signtrans(node, filename):		# Verified working
 		
 	T.outlist = [outputtrans() for i in range (T.outcount)]		# creating array outlist[]
 	for i in range (T.outcount) :
-		T.outlist[i].value = int(readword(f.readline()))	# reading value and addr values from file ans storing it in outlist[i]
-		T.outlist[i].addr = readword(f.readline())
+		T.outlist[i].value = int(block.readword(f.readline()))	# reading value and addr values from file ans storing it in outlist[i]
+		T.outlist[i].addr = block.readword(f.readline())
 		transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 		hashstr = hashstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 
