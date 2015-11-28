@@ -48,8 +48,6 @@ def addblock(propblock, node):
 	#updating blockhead, pointing it to the node with the maximum height
 	node.blockhead = maxheightnode
 				
-	print "blockhead in add block"	
-	print node.blockhead
 	# updating the database
 	transaction.maptransaction(propblock, node)
 	
