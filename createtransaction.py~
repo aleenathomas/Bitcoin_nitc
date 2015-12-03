@@ -16,9 +16,6 @@ t.outlist[1].addr = createnode.teacher1publickey
 t.outlist[2].value = 20
 t.outlist[2].addr = 9876534
 
-print "address in createtransaction"
-print t.inlist[0].pub
-
 # write the transaction to a file
 transaction.transtofile(t, "trans1.txt")
 transaction.signtrans(createnode.i_am, "trans1.txt")
@@ -26,3 +23,7 @@ newt = transaction.filetotrans("signedtrans4.txt")
 
 #add transaction to the currentblock of the node
 createnode.i_am.currentblock.add_trans_to_block(newt)
+print "the new transaction added in current block"
+print createnode.i_am.currentblock.translist[0].hash 
+print "the new transaction added in current block"
+print createnode.i_am.currentblock.translist[1].hash 

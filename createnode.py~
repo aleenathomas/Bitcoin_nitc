@@ -7,11 +7,11 @@ i_am = node.node()	#creating a node instance for the peer
 i_am.blockhead.propblock = block.block(9999)
 
 #teacher's public keys are kept static
-teacher1publickey=1
-teacher2publickey=2
-teacher3publickey=3
-teacher4publickey=4
-teacher5publickey=5
+teacher1publickey = "1"
+teacher2publickey = "2"
+teacher3publickey = "3"
+teacher4publickey = "4"
+teacher5publickey = "5"
 
 student1publickey=876
 
@@ -58,3 +58,4 @@ i_am.blockhead.propblock.add_trans_to_block(t1)
 
 treestruct.addblock(i_am.blockhead.propblock, i_am)
 
+i_am.currentblock = block.block(None)

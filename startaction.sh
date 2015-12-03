@@ -9,7 +9,7 @@ python createnode.py
 #listening for transactions in background
 ./search.sh "signedtrans4.txt" &
 #listening for proposed block in background
-./search.sh "block.txt"	&
+./search_block.sh "block.txt"	&
 
 #ask the user for his choice
 PS3='Please enter your choice: '

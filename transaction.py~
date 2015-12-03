@@ -87,15 +87,22 @@ class transaction:
 		while blockptr.parent != None and blockptr.propblockhash != 9999:	# ie, search till the genesis block
 			for i in range(blockptr.propblock.max_trans_num) :	
 				if (blockptr.propblock.translist[i].hash == self.hash) :
-					print "90"
+					print "Transaction already in the blockchain"
 					return False
 			blockptr = blockptr.parent
 		# end check 1
 		# part 2 : checking in the block currently filled by the node
 		if node.currentblock != None:
 			for i in range(block.block(None).max_trans_num):
+				'''
+				print "inside for loop"
+				print "node.currentblock.translist[i].hash"
+				print node.currentblock.translist[i].hash
+				print "self.hash"				
+				print self.hash
+				'''
 				if node.currentblock.translist[i].hash == self.hash:
-					print "98"
+					print "Transaction already received"
 					return False		
 
 		#check 2 : checking whether the inlist is empty, ie whether it is a special transaction in whcih the faculty gives STAR bitcoins to a student
@@ -111,7 +118,6 @@ class transaction:
 
 			for j in range(node.top):	# iterate through all transactions in the database ie till 'top' transactions								
 				if node.database[ j ] [ 0 ] == transhash:   # if the transaction hash matches, then the block in which 
-					print "got the block hash"
 					blockhash = node.database[ j ] [1 ]
 					break
 
@@ -131,7 +137,7 @@ class transaction:
 				for j in range(blockptr.propblock.max_trans_num):	# every transaction in the block
 					for k in range(ptr.propblock.incount):		# every input to the transaction
 						if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
-							print "134"						
+							print "Input already spent, possible double spent attempt!"
 							return False
 			'''
 			for j in range(i+1, block.max_trans_num):	# for those transactions that come after the input transaction
@@ -163,15 +169,8 @@ class transaction:
 			if flag != 1 and transptr != None:	# ie checking whether its a transcation with empty inlist
 				index =  self.inlist[l].n   
 				address = self.inlist[l].pub		
-				inputsum = inputsum + transptr.outlist[index].value  
-#				print "actual inputsum"  			
-#				print inputsum			
-				if int(transptr.outlist[index].addr) != int(address) :
-					print "address"		
-					print address					
-					print "transptr.outlist[index].addr"
-					print transptr.outlist[index].addr			
-					print "170"
+				inputsum = inputsum + transptr.outlist[index].value  		
+				if transptr.outlist[index].addr != address :					
 					return False
 			
 			
@@ -181,14 +180,14 @@ class transaction:
 			
 		if flag == 1:
 			if self.outcount == 1 and outputsum != self.STAR:
-				print "180"
+				print "Invalid transaction, attempt for possible double spent!"
 				return False
 		
 		else:			
 			if inputsum < outputsum :
-				print 'input sum is < outputsum'
+				print 'Balance is less than the requested sum'
 				return False
-		
+		print "Transaction has been successfully verified"
 		return True
 						
 				
@@ -323,7 +322,7 @@ def signtrans(node, filename):		# Verified working
 		transstr = transstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 		hashstr = hashstr + str(T.outlist[i].value) + str(T.outlist[i].addr)
 
-	T.hash = gethash(hashstr)
+	#T.hash = gethash(hashstr)	commented because of the difficulty in finding hash of the input transaction
 	transstr = transstr + str(T.hash)
 	T.sign = node.privatekey.sign(transstr)
 	#print T.sign

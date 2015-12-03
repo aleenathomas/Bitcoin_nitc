@@ -57,4 +57,3 @@ t1.outlist[0].addr = teacher5publickey
 i_am.blockhead.propblock.add_trans_to_block(t1)
 
 treestruct.addblock(i_am.blockhead.propblock, i_am)
-
