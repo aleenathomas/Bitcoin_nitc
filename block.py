@@ -48,7 +48,7 @@ class block:
 				return newblock
 				#newblock.n = newblock.n + 1	
 		if invalidtrans == 0 :
-			for i in range (self.max_trans_num-1):
+			for i in range (self.max_trans_num):
 				if self.translist[i].hash==None :
 					self.translist[i] = newtrans
 					#self.n = self.n + 1

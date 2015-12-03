@@ -7,7 +7,7 @@
 python createnode.py
 
 #listening for transactions in background
-./search.sh "signedtrans.txt" &
+./search.sh "signedtrans4.txt" &
 #listening for proposed block in background
 ./search.sh "block.txt"	&
 
@@ -19,7 +19,7 @@ do
     case $opt in
         "1")
             python2 createtransaction.py
-            ./publish.sh "signedtrans.txt"	
+            ./publish.sh "signedtrans4.txt"	
             ;;
         "2")
             echo "you chose choice 2"

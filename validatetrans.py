@@ -17,7 +17,11 @@ t.outlist[1].addr = createnode.teacher1publickey
 '''
 
 #validate trans
-t = transaction.filetotrans("signedtrans.txt")
+t = transaction.filetotrans("signedtrans4.txt")
+print('In validaate trans.py printing the contents of filetotrans(signedtrans4)')
+print(t.outlist[0].value)
+print(t.outlist[1].value)
+print(t.outlist[2].value)
 result = t.validatetrans(createnode.i_am)
 print "result in validate trans"
 print result

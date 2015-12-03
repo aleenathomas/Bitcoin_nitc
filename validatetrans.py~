@@ -17,9 +17,13 @@ t.outlist[1].addr = createnode.teacher1publickey
 '''
 
 #validate trans
-t = transaction.filetotrans("signedtrans.txt")
+t = transaction.filetotrans("signedtrans4.txt")
+print('In validaate trans.py printing the contents of filetotrans(signedtrans4)')
+print(t.outlist[0].value)
+print(t.outlist[0].value)
+print(t.outlist[0].value)
 result = t.validatetrans(createnode.i_am)
-print "result"
+print "result in validate trans"
 print result
 if result == True:
 	#add transaction to the current block maintained by the node
