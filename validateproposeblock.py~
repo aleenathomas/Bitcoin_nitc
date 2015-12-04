@@ -86,14 +86,16 @@ for i in range(block.MAXTRANS) :
 		break
 # else we need to propose the current block after solving proof of work
 proof_of_work.proofofwork(createnode.i_am.currentblock)	
-#print "Proof of work has been solved!"
+print "Proof of work has been solved!"
 # convert the current block to file
 block.blocktofile(createnode.i_am.currentblock,"blocktopropose.txt")
 print "Current block is ready to be proposed!"
 #####################
+
 # to attach the block to the blockchain
 treestruct.addblock(createnode.i_am.currentblock, createnode.i_am)
 
+'''
 t = transaction.transaction(1,2)
 t.sign = "teacher1sign"
 t.hash = 12360
@@ -108,3 +110,4 @@ t.outlist[1].addr = createnode.student3publickey
 
 result = t.validatetrans(createnode.i_am)
 #####################
+'''

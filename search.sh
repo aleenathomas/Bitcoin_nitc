@@ -9,7 +9,7 @@ chmod +x download.sh
 #validating the transaction received
 python validatetrans.py
 
-
+#python validateproposeblock.py
 #var=$(python checkpropose.py)
 
 #echo $?
