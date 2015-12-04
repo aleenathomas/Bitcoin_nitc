@@ -82,10 +82,12 @@ createnode.i_am.currentblock.add_trans_to_block(t)
 #####################
 for i in range(block.MAXTRANS) :
 	if createnode.i_am.currentblock.translist[i].hash == None:
+		print ""
 		print "not yet...."
 		break
 # else we need to propose the current block after solving proof of work
 proof_of_work.proofofwork(createnode.i_am.currentblock)	
+print ""
 print "Proof of work has been solved!"
 # convert the current block to file
 block.blocktofile(createnode.i_am.currentblock,"blocktopropose.txt")

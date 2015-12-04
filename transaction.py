@@ -87,6 +87,7 @@ class transaction:
 		while blockptr.parent != None and blockptr.propblockhash != 9999:	# ie, search till the genesis block
 			for i in range(blockptr.propblock.max_trans_num) :	
 				if (blockptr.propblock.translist[i].hash == self.hash) :
+					print ""
 					print "Transaction already in the blockchain"
 					return False
 			blockptr = blockptr.parent
@@ -102,6 +103,7 @@ class transaction:
 				print self.hash
 				'''
 				if node.currentblock.translist[i].hash == self.hash:
+					print ""
 					print "Transaction already received"
 					return False		
 
@@ -109,6 +111,7 @@ class transaction:
 		flag = 0
 		if self.incount == 0:
 			flag = 1
+			print ""
 			print "Invalid transaction, possible attempt to create coin" 
 			return False
 		# end check 2
@@ -124,6 +127,7 @@ class transaction:
 					blockhash = node.database[ j ] [1 ]
 					break
 			if blockhash == None:
+				print ""
 				print "Invalid input transaction, or has not yet made it to the blockchain"
 				return False
 			# finding the block in the blockchain using the blockhash
@@ -142,6 +146,7 @@ class transaction:
 				for j in range(blockptr.propblock.max_trans_num):	# every transaction in the block
 					for k in range(ptr.propblock.incount):		# every input to the transaction
 						if ptr.propblock.inlist[k].hash == transptr.hash:	# if input was spent, return false
+							print ""
 							print "Input already spent, possible double spent attempt!"
 							return False
 			'''
@@ -185,16 +190,20 @@ class transaction:
 			
 		if flag == 1:	# input list is empty
 			if self.outcount != 1:
+				print ""
 				print "Invalid transaction, attempt for possible double spent!"
 				return False		
 			if self.outcount == 1 and outputsum != self.STAR:
+				print ""
 				print "Invalid transaction, attempt for possible double spent!"
 				return False
 		
 		else:			
 			if inputsum < outputsum :
+				print ""
 				print 'Balance is less than the requested sum'
 				return False
+		print ""		
 		print "Transaction has been successfully verified"
 		return True
 						
