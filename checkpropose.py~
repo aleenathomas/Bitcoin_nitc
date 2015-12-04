@@ -23,4 +23,4 @@ def checkpropose():
 		#flag= True
 		print True
 checkpropose()
-exit(flag)									
+#exit(flag)									

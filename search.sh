@@ -9,20 +9,15 @@ chmod +x download.sh
 #validating the transaction received
 python validatetrans.py
 
-var=$(python checkpropose.py)
 
-echo $?
-echo $var
+#var=$(python checkpropose.py)
 
-if [ $var == true ]
-then
-    echo ./publish.sh "blocktopropose.txt"
-else 
-    echo "Block is not full yet"
-fi
+#echo $?
+#echo $var
 
-#echo $result
-#if [ "$result == true" ]
+#if [ $var == true ]
 #then
-#	./publish.sh "blocktopropose.txt"
+#    echo ./publish.sh "blocktopropose.txt"
+#else 
+#    echo "Block is not full yet"
 #fi
