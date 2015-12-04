@@ -5,6 +5,7 @@ import treestruct
 
 i_am = node.node()	#creating a node instance for the peer
 i_am.blockhead.propblock = block.block(9999)
+i_am.publickey = "1"
 
 #teacher's public keys are kept static
 teacher1publickey = "1"
@@ -13,7 +14,11 @@ teacher3publickey = "3"
 teacher4publickey = "4"
 teacher5publickey = "5"
 
-student1publickey=876
+student1publickey = "876"
+student2publickey = "567"
+student3publickey = "563"
+student4publickey = "890"
+student5publickey = "173"
 
 t1 = transaction.transaction(0,1)
 t1.sign = "signadmin"

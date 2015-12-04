@@ -5,6 +5,7 @@ import fileinput
 #dummy values to verify working of gethash as None cannot be used
 dummy_nonce = 123
 dummy_hash = 567
+MAXTRANS = 5
 
 class block:
 	def __init__(self,prev_hash):
@@ -30,7 +31,7 @@ class block:
 		for i in range (self.max_trans_num-1):
 			if (self.translist[i].hash == None) and (self.translist[i+1].hash != None): #if there is an invalid entry in between				
 				invalidtrans = 1
-				newblock = block (self.prev_hash)				#create a newblock with same contents
+				newblock = block (self.prev_hash)		#create a newblock with same contents
 				i = 0
 				j = 0
 				while i < self.max_trans_num :
@@ -50,8 +51,7 @@ class block:
 		if invalidtrans == 0 :
 			for i in range (self.max_trans_num):
 				if self.translist[i].hash == None :
-					self.translist[i] = newtrans
-					#self.n = self.n + 1
+					self.translist[i] = newtrans					
 					return self
 
 			

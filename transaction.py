@@ -108,11 +108,14 @@ class transaction:
 		#check 2 : checking whether the inlist is empty, ie whether it is a special transaction in whcih the faculty gives STAR bitcoins to a student
 		flag = 0
 		if self.incount == 0:
-			flag = 1 
+			flag = 1
+			print "Invalid transaction, possible attempt to create coin" 
+			return False
 		# end check 2
 
 		inputsum = 0
 		transptr = None
+		blockhash = None
 		for l in range(self.incount):	# after each pass, one input transaction from the input list is verified
 			transhash = self.inlist[l].hash					
 
@@ -120,7 +123,9 @@ class transaction:
 				if node.database[ j ] [ 0 ] == transhash:   # if the transaction hash matches, then the block in which 
 					blockhash = node.database[ j ] [1 ]
 					break
-
+			if blockhash == None:
+				print "Invalid input transaction, or has not yet made it to the blockchain"
+				return False
 			# finding the block in the blockchain using the blockhash
 			blockptr = node.blockhead
 			while blockptr.parent != None and blockptr.propblockhash != blockhash:	# ie, search till the genesis block
@@ -178,7 +183,10 @@ class transaction:
 		for i in range(self.outcount) :
 			outputsum = outputsum + self.outlist[i].value
 			
-		if flag == 1:
+		if flag == 1:	# input list is empty
+			if self.outcount != 1:
+				print "Invalid transaction, attempt for possible double spent!"
+				return False		
 			if self.outcount == 1 and outputsum != self.STAR:
 				print "Invalid transaction, attempt for possible double spent!"
 				return False
@@ -327,7 +335,7 @@ def signtrans(node, filename):		# Verified working
 	T.sign = node.privatekey.sign(transstr)
 	#print T.sign
 	f.close	
-	transtofile(T,"signedtrans4.txt")	
+	transtofile(T,"signedtrans5.txt")	
 
 	
 # function to add the mapping of all transactions in the newly proposed block to the database

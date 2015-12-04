@@ -47,7 +47,7 @@ class node:
 		outbalance = 0
 		while blockptr != self.genesis :
 			for i in range(blockptr.propblock.max_trans_num) :
-				if ( blockptr.propblock.translist[i].sign == node.sign ) :
+				if ( blockptr.propblock.translist[i].incount != 0 and blockptr.propblock.translist[i].sign == node.sign ) :
 					for j in range(blockptr.propblock.translist[i].outcount) :
 						 if ( blockptr.propblock.translist[i].outlist[j].addr != self.publickey ) :
 						 	outbalance = outbalance + blockptr.propblock.translist[i].outlist[j].value
@@ -57,7 +57,7 @@ class node:
 						if ( blockptr.propblock.translist[i].outlist[j].addr == self.publickey ) :
 							inbalance = inbalance + blockptr.propblock.translist[i].outlist[j].value
 						
-						
+			blockptr = blockptr.parent			
 		balance = inbalance - outbalance
 		return balance
 		

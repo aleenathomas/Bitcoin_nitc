@@ -1,6 +1,8 @@
 from gethash import *
 import transaction
 
+genesishash = 9999
+
 class Treenode:
 	def __init__( self ):
 		#parent points to the block whose hash=proposed block's prev_hash

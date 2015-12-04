@@ -13,6 +13,7 @@ def proofofwork ( block ) :
 		block.nonce = nonce
 		hashval = gethash.gethashofblock( block )
 		guess, = struct.unpack('>Q',hashval[0:8])
+	#print "Proof of work has been solved!"	
 #	print "%s:%s:%s:%s:%s:%s:%s" % (timestamp, message, nonce, guess, payload, target, end-start)
 
 # verifying nonce value
